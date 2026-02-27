@@ -135,16 +135,16 @@ if not os.path.exists(output_dir):
 with open(os.path.join(output_dir, "index.html"), "w", encoding='utf-8') as f:
     f.write(html_content)
 
-# 3. Save the legal pages
-with open(os.path.join(output_dir, "about.html"), "w", encoding='utf-8') as f:
-    f.write(about_html)
+# # 3. Save the legal pages
+# with open(os.path.join(output_dir, "about.html"), "w", encoding='utf-8') as f:
+#     f.write(about_html)
 
-with open(os.path.join(output_dir, "privacy.html"), "w", encoding='utf-8') as f:
-    f.write(privacy_html)
+# with open(os.path.join(output_dir, "privacy.html"), "w", encoding='utf-8') as f:
+#     f.write(privacy_html)
 
-# 4. Save the sitemap.xml
-with open(os.path.join(output_dir, "sitemap.xml"), "w", encoding='utf-8') as f:
-    f.write(sitemap_xml)
+# # 4. Save the sitemap.xml
+# with open(os.path.join(output_dir, "sitemap.xml"), "w", encoding='utf-8') as f:
+#     f.write(sitemap_xml)
 
 print("✅ All files saved successfully in the public/ folder!")
 # Generate a simple XML sitemap
