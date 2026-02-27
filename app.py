@@ -1,6 +1,7 @@
 import feedparser
 import google.generativeai as genai
 import os
+from datetime import datetime
 
 # 1. Setup Gemini
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
