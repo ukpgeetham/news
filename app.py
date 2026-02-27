@@ -7,7 +7,7 @@ from datetime import datetime
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 model = genai.GenerativeModel('gemini-flash-latest')
 # --- Update these variables ---
-LOGO_URL = "logoht.png"
+LOGO_URL = "https://raw.githubusercontent.com/ukpgeetham/news/main/logoht.png"
 # Create a JSON-LD structured data block for the whole site
 schema_data = {
     "@context": "https://schema.org",
