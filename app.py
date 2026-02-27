@@ -75,24 +75,28 @@ adsense_code = """
      crossorigin="anonymous"></script>
 """
 
+# 2. Build the HTML Header (Inside a Python String)
 html_content = f"""
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Tools</title>
+    <title>Happy Tools | AI News</title>
     <link rel="icon" type="image/png" href="{LOGO_URL}">
-    html_content += f'<script type="application/ld+json">{str(schema_data)}</script>'
-    html_content += f"""
+    
     <meta name="description" content="Get your daily dose of hope. AI-summarized positive news and global breakthroughs.">
     <meta name="news_keywords" content="positive news, hope, breakthroughs, AI news summaries, uplifting stories">
-    <meta property="og:title" content="The Happt Tools | AI News">
+    <meta property="og:title" content="Happy Tools | AI News">
     <meta property="og:description" content="Uplifting news summaries, delivered daily by AI.">
     <meta property="og:image" content="{LOGO_URL}">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    """
+
+    <script type="application/ld+json">
+    {str(schema_data).replace("'", '"')}
+    </script>
+
     {adsense_code}
     {style}
 </head>
