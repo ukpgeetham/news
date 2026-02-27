@@ -4,7 +4,7 @@ import os
 
 # 1. Setup Gemini
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.GenerativeModel('gemini-flash-latest')
 
 # 2. Fetch News (Change the URL for your niche)
 RSS_URL = "https://news.google.com/rss?hl=en-US&gl=US&ceid=US:en"
