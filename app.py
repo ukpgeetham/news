@@ -5,7 +5,20 @@ import os
 # 1. Setup Gemini
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 model = genai.GenerativeModel('gemini-flash-latest')
-
+# --- Update these variables ---
+LOGO_URL = "https://github.com/ukpgeetham/news/blob/main/logoht.png"
+# Create a JSON-LD structured data block for the whole site
+schema_data = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": "The Happy Tools: Uplifting AI Summaries",
+    "description": "Daily positive news and breakthroughs summarized by Gemini AI.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "The Happy Toolse",
+        "logo": {"@type": "ImageObject", "url": LOGO_URL}
+    }
+}
 # 2. Fetch News (Using "Good News" and "Science/Progress" feeds)
 # You can add multiple feeds here
 RSS_FEEDS = [
@@ -21,22 +34,38 @@ for url in RSS_FEEDS:
 # Sort by date to get newest first
 all_entries.sort(key=lambda x: x.get('published_parsed', 0), reverse=True)
 
+# Generate a simple XML sitemap
+sitemap_xml = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://happytools.site/</loc>
+        <lastmod>{datetime.now().strftime('%Y-%m-%d')}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url><loc>https://happytools.site/about.html</loc></url>
+    <url><loc>https://happytools.site/privacy.html</loc></url>
+</urlset>"""
+
+with open("public/sitemap.xml", "w") as f:
+    f.write(sitemap_xml)
+
 # 3. Enhanced "Uplifting" CSS
 style = """
 <style>
     :root { --primary: #2ecc71; --secondary: #27ae60; --bg: #f0f9f4; --text: #2c3e50; }
     body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; margin: 0; padding: 0; }
     .container { max-width: 850px; margin: 40px auto; padding: 20px; }
+    
+    /* Header & Logo Styling */
     header { text-align: center; padding-bottom: 50px; border-bottom: 2px solid #d4ede0; margin-bottom: 40px; }
-    h1 { color: var(--primary); font-size: 3rem; margin-bottom: 5px; letter-spacing: -1px; }
-    .subtitle { font-size: 1.2rem; color: #7f8c8d; }
+    .logo-img { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1 { color: var(--primary); font-size: 3rem; margin: 0; letter-spacing: -1px; }
+    
+    .subtitle { font-size: 1.2rem; color: #7f8c8d; margin-top: 10px; }
     .news-card { background: white; border-radius: 15px; border-left: 5px solid var(--primary); box-shadow: 0 10px 20px rgba(46, 204, 113, 0.1); padding: 30px; margin-bottom: 30px; transition: 0.3s; }
     .news-card:hover { transform: scale(1.02); }
-    .news-card h3 { margin-top: 0; color: var(--text); font-size: 1.5rem; line-height: 1.3; }
-    .news-card p { color: #52616b; font-size: 1.15rem; }
-    .btn { display: inline-block; background: var(--primary); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; margin-top: 15px; font-size: 0.9rem; }
-    .btn:hover { background: var(--secondary); }
-    footer { text-align: center; margin-top: 50px; padding: 20px; color: #95a5a6; font-size: 0.9rem; }
+    .btn { display: inline-block; background: var(--primary); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; margin-top: 15px; }
 </style>
 """
 
@@ -53,14 +82,26 @@ html_content = f"""
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Tools</title>
+    <link rel="icon" type="image/png" href="{LOGO_URL}">
+    html_content += f'<script type="application/ld+json">{str(schema_data)}</script>'
+    html_content += f"""
+    <meta name="description" content="Get your daily dose of hope. AI-summarized positive news and global breakthroughs.">
+    <meta name="news_keywords" content="positive news, hope, breakthroughs, AI news summaries, uplifting stories">
+    <meta property="og:title" content="The Happt Tools | AI News">
+    <meta property="og:description" content="Uplifting news summaries, delivered daily by AI.">
+    <meta property="og:image" content="{LOGO_URL}">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    """
     {adsense_code}
     {style}
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>The Daily Hope</h1>
-            <p class="subtitle">Your daily dose of progress, breakthroughs, and kindness.</p>
+            <img src="{LOGO_URL}" alt="Logo" class="logo-img">
+            <h1>The Happy Tools</h1>
+            <p class="subtitle">Your daily dose of happiness, breakthroughs, and kindness.</p>
         </header>
 """
 
@@ -86,7 +127,7 @@ for entry in all_entries[:12]:
 
 html_content += """
         <footer>
-            <p>&copy; 2026 The Daily Hope. Built with Gemini AI.</p>
+            <p>&copy; 2026 The Happy Tools.</p>
             <p><a href="about.html">About Us</a> | <a href="privacy.html">Privacy Policy</a></p>
         </footer>
     </div>
@@ -118,7 +159,7 @@ about_html = f"""
 privacy_html = f"""
 <!DOCTYPE html>
 <html lang="en">
-<head><meta charset="UTF-8"><title>Privacy Policy - The Daily Hope</title>{style}</head>
+<head><meta charset="UTF-8"><title>Privacy Policy - The Happy Tools</title>{style}</head>
 <body><div class="container">
     <h1>Privacy Policy</h1>
     <p>Your privacy is important to us. This website does not directly collect personal information from its visitors.</p>
