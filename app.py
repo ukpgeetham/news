@@ -35,22 +35,6 @@ for url in RSS_FEEDS:
 # Sort by date to get newest first
 all_entries.sort(key=lambda x: x.get('published_parsed', 0), reverse=True)
 
-# Generate a simple XML sitemap
-sitemap_xml = f"""<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-        <loc>https://happytools.site/</loc>
-        <lastmod>{datetime.now().strftime('%Y-%m-%d')}</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>1.0</priority>
-    </url>
-    <url><loc>https://happytools.site/about.html</loc></url>
-    <url><loc>https://happytools.site/privacy.html</loc></url>
-</urlset>"""
-
-with open("public/sitemap.xml", "w") as f:
-    f.write(sitemap_xml)
-
 # 3. Enhanced "Uplifting" CSS
 style = """
 <style>
@@ -163,7 +147,21 @@ with open(os.path.join(output_dir, "sitemap.xml"), "w", encoding='utf-8') as f:
     f.write(sitemap_xml)
 
 print("✅ All files saved successfully in the public/ folder!")
+# Generate a simple XML sitemap
+sitemap_xml = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://happytools.site/</loc>
+        <lastmod>{datetime.now().strftime('%Y-%m-%d')}</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    <url><loc>https://happytools.site/about.html</loc></url>
+    <url><loc>https://happytools.site/privacy.html</loc></url>
+</urlset>"""
 
+with open("public/sitemap.xml", "w") as f:
+    f.write(sitemap_xml)
 # --- GENERATING LEGAL PAGES FOR ADSENSE ---
 
 # 1. About Page Content
