@@ -141,9 +141,28 @@ html_content += """
 """
 
 # 6. Save to public folder
-if not os.path.exists('public'): os.makedirs('public')
-with open("public/index.html", "w", encoding='utf-8') as f:
+# 1. Create the 'public' directory if it doesn't exist
+# We do this at the very beginning of the saving process
+output_dir = "public"
+if not os.path.exists(output_dir):
+    os.makedirs(output_dir)
+
+# 2. Save the main index.html
+with open(os.path.join(output_dir, "index.html"), "w", encoding='utf-8') as f:
     f.write(html_content)
+
+# 3. Save the legal pages
+with open(os.path.join(output_dir, "about.html"), "w", encoding='utf-8') as f:
+    f.write(about_html)
+
+with open(os.path.join(output_dir, "privacy.html"), "w", encoding='utf-8') as f:
+    f.write(privacy_html)
+
+# 4. Save the sitemap.xml
+with open(os.path.join(output_dir, "sitemap.xml"), "w", encoding='utf-8') as f:
+    f.write(sitemap_xml)
+
+print("✅ All files saved successfully in the public/ folder!")
 
 # --- GENERATING LEGAL PAGES FOR ADSENSE ---
 
