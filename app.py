@@ -31,6 +31,7 @@ adsense_code = """
 """
 # 2. TOPICS & FEEDS
 TOPICS = {
+    "Global News": "https://www.reutersagency.com/feed/",
     "Science": "https://www.sciencedaily.com/rss/top/science.xml",
     "Nature": "https://www.sciencedaily.com/rss/top/environment.xml",
     "Travel": "https://travel.economictimes.indiatimes.com/rss/recentstories",
@@ -41,32 +42,34 @@ TOPICS = {
     "Good News": "https://www.goodnewsnetwork.org/feed/"
 }
 
+def fetch_feed_safely(url):
+    headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+    try:
+        response = requests.get(url, headers=headers, timeout=15)
+        return feedparser.parse(response.content)
+    except Exception as e:
+        print(f"⚠️ Error fetching {url}: {e}")
+        return None
+
 def get_image(entry):
-    # Improved image extraction
-    img = "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800"
+    # Fallback image if none found
+    img = "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800"
     if 'enclosures' in entry and entry.enclosures:
         img = entry.enclosures[0].href
     elif 'media_content' in entry:
         img = entry.media_content[0]['url']
-    else:
-        match = re.search(r'<img src="([^"]+)"', entry.get('description', ''))
-        if match: img = match.group(1)
     return img
 
-all_potential_news = []
-
+all_entries = []
 for category, url in TOPICS.items():
-    try:
-        feed = feedparser.parse(url)
+    print(f"Checking {category}...")
+    feed = fetch_feed_safely(url)
+    if feed and feed.entries:
         for entry in feed.entries:
-            # Store the category with the entry
             entry['site_category'] = category
-            all_potential_news.append(entry)
-    except:
-        continue
+            all_entries.append(entry)
 
-# Shuffle so every update looks different
-random.shuffle(all_potential_news)
+random.shuffle(all_entries)
 
 # 3. STYLING (CSS)
 style = """
@@ -107,33 +110,35 @@ style = """
 """
 
 # 4. FETCH AND GENERATE CONTENT
-final_news_html = ""
-count = 0
+cards_html = ""
+success_count = 0
 
-for entry in all_potential_news:
-    if count >= 12: break # Stop once we hit 12
+for entry in all_entries:
+    if success_count >= 12: break
     
-    img_url = get_image(entry)
-    cat = entry['site_category']
-    
-    prompt = f"Summarize this news in 2 hopeful sentences for a {cat} section. Title: {entry.title}"
-    
+    prompt = f"Summarize this news in 2 hopeful sentences. Topic: {entry['site_category']}. Title: {entry.title}"
     try:
-        summary = model.generate_content(prompt).text
-        final_news_html += f"""
+        response = model.generate_content(prompt)
+        summary = response.text
+        img = get_image(entry)
+        
+        cards_html += f"""
         <div class="card">
-            <img src="{img_url}" alt="news">
+            <img src="{img}" alt="news">
             <div class="card-content">
-                <span class="category">{cat}</span>
+                <span class="category">{entry['site_category']}</span>
                 <h3>{entry.title}</h3>
                 <p>{summary}</p>
-                <a href="{entry.link}" target="_blank" class="btn">Full Story &rarr;</a>
+                <a href="{entry.link}" target="_blank" class="btn">Read More &rarr;</a>
             </div>
         </div>
         """
-        count += 1
-    except:
+        success_count += 1
+    except Exception as e:
+        print(f"❌ Gemini failed on article: {e}")
         continue
+if success_count == 0:
+    cards_html = "<div class='card'><div class='card-content'><h3>No news found today.</h3><p>Please check back later!</p></div></div>"
 
 # 5. ASSEMBLE PAGES
 index_html = f"""
@@ -163,7 +168,7 @@ index_html = f"""
 <body>
     <div class="container">
         <header>
-            <img src="{LOGO_URL}" class="logo" alt="Logo">
+            <img src="{LOGO_URL}" alt="Logo">
             <div class="header-text">
                 <h1>The Happy Tools</h1>
                 <p class="tagline">Your daily dose of AI-curated breakthroughs and kindness.</p>
@@ -173,7 +178,7 @@ index_html = f"""
         <div class="ad-space">ADVERTISEMENT</div>
         
         <div class="news-grid">
-            {final_news_html}
+            {cards_html}
         </div>
 
         <footer>
