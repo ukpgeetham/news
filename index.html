@@ -4,60 +4,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Tools | AI News</title>
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ukpgeetham/news/main/logoht.png">
-    
-    <meta name="description" content="Get your daily dose of hope. AI-summarized positive news and global breakthroughs.">
-    <meta name="news_keywords" content="positive news, hope, breakthroughs, AI news summaries, uplifting stories">
-    <meta property="og:title" content="Happy Tools | AI News">
-    <meta property="og:description" content="Uplifting news summaries, delivered daily by AI.">
-    <meta property="og:image" content="https://raw.githubusercontent.com/ukpgeetham/news/main/logoht.png">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <script type="application/ld+json">
-    {"@context": "https://schema.org", "@type": "NewsArticle", "headline": "The Happy Tools: Uplifting AI Summaries", "description": "Daily positive news and breakthroughs summarized by Gemini AI.", "publisher": {"@type": "Organization", "name": "The Happy Toolse", "logo": {"@type": "ImageObject", "url": "https://raw.githubusercontent.com/ukpgeetham/news/main/logoht.png"}}}
-    </script>
-
-    
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2241812164647663"
-     crossorigin="anonymous"></script>
-
+    <title>The Happy Tools | Daily Uplifting News Summaries</title>
+    <meta name="description" content="AI-summarized positive news from Hollywood, Science, Travel, and Health.">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2241812164647663" crossorigin="anonymous"></script>
     
 <style>
-    :root { --primary: #2ecc71; --secondary: #27ae60; --bg: #f0f9f4; --text: #2c3e50; }
-    body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; margin: 0; padding: 0; }
-    .container { max-width: 850px; margin: 40px auto; padding: 20px; }
+    :root { --primary: #2ecc71; --dark: #2c3e50; --bg: #f8f9fa; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--dark); margin: 0; }
+    .container { max-width: 1000px; margin: auto; padding: 20px; }
     
-    /* Header & Logo Styling */
-    header { text-align: center; padding-bottom: 50px; border-bottom: 2px solid #d4ede0; margin-bottom: 40px; }
-    .logo-img { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: var(--primary); font-size: 3rem; margin: 0; letter-spacing: -1px; }
-    
-    .subtitle { font-size: 1.2rem; color: #7f8c8d; margin-top: 10px; }
-    .news-card { background: white; border-radius: 15px; border-left: 5px solid var(--primary); box-shadow: 0 10px 20px rgba(46, 204, 113, 0.1); padding: 30px; margin-bottom: 30px; transition: 0.3s; }
-    .news-card:hover { transform: scale(1.02); }
-    .btn { display: inline-block; background: var(--primary); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; margin-top: 15px; }
+    /* Logo and Title in one line */
+    header { 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        gap: 20px; 
+        padding: 40px 0; 
+        border-bottom: 1px solid #ddd; 
+        margin-bottom: 40px; 
+    }
+    .logo { width: 80px; height: 80px; border-radius: 60%; object-fit: cover; }
+    .header-text { text-align: left; }
+    h1 { font-size: 2.2rem; margin: 0; color: var(--primary); line-height: 1; }
+    .tagline { margin: 5px 0 0 0; font-size: 1rem; color: #666; }
+
+    .news-grid { display: grid; grid-row-gap: 30px; }
+    .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; transition: 0.3s; }
+    @media (max-width: 768px) { 
+        header { flex-direction: column; text-align: center; } 
+        .header-text { text-align: center; }
+        .card { flex-direction: column; } 
+        .card img { width: 100% !important; height: 200px !important; } 
+    }
+    .card img { width: 300px; height: auto; object-fit: cover; }
+    .card-content { padding: 25px; flex: 1; }
+    .category { font-size: 0.7rem; font-weight: bold; color: var(--primary); text-transform: uppercase; }
+    .btn { display: inline-block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: bold; border: 2px solid var(--primary); padding: 6px 15px; border-radius: 20px; }
+    footer { text-align: center; padding: 40px; font-size: 0.8rem; border-top: 1px solid #ddd; }
 </style>
 
 </head>
 <body>
     <div class="container">
         <header>
-            <img src="https://raw.githubusercontent.com/ukpgeetham/news/main/logoht.png" alt="Logo" class="logo-img">
-            <h1>The Happy Tools</h1>
-            <p class="subtitle">Your daily dose of happiness, breakthroughs, and kindness.</p>
+            <img src="https://raw.githubusercontent.com/ukpgeetham/news/main/logoht.png" class="logo" alt="Logo">
+            <h1>Happy Tools</h1>
+            <p>Your daily dose of AI-curated breakthroughs and kindness.</p>
         </header>
+        
+        <div class="ad-space">ADVERTISEMENT</div>
+        
+        <div class="news-grid">
+            
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=80" alt="MIT study finds Earth’s first animals were likely ancient sea sponges">
+                <div class="card-content">
+                    <span class="category">Science & Nature</span>
+                    <h3>MIT study finds Earth’s first animals were likely ancient sea sponges</h3>
+                    <p>A groundbreaking MIT study has traced the roots of animal life back to resilient sea sponges, revealing the humble yet enduring origins of our shared history. This discovery offers an inspiring glimpse into the deep connection we have with the ancient oceans and the remarkable journey life has taken to reach the present day.</p>
+                    <a href="https://www.sciencedaily.com/releases/2026/02/260227071918.htm" target="_blank" class="btn">Read Source &rarr;</a>
+                </div>
+            </div>
+            
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=80" alt="Stunning 3D maps reveal DNA is structured before life “switches on”">
+                <div class="card-content">
+                    <span class="category">Science & Nature</span>
+                    <h3>Stunning 3D maps reveal DNA is structured before life “switches on”</h3>
+                    <p>Breathtaking new 3D visualizations reveal that the intricate architecture of our DNA is perfectly organized and ready even before the first spark of life begins. This discovery highlights the awe-inspiring order of the natural world, showing how life meticulously prepares itself to flourish from its very earliest moments.</p>
+                    <a href="https://www.sciencedaily.com/releases/2026/02/260227061824.htm" target="_blank" class="btn">Read Source &rarr;</a>
+                </div>
+            </div>
+            
+        </div>
 
-    <div class="news-card">
-        <h3>These positive stories made headlines across Arizona in February - AZ Family</h3>
-        <p>Throughout February, Arizona blossomed with remarkable stories of community resilience and transformative progress that touched hearts across the entire state. These powerful milestones serve as a testament to the enduring human spirit, proving that collective acts of kindness and innovation are building a much brighter, more hopeful future for everyone.</p>
-        <a href="https://news.google.com/rss/articles/CBMipwFBVV95cUxPZ1Y3eTN1UUp1WFlHWWtuTjdrd0NiaXByNnRUZUtlekZ0WXlvMy1ZUUJpTEYyZm5yMUNlX1d6T0hhSGllbjJnX3NYMUltMDBPNmRCUVlfZ1NLTTlXOHVURTItZlVib3RoQllmR0ZnSHdHMUJwU1IxOXN2QmstU1U4dlcxTGVMbmdaUU10TmduVXZkaHZEWmR4aVRRMm5SSnYxUXRlaV9LQQ?oc=5" target="_blank" class="btn">Full Heartwarming Story &rarr;</a>
-    </div>
-    
         <footer>
-            <p>&copy; 2026 The Happy Tools.</p>
-            <p><a href="about.html">About Us</a> | <a href="privacy.html">Privacy Policy</a></p>
+            <p>&copy; 2026 The Happy Tools | <a href="about.html">About</a> | <a href="privacy.html">Privacy</a></p>
         </footer>
     </div>
 </body>
