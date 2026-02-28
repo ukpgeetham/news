@@ -2,6 +2,7 @@ import feedparser
 import google.generativeai as genai
 import os
 import re
+import random
 from datetime import datetime
 
 # 1. SETUP & CONFIGURATION
