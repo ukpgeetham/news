@@ -139,11 +139,12 @@ for entry in all_entries:
         success_count += 1
     except Exception as e:
        print(f"⚠️ Skipping article due to limit: {e}")
-        # If we hit a 429, wait longer before trying the next one
-        if "429" in str(e):
-            print("Sleeping for 30 seconds to reset quota...")
-            time.sleep(30)
-        continue
+       # If we hit a 429, wait longer before trying the next one
+       if "429" in str(e):
+        print("Sleeping for 30 seconds to reset quota...")
+        time.sleep(30)
+       continue
+       
 if success_count == 0:
     cards_html = "<div class='card'><div class='card-content'><h3>No news found today.</h3><p>Please check back later!</p></div></div>"
 
