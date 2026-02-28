@@ -13,7 +13,18 @@ model = genai.GenerativeModel('gemini-flash-latest')
 SITE_URL = "https://happytools.site" # No trailing slash
 LOGO_URL = "https://raw.githubusercontent.com/ukpgeetham/news/main/logoht.png"
 ADSENSE_ID = "ca-pub-2241812164647663" 
-
+# Create a JSON-LD structured data block for the whole site
+schema_data = {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": "The Happy Tools: Uplifting AI Summaries",
+    "description": "Daily positive news and breakthroughs summarized by Gemini AI.",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Happy Tools",
+        "logo": {"@type": "ImageObject", "url": LOGO_URL}
+    }
+}
 # 2. TOPICS & FEEDS
 TOPICS = {
     "Science": "https://www.sciencedaily.com/rss/top/science.xml",
