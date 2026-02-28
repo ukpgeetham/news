@@ -1,197 +1,150 @@
 import feedparser
 import google.generativeai as genai
 import os
+import re
 from datetime import datetime
 
-# 1. Setup Gemini
+# 1. SETUP & CONFIGURATION
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 model = genai.GenerativeModel('gemini-flash-latest')
-# --- Update these variables ---
+
+# Update these with your info
+SITE_URL = "https://happytools.site" # No trailing slash
 LOGO_URL = "https://raw.githubusercontent.com/ukpgeetham/news/main/logoht.png"
-# Create a JSON-LD structured data block for the whole site
-schema_data = {
-    "@context": "https://schema.org",
-    "@type": "NewsArticle",
-    "headline": "The Happy Tools: Uplifting AI Summaries",
-    "description": "Daily positive news and breakthroughs summarized by Gemini AI.",
-    "publisher": {
-        "@type": "Organization",
-        "name": "The Happy Toolse",
-        "logo": {"@type": "ImageObject", "url": LOGO_URL}
-    }
+ADSENSE_ID = "ca-pub-2241812164647663" 
+
+# 2. TOPICS & FEEDS
+TOPICS = {
+    "Science & Nature": "https://www.sciencedaily.com/rss/top/environment.xml",
+    "Travel & Culture": "https://travel.economictimes.indiatimes.com/rss/recentstories",
+    "Hollywood & Entertainment": "https://www.hollywoodreporter.com/feed/",
+    "Fitness & Health": "https://www.health.com/rss",
+    "Positive News": "https://www.goodnewsnetwork.org/feed/"
 }
-# 2. Fetch News (Using "Good News" and "Science/Progress" feeds)
-# You can add multiple feeds here
-RSS_FEEDS = [
-    "https://www.goodnewsnetwork.org/feed/",
-    "https://news.google.com/rss/search?q=uplifting+news+OR+scientific+breakthrough+OR+positive+news&hl=en-US&gl=US&ceid=US:en"
-]
 
-all_entries = []
-for url in RSS_FEEDS:
-    feed = feedparser.parse(url)
-    all_entries.extend(feed.entries)
+def get_image(entry):
+    """Extracts image URL from RSS entry tags."""
+    if 'enclosures' in entry and len(entry.enclosures) > 0:
+        return entry.enclosures[0].href
+    if 'media_content' in entry:
+        return entry.media_content[0]['url']
+    img_match = re.search(r'<img src="([^"]+)"', entry.get('description', ''))
+    if img_match:
+        return img_match.group(1)
+    return "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&q=80"
 
-# Sort by date to get newest first
-all_entries.sort(key=lambda x: x.get('published_parsed', 0), reverse=True)
-
-# 3. Enhanced "Uplifting" CSS
+# 3. STYLING (CSS)
 style = """
 <style>
-    :root { --primary: #2ecc71; --secondary: #27ae60; --bg: #f0f9f4; --text: #2c3e50; }
-    body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; margin: 0; padding: 0; }
-    .container { max-width: 850px; margin: 40px auto; padding: 20px; }
+    :root { --primary: #2ecc71; --dark: #2c3e50; --bg: #f8f9fa; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--dark); margin: 0; }
+    .container { max-width: 1000px; margin: auto; padding: 20px; }
     
-    /* Header & Logo Styling */
-    header { text-align: center; padding-bottom: 50px; border-bottom: 2px solid #d4ede0; margin-bottom: 40px; }
-    .logo-img { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: var(--primary); font-size: 3rem; margin: 0; letter-spacing: -1px; }
-    
-    .subtitle { font-size: 1.2rem; color: #7f8c8d; margin-top: 10px; }
-    .news-card { background: white; border-radius: 15px; border-left: 5px solid var(--primary); box-shadow: 0 10px 20px rgba(46, 204, 113, 0.1); padding: 30px; margin-bottom: 30px; transition: 0.3s; }
-    .news-card:hover { transform: scale(1.02); }
-    .btn { display: inline-block; background: var(--primary); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; margin-top: 15px; }
+    /* Logo and Title in one line */
+    header { 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        gap: 20px; 
+        padding: 40px 0; 
+        border-bottom: 1px solid #ddd; 
+        margin-bottom: 40px; 
+    }
+    .logo { width: 80px; height: 80px; border-radius: 60%; object-fit: cover; }
+    .header-text { text-align: left; }
+    h1 { font-size: 2.2rem; margin: 0; color: var(--primary); line-height: 1; }
+    .tagline { margin: 5px 0 0 0; font-size: 1rem; color: #666; }
+
+    .news-grid { display: grid; grid-row-gap: 30px; }
+    .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; transition: 0.3s; }
+    @media (max-width: 768px) { 
+        header { flex-direction: column; text-align: center; } 
+        .header-text { text-align: center; }
+        .card { flex-direction: column; } 
+        .card img { width: 100% !important; height: 200px !important; } 
+    }
+    .card img { width: 300px; height: auto; object-fit: cover; }
+    .card-content { padding: 25px; flex: 1; }
+    .category { font-size: 0.7rem; font-weight: bold; color: var(--primary); text-transform: uppercase; }
+    .btn { display: inline-block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: bold; border: 2px solid var(--primary); padding: 6px 15px; border-radius: 20px; }
+    footer { text-align: center; padding: 40px; font-size: 0.8rem; border-top: 1px solid #ddd; }
 </style>
 """
 
-# 4. Building HTML with AdSense
-adsense_code = """
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2241812164647663"
-     crossorigin="anonymous"></script>
-"""
+# 4. FETCH AND GENERATE CONTENT
+all_news_cards = ""
+for category, url in TOPICS.items():
+    feed = feedparser.parse(url)
+    for entry in feed.entries[:3]: # Takes top 3 from each category (Total 15)
+        img_url = get_image(entry)
+        
+        # SEO-friendly Summarization
+        prompt = f"Rewrite this news headline into a hopeful, engaging 2-sentence summary. Category: {category}. Title: {entry.title}"
+        try:
+            summary = model.generate_content(prompt).text
+            all_news_cards += f"""
+            <div class="card">
+                <img src="{img_url}" alt="{entry.title}">
+                <div class="card-content">
+                    <span class="category">{category}</span>
+                    <h3>{entry.title}</h3>
+                    <p>{summary}</p>
+                    <a href="{entry.link}" target="_blank" class="btn">Read Source &rarr;</a>
+                </div>
+            </div>
+            """
+        except: continue
 
-# 2. Build the HTML Header (Inside a Python String)
-html_content = f"""
+# 5. ASSEMBLE PAGES
+index_html = f"""
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Tools | AI News</title>
-    <link rel="icon" type="image/png" href="{LOGO_URL}">
-    
-    <meta name="description" content="Get your daily dose of hope. AI-summarized positive news and global breakthroughs.">
-    <meta name="news_keywords" content="positive news, hope, breakthroughs, AI news summaries, uplifting stories">
-    <meta property="og:title" content="Happy Tools | AI News">
-    <meta property="og:description" content="Uplifting news summaries, delivered daily by AI.">
-    <meta property="og:image" content="{LOGO_URL}">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-
-    <script type="application/ld+json">
-    {str(schema_data).replace("'", '"')}
-    </script>
-
-    {adsense_code}
+    <title>The Happy Tools | Daily Uplifting News Summaries</title>
+    <meta name="description" content="AI-summarized positive news from Hollywood, Science, Travel, and Health.">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_ID}" crossorigin="anonymous"></script>
     {style}
 </head>
 <body>
     <div class="container">
         <header>
-            <img src="{LOGO_URL}" alt="Logo" class="logo-img">
-            <h1>The Happy Tools</h1>
-            <p class="subtitle">Your daily dose of happiness, breakthroughs, and kindness.</p>
+            <img src="{LOGO_URL}" class="logo" alt="Logo">
+            <h1>Happy Tools</h1>
+            <p>Your daily dose of AI-curated breakthroughs and kindness.</p>
         </header>
-"""
+        
+        <div class="ad-space">ADVERTISEMENT</div>
+        
+        <div class="news-grid">
+            {all_news_cards}
+        </div>
 
-# 5. Filter and Summarize (Top 12 items)
-for entry in all_entries[:12]:
-    # Custom Prompt to ensure positive framing
-    prompt = (f"Rewrite this news headline into a very hopeful and inspiring 2-sentence summary. "
-              f"Focus on the progress and positive impact. Headline: {entry.title}")
-    
-    try:
-        response = model.generate_content(prompt)
-        summary = response.text
-    except:
-        continue # Skip if AI fails
-
-    html_content += f"""
-    <div class="news-card">
-        <h3>{entry.title}</h3>
-        <p>{summary}</p>
-        <a href="{entry.link}" target="_blank" class="btn">Full Heartwarming Story &rarr;</a>
-    </div>
-    """
-
-html_content += """
         <footer>
-            <p>&copy; 2026 The Happy Tools.</p>
-            <p><a href="about.html">About Us</a> | <a href="privacy.html">Privacy Policy</a></p>
+            <p>&copy; 2026 The Happy Tools | <a href="about.html">About</a> | <a href="privacy.html">Privacy</a></p>
         </footer>
     </div>
 </body>
 </html>
 """
 
-# 6. Save to public folder
-# 1. Create the 'public' directory if it doesn't exist
-# We do this at the very beginning of the saving process
-output_dir = "public"
-if not os.path.exists(output_dir):
-    os.makedirs(output_dir)
+# Legal Pages
+about_html = f"<!DOCTYPE html><html><head><title>About Us</title>{style}</head><body><div class='container'><h1>About Us</h1><p>We use AI to summarize positive news.</p><a href='index.html'>Back Home</a></div></body></html>"
+privacy_html = f"<!DOCTYPE html><html><head><title>Privacy Policy</title>{style}</head><body><div class='container'><h1>Privacy Policy</h1><p>We use Google AdSense cookies for ads.</p><a href='index.html'>Back Home</a></div></body></html>"
 
-# 2. Save the main index.html
-with open(os.path.join(output_dir, "index.html"), "w", encoding='utf-8') as f:
-    f.write(html_content)
+# 6. SAVE EVERYTHING
+if not os.path.exists("public"): os.makedirs("public")
 
-# # 3. Save the legal pages
-# with open(os.path.join(output_dir, "about.html"), "w", encoding='utf-8') as f:
-#     f.write(about_html)
+files = {
+    "index.html": index_html,
+    "about.html": about_html,
+    "privacy.html": privacy_html,
+    "sitemap.xml": f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>{SITE_URL}/</loc></url></urlset>'
+}
 
-# with open(os.path.join(output_dir, "privacy.html"), "w", encoding='utf-8') as f:
-#     f.write(privacy_html)
+for filename, content in files.items():
+    with open(f"public/{filename}", "w", encoding="utf-8") as f:
+        f.write(content)
 
-# # 4. Save the sitemap.xml
-# with open(os.path.join(output_dir, "sitemap.xml"), "w", encoding='utf-8') as f:
-#     f.write(sitemap_xml)
-
-print("✅ All files saved successfully in the public/ folder!")
-# Generate a simple XML sitemap
-sitemap_xml = f"""<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
-        <loc>https://happytools.site/</loc>
-        <lastmod>{datetime.now().strftime('%Y-%m-%d')}</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>1.0</priority>
-    </url>
-    <url><loc>https://happytools.site/about.html</loc></url>
-    <url><loc>https://happytools.site/privacy.html</loc></url>
-</urlset>"""
-
-with open("public/sitemap.xml", "w") as f:
-    f.write(sitemap_xml)
-# --- GENERATING LEGAL PAGES FOR ADSENSE ---
-
-# 1. About Page Content
-about_html = f"""
-<!DOCTYPE html>
-<html lang="en">
-<head><meta charset="UTF-8"><title>About Us - HappyTools</title>{style}</head>
-<body><div class="container">
-    <h1>About The Happy Tools</h1>
-    <p>In a world often filled with heavy news, <strong>The Happy Tools</strong> was created to shine a light on human progress, scientific breakthroughs, and acts of kindness.</p>
-    <p>Our mission is to provide a calm space for readers to stay informed about the positive changes happening globally. We use AI technology to curate and summarize uplifting stories from trusted sources, ensuring you get the heart of the story in seconds.</p>
-    <p><a href="index.html" class="btn">Back to Home</a></p>
-</div></body></html>
-"""
-
-# 2. Privacy Policy Content (Required by AdSense)
-privacy_html = f"""
-<!DOCTYPE html>
-<html lang="en">
-<head><meta charset="UTF-8"><title>Privacy Policy - The Happy Tools</title>{style}</head>
-<body><div class="container">
-    <h1>Privacy Policy</h1>
-    <p>Your privacy is important to us. This website does not directly collect personal information from its visitors.</p>
-    <h3>Cookies and Advertisements</h3>
-    <p>We use Google AdSense to serve ads. Google uses cookies to serve ads based on a user's prior visits to your website or other websites. Google's use of advertising cookies enables it and its partners to serve ads to your users based on their visit to your sites and/or other sites on the Internet.</p>
-    <p>Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads">Google Ad Settings</a>.</p>
-    <p><a href="index.html" class="btn">Back to Home</a></p>
-</div></body></html>
-"""
-
-# Save the extra pages
-with open("public/about.html", "w", encoding='utf-8') as f: f.write(about_html)
-with open("public/privacy.html", "w", encoding='utf-8') as f: f.write(privacy_html)
+print("✅ Site generated successfully in /public folder!")
