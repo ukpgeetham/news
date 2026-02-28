@@ -25,6 +25,10 @@ schema_data = {
         "logo": {"@type": "ImageObject", "url": LOGO_URL}
     }
 }
+adsense_code = """
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_ID}"
+     crossorigin="anonymous"></script>
+"""
 # 2. TOPICS & FEEDS
 TOPICS = {
     "Science": "https://www.sciencedaily.com/rss/top/science.xml",
