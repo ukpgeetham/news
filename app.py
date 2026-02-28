@@ -4,6 +4,7 @@ import os
 import re
 import random
 import requests
+import time
 from datetime import datetime
 
 # 1. SETUP & CONFIGURATION
@@ -117,8 +118,9 @@ success_count = 0
 for entry in all_entries:
     if success_count >= 12: break
     
-    prompt = f"Summarize this news in 2 hopeful sentences. Topic: {entry['site_category']}. Title: {entry.title}"
+    prompt = f"Rewrite this news headline into 2 hopeful sentences. Category: {entry['site_category']}. Title: {entry.title}"
     try:
+        time.sleep(2)
         response = model.generate_content(prompt)
         summary = response.text
         img = get_image(entry)
@@ -136,7 +138,11 @@ for entry in all_entries:
         """
         success_count += 1
     except Exception as e:
-        print(f"❌ Gemini failed on article: {e}")
+       print(f"⚠️ Skipping article due to limit: {e}")
+        # If we hit a 429, wait longer before trying the next one
+        if "429" in str(e):
+            print("Sleeping for 30 seconds to reset quota...")
+            time.sleep(30)
         continue
 if success_count == 0:
     cards_html = "<div class='card'><div class='card-content'><h3>No news found today.</h3><p>Please check back later!</p></div></div>"
