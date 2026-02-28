@@ -3,6 +3,7 @@ import google.generativeai as genai
 import os
 import re
 import random
+import requests
 from datetime import datetime
 
 # 1. SETUP & CONFIGURATION
