@@ -4,126 +4,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Tools | AI News</title>
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ukpgeetham/news/main/logoht.png">
-    
+    <title>Happy Tools</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png">
+
     <meta name="description" content="Get your daily dose of hope. AI-summarized positive news and global breakthroughs.">
     <meta name="news_keywords" content="positive news, hope, breakthroughs, AI news summaries, uplifting stories">
     <meta property="og:title" content="Happy Tools | AI News">
     <meta property="og:description" content="Uplifting news summaries, delivered daily by AI.">
-    <meta property="og:image" content="https://raw.githubusercontent.com/ukpgeetham/news/main/logoht.png">
+    <meta property="og:image" content="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
 
     <script type="application/ld+json">
-    {"@context": "https://schema.org", "@type": "NewsArticle", "headline": "The Happy Tools: Uplifting AI Summaries", "description": "Daily positive news and breakthroughs summarized by Gemini AI.", "publisher": {"@type": "Organization", "name": "The Happy Toolse", "logo": {"@type": "ImageObject", "url": "https://raw.githubusercontent.com/ukpgeetham/news/main/logoht.png"}}}
+    {"@context": "https://schema.org", "@type": "NewsArticle", "headline": "The Happy Tools: Uplifting AI Summaries", "description": "Daily positive news and breakthroughs summarized by Gemini AI.", "publisher": {"@type": "Organization", "name": "Happy Tools", "logo": {"@type": "ImageObject", "url": "https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png"}}}
     </script>
 
     
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2241812164647663"
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={ADSENSE_ID}"
      crossorigin="anonymous"></script>
 
     
 <style>
-    :root { --primary: #2ecc71; --secondary: #27ae60; --bg: #f0f9f4; --text: #2c3e50; }
-    body { font-family: 'Inter', sans-serif; background-color: var(--bg); color: var(--text); line-height: 1.6; margin: 0; padding: 0; }
-    .container { max-width: 850px; margin: 40px auto; padding: 20px; }
+    :root { --primary: #2ecc71; --dark: #2c3e50; --bg: #f8f9fa; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--dark); margin: 0; }
+    .container { max-width: 1000px; margin: auto; padding: 20px; }
     
-    /* Header & Logo Styling */
-    header { text-align: center; padding-bottom: 50px; border-bottom: 2px solid #d4ede0; margin-bottom: 40px; }
-    .logo-img { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    h1 { color: var(--primary); font-size: 3rem; margin: 0; letter-spacing: -1px; }
-    
-    .subtitle { font-size: 1.2rem; color: #7f8c8d; margin-top: 10px; }
-    .news-card { background: white; border-radius: 15px; border-left: 5px solid var(--primary); box-shadow: 0 10px 20px rgba(46, 204, 113, 0.1); padding: 30px; margin-bottom: 30px; transition: 0.3s; }
-    .news-card:hover { transform: scale(1.02); }
-    .btn { display: inline-block; background: var(--primary); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600; margin-top: 15px; }
+    /* Logo and Title in one line */
+    header { 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        gap: 20px; 
+        padding: 40px 0; 
+        border-bottom: 1px solid #ddd; 
+        margin-bottom: 40px; 
+    }
+    .logo { width: 80px; height: 80px; border-radius: 60%; object-fit: cover; }
+    .header-text { text-align: left; }
+    h1 { font-size: 2.2rem; margin: 0; color: var(--primary); line-height: 1; }
+    .tagline { margin: 5px 0 0 0; font-size: 1rem; color: #666; }
+
+    .news-grid { display: grid; grid-row-gap: 30px; }
+    .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; transition: 0.3s; }
+    @media (max-width: 768px) { 
+        header { flex-direction: column; text-align: center; } 
+        .header-text { text-align: center; }
+        .card { flex-direction: column; } 
+        .card img { width: 100% !important; height: 200px !important; } 
+    }
+    .card img { width: 300px; height: auto; object-fit: cover; }
+    .card-content { padding: 25px; flex: 1; }
+    .category { font-size: 0.7rem; font-weight: bold; color: var(--primary); text-transform: uppercase; }
+    .btn { display: inline-block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: bold; border: 2px solid var(--primary); padding: 6px 15px; border-radius: 20px; }
+    footer { text-align: center; padding: 40px; font-size: 0.8rem; border-top: 1px solid #ddd; }
 </style>
 
 </head>
 <body>
     <div class="container">
         <header>
-            <img src="https://raw.githubusercontent.com/ukpgeetham/news/main/logoht.png" alt="Logo" class="logo-img">
-            <h1>The Happy Tools</h1>
-            <p class="subtitle">Your daily dose of happiness, breakthroughs, and kindness.</p>
+            <img src="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png" alt="Logo">
+            <div class="header-text">
+                <h1>The Happy Tools</h1>
+                <p class="tagline">Your daily dose of AI-curated breakthroughs and kindness.</p>
+            </div>
         </header>
+        
+        <div class="ad-space">ADVERTISEMENT</div>
+        
+        <div class="news-grid">
+            
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800" alt="news">
+            <div class="card-content">
+                <span class="category">Science</span>
+                <h3>Scientists discover a bacterial kill switch and it could change the fight against superbugs</h3>
+                <p>The discovery of a bacterial kill switch marks a monumental breakthrough that could finally tip the scales in our favor against drug-resistant superbugs. This innovation offers a bright vision for the future of medicine, where even the most challenging infections can be safely and effectively cured.</p>
+                <a href="https://www.sciencedaily.com/releases/2026/02/260228082723.htm" target="_blank" class="btn">Read More &rarr;</a>
+            </div>
+        </div>
+        
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800" alt="news">
+            <div class="card-content">
+                <span class="category">Science</span>
+                <h3>Young Mars volcano hides a powerful magma engine beneath the surface</h3>
+                <p>The discovery of a hidden magma engine reveals that Mars is still a vibrant, geologically active world with a beating heart. This internal warmth brings us closer to finding habitable environments and fuels our hope for uncovering signs of life beneath the Red Planet's surface.</p>
+                <a href="https://www.sciencedaily.com/releases/2026/02/260222092329.htm" target="_blank" class="btn">Read More &rarr;</a>
+            </div>
+        </div>
+        
+        </div>
 
-    <div class="news-card">
-        <h3>Total Lunar Eclipse Tuesday Morning to Unveil Blood Moon for N. America, Australia and East Asia</h3>
-        <p>This spectacular celestial event serves as a brilliant reminder of the shared wonder that unites diverse cultures across North America, Australia, and East Asia. As we look to the skies together, the glowing moon symbolizes our collective journey toward a future defined by curiosity, discovery, and universal harmony.</p>
-        <a href="https://www.goodnewsnetwork.org/total-lunar-eclipse-tuesday-morning-to-unveil-blood-moon-for-n-america-australia-and-east-asia/" target="_blank" class="btn">Full Heartwarming Story &rarr;</a>
-    </div>
-    
-    <div class="news-card">
-        <h3>Good News in History, March 2</h3>
-        <p>Today honors a legacy of extraordinary breakthroughs, where acts of individual courage and creative genius have forever expanded the boundaries of what is possible. These historic milestones serve as a powerful reminder that our collective journey is one of constant progress, fueled by the enduring hope and brilliance of the human spirit.</p>
-        <a href="https://www.goodnewsnetwork.org/events070302/" target="_blank" class="btn">Full Heartwarming Story &rarr;</a>
-    </div>
-    
-    <div class="news-card">
-        <h3>Ultra-Rare Pokemon Card That Cost $2 Sells for $40,000 at Auction, as Prices Soar</h3>
-        <p>A modest $2 treasure has blossomed into a life-changing $40,000 windfall, proving that even the smallest investments can lead to extraordinary dreams coming true. This remarkable achievement highlights the incredible growth and bright possibilities within a community where passion and history are being rewarded like never before.</p>
-        <a href="https://www.goodnewsnetwork.org/ultra-rare-pokemon-card-that-cost-2-goes-to-auction-for-40000/" target="_blank" class="btn">Full Heartwarming Story &rarr;</a>
-    </div>
-    
-    <div class="news-card">
-        <h3>Rare Fossils in Amber Raise Questions About Secret Lives of Cretaceous Insects</h3>
-        <p>These extraordinary fossils preserved in amber illuminate the hidden beauty of ancient life, bridging the gap between our world and the wonders of the deep past. This remarkable discovery marks a significant leap forward in our understanding of nature, fueling our curiosity and paving the way for a future of endless scientific inspiration.</p>
-        <a href="https://www.goodnewsnetwork.org/rare-fossils-in-amber-reveal-the-secret-lives-of-cretaceous-insects/" target="_blank" class="btn">Full Heartwarming Story &rarr;</a>
-    </div>
-    
-    <div class="news-card">
-        <h3>Forget Yankee Candle, This Company has Hired Disabled Americans for 20 Years to Produce Superior Scents</h3>
-        <p>For two decades, this visionary company has empowered disabled Americans by providing meaningful careers that celebrate their unique talents and foster true independence. By blending social purpose with excellence, they are proving that inclusive workplaces create world-class products and a brighter, more equitable future for everyone.</p>
-        <a href="https://www.goodnewsnetwork.org/nj-candle-company-employs-adults-with-special-needs-for-20-years/" target="_blank" class="btn">Full Heartwarming Story &rarr;</a>
-    </div>
-    
-    <div class="news-card">
-        <h3>Treacherous 43-Day Mountain Search Finally Reunites Dog With Owner After it Bolted During Road Trip: ‘It was amazing’</h3>
-        <p>After forty-three days of relentless hope and determination, a miracle reunion in the rugged mountains has brought a lost dog safely back into the arms of its loving owner. This incredible victory showcases the power of unwavering perseverance and serves as a beautiful reminder that no journey is too long when fueled by an unbreakable bond.</p>
-        <a href="https://www.goodnewsnetwork.org/treacherous-43-day-mountain-search-finally-reunites-dog-with-owner-after-it-bolted-during-road-trip/" target="_blank" class="btn">Full Heartwarming Story &rarr;</a>
-    </div>
-    
-    <div class="news-card">
-        <h3>Good News in History, March 1</h3>
-        <p>Today celebrates a legacy of visionary stewardship and global compassion, marking historic milestones that protected our planet's natural wonders and launched a worldwide movement for peace. These achievements stand as a powerful reminder that our shared commitment to service and conservation can transform the world into a more hopeful and united home for all.</p>
-        <a href="https://www.goodnewsnetwork.org/events070301/" target="_blank" class="btn">Full Heartwarming Story &rarr;</a>
-    </div>
-    
-    <div class="news-card">
-        <h3>Older Male Whales More Successful at Mating Because They’re Better Singers, Shows Study</h3>
-        <p>This uplifting discovery reveals that as whales grow older, they refine their songs into masterpieces of experience, ensuring a vibrant and successful future for their species. It serves as a beautiful testament to the power of lifelong growth, proving that wisdom and persistence lead to the most harmonious outcomes in the natural world.</p>
-        <a href="https://www.goodnewsnetwork.org/older-male-whales-more-successful-at-mating-as-they-sing-better/" target="_blank" class="btn">Full Heartwarming Story &rarr;</a>
-    </div>
-    
-    <div class="news-card">
-        <h3>Dozens of Strangers Form Parade for Man with Cancer, Driving Classic Cars Passed his Home for One Last Surprise (WATCH)</h3>
-        <p>In a breathtaking display of unity, dozens of strangers transformed a difficult journey into a vibrant celebration of life to honor a courageous neighbor. This powerful act of compassion proves that the human spirit is defined by its capacity for kindness, leaving behind a lasting legacy of hope and connection that inspires us all.</p>
-        <a href="https://www.goodnewsnetwork.org/dozens-of-strangers-form-parade-for-man-with-cancer-driving-classic-cars-past-his-home-for-one-last-surprise-watch/" target="_blank" class="btn">Full Heartwarming Story &rarr;</a>
-    </div>
-    
-    <div class="news-card">
-        <h3>Monopoly World Champion Reveals His Secrets for Always Beating Your Family, as the Game Celebrates 90 Years</h3>
-        <p>As Monopoly celebrates 90 years of bridging generations, a world champion’s shared wisdom is empowering players everywhere to master the art of strategy and connection. This generous exchange of knowledge ensures that the classic game remains a vibrant catalyst for family bonding and shared joy for many decades to come.</p>
-        <a href="https://www.goodnewsnetwork.org/monopoly-world-champ-reveals-his-secrets-for-always-beating-your-family/" target="_blank" class="btn">Full Heartwarming Story &rarr;</a>
-    </div>
-    
-    <div class="news-card">
-        <h3>Good News - Daily Kos</h3>
-        <p>Significant strides in justice and sustainability are currently transforming our world, proving that collective action leads to profound and lasting progress. This momentum of positive change offers a powerful vision of hope, reminding us that our shared commitment to a better future is successfully yielding a more equitable life for all.</p>
-        <a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTFA5b2hLQ2tFLXBrb2x5VmI5eWdfajhYN2hnVFVUcVlTT0ttSXVqZmFjcGJtbVdSSGUzeEJCRTJZNy1Kd0pkMWFWQm9YZkFQUWR3a1NB?oc=5" target="_blank" class="btn">Full Heartwarming Story &rarr;</a>
-    </div>
-    
-    <div class="news-card">
-        <h3>Your Weekly Horoscope – ‘Free Will Astrology’ by Rob Brezsny</h3>
-        <p>Rob Brezsny’s latest guidance illuminates the path toward personal liberation, reminding us that we hold the powerful creative agency to shape our own bright futures. By embracing this spirit of intentional growth, every individual can turn their highest aspirations into a tangible reality that uplifts the world around them.</p>
-        <a href="https://www.goodnewsnetwork.org/horoscope-from-rob-brezsnys-free-will-astrology-2-28-2026/" target="_blank" class="btn">Full Heartwarming Story &rarr;</a>
-    </div>
-    
         <footer>
-            <p>&copy; 2026 The Happy Tools.</p>
-            <p><a href="about.html">About Us</a> | <a href="privacy.html">Privacy Policy</a></p>
+            <p>&copy; 2026 The Happy Tools | <a href="about.html">About</a> | <a href="privacy.html">Privacy</a></p>
         </footer>
     </div>
 </body>
