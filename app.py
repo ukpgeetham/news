@@ -47,7 +47,7 @@ TOPICS = {
 def fetch_feed_safely(url):
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
     try:
-        response = requests.get(url, headers=headers, timeout=15)
+        response = requests.get(url, headers=headers, timeout=10)
         return feedparser.parse(response.content)
     except Exception as e:
         print(f"⚠️ Error fetching {url}: {e}")
@@ -66,12 +66,13 @@ all_entries = []
 for category, url in TOPICS.items():
     print(f"Checking {category}...")
     feed = fetch_feed_safely(url)
-    if feed and feed.entries:
+    if feed and feed.entries[:5]:
         for entry in feed.entries:
             entry['site_category'] = category
             all_entries.append(entry)
 
 random.shuffle(all_entries)
+target_entries = all_entries[:15] 
 
 # 3. STYLING (CSS)
 style = """
@@ -115,7 +116,7 @@ style = """
 cards_html = ""
 success_count = 0
 
-for entry in all_entries:
+for entry in target_entries:
     if success_count >= 12: break
     
     prompt = f"Rewrite this news headline into 2 hopeful sentences. Category: {entry['site_category']}. Title: {entry.title}"
@@ -138,11 +139,7 @@ for entry in all_entries:
         """
         success_count += 1
     except Exception as e:
-       print(f"⚠️ Skipping article due to limit: {e}")
-       # If we hit a 429, wait longer before trying the next one
-       if "429" in str(e):
-        print("Sleeping for 30 seconds to reset quota...")
-        time.sleep(30)
+       print(f"Skipping: {e}")
        continue
        
 if success_count == 0:
