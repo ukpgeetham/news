@@ -13,7 +13,7 @@ model = genai.GenerativeModel('gemini-flash-latest')
 
 # Update these with your info
 SITE_URL = "https://happytools.site" # No trailing slash
-LOGO_URL = "https://raw.githubusercontent.com/ukpgeetham/news/main/logoht.png"
+LOGO_URL = "https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png"
 ADSENSE_ID = "ca-pub-2241812164647663" 
 # Create a JSON-LD structured data block for the whole site
 schema_data = {
