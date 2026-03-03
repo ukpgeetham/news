@@ -34,10 +34,10 @@ adsense_code = """
 # 2. TOPICS & FEEDS
 TOPICS = {
      "Global News": "https://www.reutersagency.com/feed/",
-    # "Science": "https://www.sciencedaily.com/rss/top/science.xml",
+     "Science": "https://api.rss2json.com/v1/api.json?rss_url=https://www.goodnewsnetwork.org/feed/",
     # "Nature": "https://www.sciencedaily.com/rss/top/environment.xml",
     # "Travel": "https://travel.economictimes.indiatimes.com/rss/recentstories",
-    # "Hollywood": "https://www.hollywoodreporter.com/feed/",
+     "Hollywood": "https://www.hollywoodreporter.com/feed/",
     # "Entertainment": "https://variety.com/feed/",
     # "Health": "https://www.health.com/rss",
     # "Fitness": "https://www.outsideonline.com/health/fitness/feed/",
@@ -63,6 +63,7 @@ def get_image(entry):
     return img
 
 all_entries = []
+ticker_items = []
 for category, url in TOPICS.items():
     print(f"Checking {category}...")
     feed = fetch_feed_safely(url)
@@ -70,9 +71,13 @@ for category, url in TOPICS.items():
         for entry in feed.entries:
             entry['site_category'] = category
             all_entries.append(entry)
+            # Add to ticker list
+            ticker_items.append(f"[{category}] {entry.title}")
 
 random.shuffle(all_entries)
-target_entries = all_entries[:15] 
+target_entries = all_entries[:15]
+# Create a long string of headlines for the ticker
+ticker_text = "  •  ".join(ticker_titles[:10]) # Join 10 titles for the ticker
 
 # 3. STYLING (CSS)
 style = """
@@ -81,6 +86,10 @@ style = """
     body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--dark); margin: 0; }
     .container { max-width: 1000px; margin: auto; padding: 20px; }
     
+    /* Live Ticker Styling */
+    .ticker-wrap { width: 100%; overflow: hidden; background: var(--dark); color: white; padding: 10px 0; position: sticky; top: 0; z-index: 1000; }
+    .ticker { white-space: nowrap; display: inline-block; animation: marquee 30s linear infinite; font-weight: bold; font-size: 0.9rem; }
+    @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
     /* Logo and Title in one line */
     header { 
         display: flex; 
@@ -171,24 +180,17 @@ index_html = f"""
     {style}
 </head>
 <body>
+    <div class="ticker-wrap">
+        <div class="ticker">BREAKING: {ticker_text}</div>
+    </div>
     <div class="container">
         <header>
             <img src="{LOGO_URL}" alt="Logo" class="logo">
             <div class="header-text">
                 <h1>The Happy Tools</h1>
-                <p class="tagline">Your daily dose of AI-curated breakthroughs and kindness.</p>
+                <p class="tagline">Your daily dose of breakthroughs and kindness.</p>
             </div>
         </header>
-        <div id="live-news-ticker">Loading live updates...</div>
-        <script>
-          fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.goodnewsnetwork.org/feed/')
-            .then(res => res.json())
-            .then(data => {
-              const items = data.items.slice(0, 5); // Get top 5
-              const tickerText = items.map(item => item.title).join(' • ');
-              document.getElementById('live-news-ticker').innerText = tickerText;
-            });
-        </script>
         <div class="ad-space">ADVERTISEMENT</div>
         
         <div class="news-grid">
