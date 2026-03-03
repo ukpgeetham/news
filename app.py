@@ -33,14 +33,14 @@ adsense_code = """
 """
 # 2. TOPICS & FEEDS
 TOPICS = {
-    "Global News": "https://www.reutersagency.com/feed/",
-    "Science": "https://www.sciencedaily.com/rss/top/science.xml",
-    "Nature": "https://www.sciencedaily.com/rss/top/environment.xml",
-    "Travel": "https://travel.economictimes.indiatimes.com/rss/recentstories",
-    "Hollywood": "https://www.hollywoodreporter.com/feed/",
-    "Entertainment": "https://variety.com/feed/",
-    "Health": "https://www.health.com/rss",
-    "Fitness": "https://www.outsideonline.com/health/fitness/feed/",
+     "Global News": "https://www.reutersagency.com/feed/",
+    # "Science": "https://www.sciencedaily.com/rss/top/science.xml",
+    # "Nature": "https://www.sciencedaily.com/rss/top/environment.xml",
+    # "Travel": "https://travel.economictimes.indiatimes.com/rss/recentstories",
+    # "Hollywood": "https://www.hollywoodreporter.com/feed/",
+    # "Entertainment": "https://variety.com/feed/",
+    # "Health": "https://www.health.com/rss",
+    # "Fitness": "https://www.outsideonline.com/health/fitness/feed/",
     "Good News": "https://www.goodnewsnetwork.org/feed/"
 }
 
@@ -173,13 +173,22 @@ index_html = f"""
 <body>
     <div class="container">
         <header>
-            <img src="{LOGO_URL}" alt="Logo">
+            <img src="{LOGO_URL}" alt="Logo" class="logo">
             <div class="header-text">
                 <h1>The Happy Tools</h1>
                 <p class="tagline">Your daily dose of AI-curated breakthroughs and kindness.</p>
             </div>
         </header>
-        
+        <div id="live-news-ticker">Loading live updates...</div>
+        <script>
+          fetch('https://api.rss2json.com/v1/api.json?rss_url=https://www.goodnewsnetwork.org/feed/')
+            .then(res => res.json())
+            .then(data => {
+              const items = data.items.slice(0, 5); // Get top 5
+              const tickerText = items.map(item => item.title).join(' • ');
+              document.getElementById('live-news-ticker').innerText = tickerText;
+            });
+        </script>
         <div class="ad-space">ADVERTISEMENT</div>
         
         <div class="news-grid">
