@@ -1,5 +1,5 @@
 import feedparser
-import google.generativeai as genai
+import google.genai as genai
 import os
 import re
 import random
@@ -77,7 +77,7 @@ for category, url in TOPICS.items():
 random.shuffle(all_entries)
 target_entries = all_entries[:15]
 # Create a long string of headlines for the ticker
-ticker_text = "  •  ".join(ticker_titles[:10]) # Join 10 titles for the ticker
+ticker_text = "  •  ".join(ticker_items[:10]) # Join 10 titles for the ticker
 
 # 3. STYLING (CSS)
 style = """
