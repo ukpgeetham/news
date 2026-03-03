@@ -7,6 +7,10 @@
     body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--dark); margin: 0; }
     .container { max-width: 1000px; margin: auto; padding: 20px; }
     
+    /* Live Ticker Styling */
+    .ticker-wrap { width: 100%; overflow: hidden; background: var(--dark); color: white; padding: 10px 0; position: sticky; top: 0; z-index: 1000; }
+    .ticker { white-space: nowrap; display: inline-block; animation: marquee 30s linear infinite; font-weight: bold; font-size: 0.9rem; }
+    @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
     /* Logo and Title in one line */
     header { 
         display: flex; 

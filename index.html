@@ -29,6 +29,10 @@
     body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--dark); margin: 0; }
     .container { max-width: 1000px; margin: auto; padding: 20px; }
     
+    /* Live Ticker Styling */
+    .ticker-wrap { width: 100%; overflow: hidden; background: var(--dark); color: white; padding: 10px 0; position: sticky; top: 0; z-index: 1000; }
+    .ticker { white-space: nowrap; display: inline-block; animation: marquee 30s linear infinite; font-weight: bold; font-size: 0.9rem; }
+    @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
     /* Logo and Title in one line */
     header { 
         display: flex; 
@@ -61,19 +65,31 @@
 
 </head>
 <body>
+    <div class="ticker-wrap">
+        <div class="ticker">BREAKING: [Hollywood] Comcast Chief Says Peacock Is Not Going Global: “Domestic Is Our Path”  •  [Hollywood] ‘The Alabama Solution’ Directors on Why Their Oscar-Nominated Film Is a Timely “Study of Complicity”  •  [Hollywood] ‘Game of Thrones’ Movie Officially in the Works at Warner Bros. From ‘Andor’ Writer  •  [Hollywood] The Journalist Who Became the Face of Epstein Skepticism  •  [Hollywood] Marc DeBevoise, Former Paramount and CBS Interactive Top Exec, Named OverDrive President  •  [Hollywood] Ex-Sony Boss Has Seen ‘The Studio’ — And He Wants a Word With Seth Rogen  •  [Hollywood] ‘Palm Royale’ Canceled at Apple After Two Seasons  •  [Hollywood] S&P Puts Paramount on Negative Credit Watch  •  [Hollywood] Todd Meadows, a Deckhand on ‘Deadliest Catch,’ Dies at 25  •  [Hollywood] Ryan Reynolds and Rob Mac Will Call a Live Wrexham Soccer Match This Month</div>
+    </div>
     <div class="container">
         <header>
-            <img src="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png" alt="Logo">
+            <img src="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png" alt="Logo" class="logo">
             <div class="header-text">
                 <h1>The Happy Tools</h1>
-                <p class="tagline">Your daily dose of AI-curated breakthroughs and kindness.</p>
+                <p class="tagline">Your daily dose of breakthroughs and kindness.</p>
             </div>
         </header>
-        
         <div class="ad-space">ADVERTISEMENT</div>
         
         <div class="news-grid">
-            <div class='card'><div class='card-content'><h3>No news found today.</h3><p>Please check back later!</p></div></div>
+            
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800" alt="news">
+            <div class="card-content">
+                <span class="category">Good News</span>
+                <h3>Total Lunar Eclipse Tuesday Morning Will Unveil Blood Moon for N. America, Australia and East Asia</h3>
+                <p>This Tuesday morning, a magnificent total lunar eclipse will grace the skies, inviting people from North America to East Asia to witness the stunning glow of a rare "Blood Moon." It is a wonderful opportunity to look up and feel inspired by the cosmic beauty and shared wonder that unites us all across the globe.</p>
+                <a href="https://www.goodnewsnetwork.org/total-lunar-eclipse-tuesday-morning-to-unveil-blood-moon-for-n-america-australia-and-east-asia/" target="_blank" class="btn">Read More &rarr;</a>
+            </div>
+        </div>
+        
         </div>
 
         <footer>
