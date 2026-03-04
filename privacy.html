@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Privacy Policy - The Happy Tools</title>
+    
+<style>
+    :root { --primary: #2ecc71; --dark: #2c3e50; --bg: #f8f9fa; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--dark); margin: 0; }
+    .container { max-width: 1000px; margin: auto; padding: 20px; }
+    
+    /* Live Ticker Styling */
+    .ticker-wrap { width: 100%; overflow: hidden; background: var(--dark); color: white; padding: 10px 0; position: sticky; top: 0; z-index: 1000; }
+    .ticker { white-space: nowrap; display: inline-block; animation: marquee 40s linear infinite; font-weight: bold; font-size: 0.9rem; }
+    @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+    
+    /* Logo and Title */
+    header { 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        gap: 20px; 
+        padding: 40px 0; 
+        border-bottom: 1px solid #ddd; 
+        margin-bottom: 40px; 
+    }
+    .logo { width: 80px; height: 80px; border-radius: 60%; object-fit: cover; }
+    .header-text { text-align: left; }
+    h1 { font-size: 2.2rem; margin: 0; color: var(--primary); line-height: 1; }
+    .tagline { margin: 5px 0 0 0; font-size: 1rem; color: #666; }
+
+    .news-grid { display: grid; grid-row-gap: 30px; }
+    .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; transition: 0.3s; }
+    .card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.1); transform: translateY(-2px); }
+    
+    @media (max-width: 768px) { 
+        header { flex-direction: column; text-align: center; } 
+        .header-text { text-align: center; }
+        .card { flex-direction: column; } 
+        .card img { width: 100% !important; height: 200px !important; } 
+    }
+    
+    .card img { width: 300px; height: auto; object-fit: cover; flex-shrink: 0; }
+    .card-content { padding: 25px; flex: 1; display: flex; flex-direction: column; }
+    .category { font-size: 0.75rem; font-weight: bold; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; }
+    .card h3 { margin: 12px 0 10px; font-size: 1.3rem; line-height: 1.4; }
+    .card p { margin: 0 0 15px; color: #555; line-height: 1.6; flex-grow: 1; }
+    .source { font-size: 0.8rem; color: #999; margin-top: 10px; }
+    .btn { display: inline-block; color: var(--primary); text-decoration: none; font-weight: bold; border: 2px solid var(--primary); padding: 8px 18px; border-radius: 20px; transition: 0.3s; }
+    .btn:hover { background: var(--primary); color: white; }
+    footer { text-align: center; padding: 40px; font-size: 0.8rem; border-top: 1px solid #ddd; color: #666; }
+</style>
+
+</head>
+<body>
+    <div class="container">
+        <h1>Privacy Policy</h1>
+        <p>Your privacy is important to us. This website does not directly collect personal information from its visitors.</p>
+        
+        <h3>Cookies and Advertisements</h3>
+        <p>We use Google AdSense to serve ads. Google uses cookies to serve relevant ads based on your browsing history. You can manage your ad preferences through Google Ad Settings.</p>
+        <p><a href="https://www.google.com/settings/ads" target="_blank">Manage your Google Ad Settings</a></p>
+        
+        <h3>External Services</h3>
+        <p>This website uses:</p>
+        <ul>
+            <li><strong>NewsAPI.org</strong> - for news data</li>
+            <li><strong>Google Gemini AI</strong> - for content summarization</li>
+            <li><strong>Google AdSense</strong> - for advertising</li>
+        </ul>
+        
+        <p><a href="index.html" class="btn">← Back to Home</a></p>
+    </div>
+</body>
+</html>
