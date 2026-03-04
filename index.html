@@ -1,22 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Get your daily dose of hope. AI-summarized positive news and global breakthroughs.">
-    <meta name="keywords" content="positive news, hope, breakthroughs, AI summaries, uplifting stories, good news">
-    <meta property="og:title" content="The Happy Tools | AI News">
-    <meta property="og:description" content="Uplifting news summaries, delivered daily by AI.">
-    <meta property="og:image" content="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    
-    <script type="application/ld+json">
-    {"@context": "https://schema.org", "@type": "NewsArticle", "headline": "The Happy Tools: Uplifting AI Summaries", "description": "Daily positive news and breakthroughs summarized by Gemini AI.", "publisher": {"@type": "Organization", "name": "Happy Tools", "logo": {"@type": "ImageObject", "url": "https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png"}}}
-    </script>
-    
-    <title>The Happy Tools | Positive News Summaries</title>
+    <meta name="description" content="Daily positive news and breakthroughs.">
+    <title>The Happy Tools - Positive News</title>
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png">
     
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2241812164647663"
@@ -25,75 +13,186 @@
     
 <style>
     :root { --primary: #2ecc71; --dark: #2c3e50; --bg: #f8f9fa; }
-    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--dark); margin: 0; }
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--dark); margin: 0; }
     .container { max-width: 1000px; margin: auto; padding: 20px; }
     
-    /* Live Ticker Styling */
     .ticker-wrap { width: 100%; overflow: hidden; background: var(--dark); color: white; padding: 10px 0; position: sticky; top: 0; z-index: 1000; }
-    .ticker { white-space: nowrap; display: inline-block; animation: marquee 40s linear infinite; font-weight: bold; font-size: 0.9rem; }
+    .ticker { white-space: nowrap; display: inline-block; animation: marquee 50s linear infinite; font-weight: bold; font-size: 0.9rem; }
     @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
     
-    /* Logo and Title */
-    header { 
-        display: flex; 
-        align-items: center; 
-        justify-content: center; 
-        gap: 20px; 
-        padding: 40px 0; 
-        border-bottom: 1px solid #ddd; 
-        margin-bottom: 40px; 
-    }
-    .logo { width: 80px; height: 80px; border-radius: 60%; object-fit: cover; }
-    .header-text { text-align: left; }
-    h1 { font-size: 2.2rem; margin: 0; color: var(--primary); line-height: 1; }
-    .tagline { margin: 5px 0 0 0; font-size: 1rem; color: #666; }
+    header { display: flex; align-items: center; justify-content: center; gap: 20px; padding: 40px 0; border-bottom: 1px solid #ddd; margin-bottom: 40px; }
+    .logo { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; }
+    h1 { font-size: 2.2rem; margin: 0; color: var(--primary); }
+    .tagline { margin: 5px 0 0; font-size: 1rem; color: #666; }
 
-    .news-grid { display: grid; grid-row-gap: 30px; }
-    .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; transition: 0.3s; }
-    .card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.1); transform: translateY(-2px); }
+    .news-grid { display: grid; gap: 30px; }
+    .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: flex; transition: all 0.3s; }
+    .card:hover { box-shadow: 0 8px 20px rgba(0,0,0,0.12); transform: translateY(-2px); }
+    
+    .card img { width: 280px; height: auto; object-fit: cover; flex-shrink: 0; }
+    .card-content { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .category { font-size: 0.75rem; font-weight: bold; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .card h3 { margin: 0 0 10px; font-size: 1.2rem; line-height: 1.3; }
+    .card p { margin: 0 0 12px; color: #555; line-height: 1.5; flex-grow: 1; font-size: 0.95rem; }
+    .source { font-size: 0.8rem; color: #999; margin-bottom: 10px; }
+    .btn { display: inline-block; color: var(--primary); text-decoration: none; font-weight: 600; border: 2px solid var(--primary); padding: 6px 14px; border-radius: 20px; }
+    .btn:hover { background: var(--primary); color: white; }
     
     @media (max-width: 768px) { 
-        header { flex-direction: column; text-align: center; } 
-        .header-text { text-align: center; }
+        header { flex-direction: column; gap: 15px; }
         .card { flex-direction: column; } 
-        .card img { width: 100% !important; height: 200px !important; } 
+        .card img { width: 100%; height: 200px; } 
     }
     
-    .card img { width: 300px; height: auto; object-fit: cover; flex-shrink: 0; }
-    .card-content { padding: 25px; flex: 1; display: flex; flex-direction: column; }
-    .category { font-size: 0.75rem; font-weight: bold; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; }
-    .card h3 { margin: 12px 0 10px; font-size: 1.3rem; line-height: 1.4; }
-    .card p { margin: 0 0 15px; color: #555; line-height: 1.6; flex-grow: 1; }
-    .source { font-size: 0.8rem; color: #999; margin-top: 10px; }
-    .btn { display: inline-block; color: var(--primary); text-decoration: none; font-weight: bold; border: 2px solid var(--primary); padding: 8px 18px; border-radius: 20px; transition: 0.3s; }
-    .btn:hover { background: var(--primary); color: white; }
-    footer { text-align: center; padding: 40px; font-size: 0.8rem; border-top: 1px solid #ddd; color: #666; }
+    footer { text-align: center; padding: 30px; font-size: 0.85rem; border-top: 1px solid #ddd; color: #999; }
+    .ad-space { text-align: center; padding: 20px; background: #f0f0f0; border-radius: 8px; margin: 20px 0; }
 </style>
 
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "NewsArticle", "headline": "The Happy Tools", "description": "Positive news updates daily"}</script>
 </head>
 <body>
     <div class="ticker-wrap">
-        <div class="ticker">🌟 US Olympic gold medalists Hilary Knight ...  •  Boston Celtics vs. Milwaukee Bucks Live ...  •  Older adults gain muscle power with dail...  •  The Coolest Gadgets From MWC 2026 - Gizm...  •  PSA: Pokémon FireRed & LeafGreen Switch ...  •  Apple’s new products add C1X chip for th...  •  Colorado public health officials confirm...  •  Viagara May Be One of Our Best Existing ...  •  Interstellar comet 3I/ATLAS shines in ne...  •  Home Drinking Water May Impact Parkinson... 🌟</div>
+        <div class="ticker">🌟 Google fixes Gemini’s biggest Googl • Better Buy in 2026: Bitcoin or Silv • NASA Uses Mars Global Localization  • Colorado public health officials co • Trees cover rock, eventually: Study • NASA Announces Major Change to Plan • NASA, JAXA to Cover HTV-X1 Spacecra • Rectal cancer rates are rising in U • The Coolest Gadgets From MWC 2026 - • KGO forecaster off the air after op 🌟</div>
     </div>
     <div class="container">
         <header>
             <img src="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png" alt="Logo" class="logo">
-            <div class="header-text">
+            <div>
                 <h1>The Happy Tools</h1>
-                <p class="tagline">Your daily dose of breakthroughs and kindness.</p>
+                <p class="tagline">Your daily dose of positive news</p>
             </div>
         </header>
         
+        <div class="ad-space">ADVERTISEMENT</div>
+        
         <div class="news-grid">
-            <div class='card'><div class='card-content'>
-                    <h3>📭 No news found today</h3>
-                    <p>We couldn't find enough positive stories today. Please check back later!</p>
-                  </div></div>
+            
+    <div class="card">
+        <img src="https://static0.anpoimages.com/wordpress/wp-content/uploads/2025/10/gemini-google-home-logo.jpg?w=1600&h=900&fit=crop" alt="Google fixes Gemini’s biggest Google Home frustrations - Android Police" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">Technology</span>
+            <h3>Google fixes Gemini’s biggest Google Home frustrations - Android Police</h3>
+            <p>Less interruption, more control</p>
+            <div class="source">📰 Android Police</div>
+            <a href="https://www.androidpolice.com/google-fixes-geminis-biggest-google-home-frustrations/" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="https://g.foolcdn.com/image/?url=https%3A%2F%2Fg.foolcdn.com%2Feditorial%2Fimages%2F857301%2Fbitcoin-with-chart.jpg&w=1200&op=resize" alt="Better Buy in 2026: Bitcoin or Silver? The Answer Couldn't Be Clearer for Long-Term Investors. - The Motley Fool" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">Business</span>
+            <h3>Better Buy in 2026: Bitcoin or Silver? The Answer Couldn't Be Clearer for Long-Term Investors. - The Motley Fool</h3>
+            <p>Production and supply dynamics tell the whole story here.</p>
+            <div class="source">📰 Motley Fool</div>
+            <a href="https://www.fool.com/investing/2026/03/02/better-buy-in-2026-bitcoin-or-silver-the-answer-co/" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="https://hackaday.com/wp-content/uploads/2021/04/perseverance-ingenuity-selfie.jpg" alt="NASA Uses Mars Global Localization As GNSS Replacement For The Perseverance Rover - Hackaday" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">Science</span>
+            <h3>NASA Uses Mars Global Localization As GNSS Replacement For The Perseverance Rover - Hackaday</h3>
+            <p>Unlike on Earth there aren’t dozens of satellites whizzing around Mars to provide satellite navigation functionality. Recently NASA’s JPL engineers tried something with the Perseverance…</p>
+            <div class="source">📰 Hackaday</div>
+            <a href="https://hackaday.com/2026/03/02/nasa-uses-mars-global-localization-as-gnss-replacement-for-the-perseverance-rover/" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800" alt="Colorado public health officials confirm measles case, release locations for potential exposures in Broomfield and Westminster - Colorado Department of Public Health and Environment (.gov)" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">General</span>
+            <h3>Colorado public health officials confirm measles case, release locations for potential exposures in Broomfield and Westminster - Colorado Department of Public Health and Environment (.gov)</h3>
+            <p>The individual is the second case of measles at Broomfield High School. Neither of the students had received the measles, mumps, and rubella (MMR) vaccine.</p>
+            <div class="source">📰 Colorado.gov</div>
+            <a href="https://cdphe.colorado.gov/press-release/colorado-public-health-officials-confirm-measles-case-Broomfield-Westminster" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="https://scx2.b-cdn.net/gfx/news/2026/trees-cover-rock-event.jpg" alt="Trees cover rock, eventually: Study maps how bare Georgia bedrock turns into forest - Phys.org" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">Science</span>
+            <h3>Trees cover rock, eventually: Study maps how bare Georgia bedrock turns into forest - Phys.org</h3>
+            <p>In the forests of the southeastern United States, dense tree cover dominates most landscapes. That's why the Appalachian Trail is sometimes nicknamed &quot;The Green Tunnel.&quot; But avid hikers know that ofte...</p>
+            <div class="source">📰 Phys.Org</div>
+            <a href="https://phys.org/news/2026-03-trees-eventually-georgia-bedrock-forest.html" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="https://www.sciencealert.com/images/2026/03/Mobile-launcher-1-containing-the-massive-Artemis-II-Space-Launch-System-SLS-rocket-arrives-at-the-Vehicle-Assembly-Building.jpg" alt="NASA Announces Major Change to Plans For Putting Humans on The Moon - ScienceAlert" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">Science</span>
+            <h3>NASA Announces Major Change to Plans For Putting Humans on The Moon - ScienceAlert</h3>
+            <p>As we wait for the historic Artemis II mission – with Canadian astronaut Jeremy Hansen on board – NASA has announced major changes to the Artemis program.</p>
+            <div class="source">📰 ScienceAlert</div>
+            <a href="https://www.sciencealert.com/nasa-announces-major-change-to-plans-for-putting-humans-on-the-moon" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="https://images-assets.nasa.gov/image/iss073e0988452/iss073e0988452~large.jpg" alt="NASA, JAXA to Cover HTV-X1 Spacecraft Departure from Space Station - NASA (.gov)" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">Science</span>
+            <h3>NASA, JAXA to Cover HTV-X1 Spacecraft Departure from Space Station - NASA (.gov)</h3>
+            <p>On Thursday, March 5, flight controllers will use the space station’s Canadarm2 robotic arm to detach HTV-X1 from the Harmony module’s Earth-facing port on</p>
+            <div class="source">📰 NASA</div>
+            <a href="https://www.nasa.gov/news-release/nasa-jaxa-to-cover-htv-x1-spacecraft-departure-from-space-station/" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/rockcms/2023-03/230303-stock-colonoscopy-ew-111p-4fb675.jpg" alt="Rectal cancer rates are rising in U.S., driving an increase in illness in younger adults - NBC News" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">Health</span>
+            <h3>Rectal cancer rates are rising in U.S., driving an increase in illness in younger adults - NBC News</h3>
+            <p>A rise in rectal cancer rates is driving an increase in colorectal cancer diagnoses in people younger than 65, according to a report published Monday from the American Cancer Society.</p>
+            <div class="source">📰 NBC News</div>
+            <a href="https://www.nbcnews.com/health/health-news/rectal-cancer-rates-are-rising-us-driving-increase-illness-younger-adu-rcna261297" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="https://gizmodo.com/app/uploads/2026/03/Best-of-MWC-2026-Featured-Image-1-1200x675.jpg" alt="The Coolest Gadgets From MWC 2026 - Gizmodo" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">Business</span>
+            <h3>The Coolest Gadgets From MWC 2026 - Gizmodo</h3>
+            <p>The mobile-focused show has some exciting new phones, tablets, and... humanoid robots?</p>
+            <div class="source">📰 Gizmodo.com</div>
+            <a href="https://gizmodo.com/the-coolest-gadgets-from-mwc-2026-2000728407" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="https://s.hdnux.com/photos/01/63/44/04/30294301/3/rawImage.jpg" alt="KGO forecaster off the air after open-heart surgery - SFGATE" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">Technology</span>
+            <h3>KGO forecaster off the air after open-heart surgery - SFGATE</h3>
+            <p>Spencer Christian, weather forecaster for KGO-TV, has been off the air since February after an open-heart surgery.</p>
+            <div class="source">📰 SFGate</div>
+            <a href="https://www.sfgate.com/sf-culture/article/kgo-forecaster-heart-surgery-21951373.php" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="https://sportsfly.cbsistatic.com/fly-467/bundles/sportsmediacss/images/fantasy/default-article-image-large.png" alt="Boston Celtics vs. Milwaukee Bucks Live Score and Stats - March 2, 2026 Gametracker - CBS Sports" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">General</span>
+            <h3>Boston Celtics vs. Milwaukee Bucks Live Score and Stats - March 2, 2026 Gametracker - CBS Sports</h3>
+            <p>Get real-time NBA Basketball coverage and scores as Boston Celtics takes on Milwaukee Bucks. We bring you the latest game previews, live stats, expert picks and recaps on CBSSports.com</p>
+            <div class="source">📰 CBS Sports</div>
+            <a href="https://www.cbssports.com/nba/gametracker/recap/NBA_20260302_BOS@MIL/" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="https://dims.apnews.com/dims4/default/8f4c175/2147483647/strip/true/crop/3070x2046+0+1/resize/980x653!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2Fbc%2F33%2F14bdbdea1c92d4d8ce65b2a9ecfd%2Fe327893369c946bda7a7acbcef60977c" alt="US Olympic gold medalists Hilary Knight and Quinn and Jack Hughes appear on 'Tonight Show' - AP News" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">General</span>
+            <h3>US Olympic gold medalists Hilary Knight and Quinn and Jack Hughes appear on 'Tonight Show' - AP News</h3>
+            <p>Jimmy Fallon made fun of Jack Hughes for getting a tooth knocked out before scoring his Olympic-final overtime goal and praised Hilary Knight for winning at her fifth Games as the U.S. gold medal-winn...</p>
+            <div class="source">📰 Associated Press</div>
+            <a href="https://apnews.com/article/olympic-hockey-knight-hughes-tonight-show-402d8e7db05c6d3edbc977e2cac1fea8" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        </div>
+    </div>
         </div>
 
         <footer>
             <p>&copy; 2026 The Happy Tools | <a href="about.html">About</a> | <a href="privacy.html">Privacy</a></p>
-            <p>Updated: March 04, 2026 at 12:48 PM</p>
+            <p>Updated: March 04, 2026 at 01:02 PM</p>
         </footer>
     </div>
 </body>
