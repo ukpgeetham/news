@@ -149,6 +149,19 @@ STYLE = """
     .ticker-wrap { width: 100%; overflow: hidden; background: var(--dark); color: white; padding: 10px 0; position: sticky; top: 0; z-index: 1000; }
     .ticker { white-space: nowrap; display: inline-block; animation: marquee 50s linear infinite; font-weight: bold; font-size: 0.9rem; }
     @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+    /* NAV MENU */
+    nav { background: var(--dark); padding: 15px 0; position: fixed; top: 0; width: 100%; z-index: 1000; border-bottom: 3px solid var(--primary); }
+    .nav-container { max-width: 1000px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+    .nav-links { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
+    .nav-links a { color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* GAME BOX */
+    .game-box { background: white; padding: 40px; border-radius: 15px; text-align: center; border: 3px solid var(--primary); }
+    #word-display { font-size: 3rem; color: var(--primary); letter-spacing: 8px; margin: 20px 0; font-weight: 900; }
+    input { padding: 12px; width: 250px; border-radius: 10px; border: 2px solid #ddd; font-size: 1.1rem; }
+    @media (max-width: 768px) { .card { flex-direction: column; } .card img { width: 100%; } }
     
     header { display: flex; align-items: center; justify-content: center; gap: 20px; padding: 40px 0; border-bottom: 1px solid #ddd; margin-bottom: 40px; }
     .logo { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; }
@@ -177,6 +190,21 @@ STYLE = """
     footer { text-align: center; padding: 30px; font-size: 0.85rem; border-top: 1px solid #ddd; color: #999; }
     .ad-space { text-align: center; padding: 20px; background: #f0f0f0; border-radius: 8px; margin: 20px 0; }
 </style>
+"""
+NAV_HTML = f"""
+<nav>
+    <div class="nav-container">
+        <div style="display:flex; align-items:center; gap:10px;">
+            <img src="{LOGO_URL}" style="width:30px; height:30px; border-radius:50%;">
+            <span style="color:white; font-weight:900;">HAPPY TOOLS</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">News</a></li>
+            <li><a href="games.html">Fun Games</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </div>
+</nav>
 """
 
 ADSENSE_CODE = f"""
@@ -259,14 +287,15 @@ def generate_index_html(cards_html: str, ticker_text: str) -> str:
     <div class="ticker-wrap">
         <div class="ticker">🌟 {ticker_text} 🌟</div>
     </div>
+    {NAV_HTML}
     <div class="container">
-        <header>
-            <img src="{LOGO_URL}" alt="Logo" class="logo">
-            <div>
-                <h1>The Happy Tools</h1>
-                <p class="tagline">Your daily dose of positive news</p>
-            </div>
-        </header>
+        # <header>
+        #     <img src="{LOGO_URL}" alt="Logo" class="logo">
+        #     <div>
+        #         <h1>The Happy Tools</h1>
+        #         <p class="tagline">Your daily dose of positive news</p>
+        #     </div>
+        # </header>
         
         <div class="ad-space">ADVERTISEMENT</div>
         
@@ -282,7 +311,33 @@ def generate_index_html(cards_html: str, ticker_text: str) -> str:
 </body>
 </html>"""
 
-
+def games_page() -> str:
+    return f"""
+<!DOCTYPE html><html><head>{STYLE}</head>
+<body>
+    {NAV_HTML}
+    <div class="container">
+        <div class="game-box">
+            <h2>🧩 Positive Word Scramble</h2>
+            <p>Unscramble the uplifting word!</p>
+            <div id="word-display">-----</div>
+            <input type="text" id="user-input" placeholder="Type here...">
+            <button onclick="check()" class="btn" style="cursor:pointer; background:white;">Submit</button>
+        </div>
+    </div>
+    <script>
+        const words = ["HAPPY", "PEACE", "SMILE", "HOPE", "JOY"];
+        let secret = words[Math.floor(Math.random()*words.length)];
+        document.getElementById('word-display').innerText = secret.split('').sort(()=>0.5-Math.random()).join('');
+        function check() {{
+            if(document.getElementById('user-input').value.toUpperCase() === secret) {{
+                alert("You got it! 🌟");
+                location.reload();
+            }} else {{ alert("Try again!"); }}
+        }}
+    </script>
+</body></html>
+"""
 def generate_about_html() -> str:
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -360,6 +415,7 @@ def main():
         "index.html": generate_index_html(cards, ticker),
         "about.html": generate_about_html(),
         "privacy.html": generate_privacy_html(),
+        "games.html": games_page(),
         "sitemap.xml": generate_sitemap()
     })
     
