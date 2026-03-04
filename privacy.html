@@ -10,6 +10,19 @@
     .ticker-wrap { width: 100%; overflow: hidden; background: var(--dark); color: white; padding: 10px 0; position: sticky; top: 0; z-index: 1000; }
     .ticker { white-space: nowrap; display: inline-block; animation: marquee 50s linear infinite; font-weight: bold; font-size: 0.9rem; }
     @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+    /* NAV MENU */
+    nav { background: var(--dark); padding: 15px 0; position: fixed; top: 0; width: 100%; z-index: 1000; border-bottom: 3px solid var(--primary); }
+    .nav-container { max-width: 1000px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+    .nav-links { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
+    .nav-links a { color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* GAME BOX */
+    .game-box { background: white; padding: 40px; border-radius: 15px; text-align: center; border: 3px solid var(--primary); }
+    #word-display { font-size: 3rem; color: var(--primary); letter-spacing: 8px; margin: 20px 0; font-weight: 900; }
+    input { padding: 12px; width: 250px; border-radius: 10px; border: 2px solid #ddd; font-size: 1.1rem; }
+    @media (max-width: 768px) { .card { flex-direction: column; } .card img { width: 100%; } }
     
     header { display: flex; align-items: center; justify-content: center; gap: 20px; padding: 40px 0; border-bottom: 1px solid #ddd; margin-bottom: 40px; }
     .logo { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; }
