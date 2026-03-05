@@ -1,10 +1,23 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Daily positive news and breakthroughs.">
-    <title>The Happy Tools - Positive News</title>
+    <meta name="description" content="Get your daily dose of hope. AI-summarized positive news and global breakthroughs.">
+    <meta name="news_keywords" content="positive news, hope, breakthroughs, AI news summaries, uplifting stories">
+    <meta property="og:title" content="Happy Tools | AI News">
+    <meta property="og:description" content="Uplifting news summaries, delivered daily by AI.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "NewsArticle", "headline": "The Happy Tools: Uplifting AI Summaries", "description": "Daily positive news and breakthroughs summarized by Gemini AI.", "publisher": {"@type": "Organization", "name": "Happy Tools", "logo": {"@type": "ImageObject", "url": "https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png"}}}
+    </script>
+    
+    <title>Happy Tools</title>
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png">
     
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2241812164647663"
@@ -13,214 +26,125 @@
     
 <style>
     :root { --primary: #2ecc71; --dark: #2c3e50; --bg: #f8f9fa; }
-    * { box-sizing: border-box; }
-    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--dark); margin: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--dark); margin: 0; }
     .container { max-width: 1000px; margin: auto; padding: 20px; }
     
+    /* Live Ticker Styling */
     .ticker-wrap { width: 100%; overflow: hidden; background: var(--dark); color: white; padding: 10px 0; position: sticky; top: 0; z-index: 1000; }
-    .ticker { white-space: nowrap; display: inline-block; animation: marquee 50s linear infinite; font-weight: bold; font-size: 0.9rem; }
+    .ticker { white-space: nowrap; display: inline-block; animation: marquee 30s linear infinite; font-weight: bold; font-size: 0.9rem; }
     @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-
-    /* NAV MENU */
-    nav { background: var(--dark); padding: 15px 0; position: fixed; top: 0; width: 100%; z-index: 1000; border-bottom: 3px solid var(--primary); }
-    .nav-container { max-width: 1000px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
-    .nav-links { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
-    .nav-links a { color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; }
-    .nav-links a:hover { color: var(--primary); }
-
-    /* GAME BOX */
-    .game-box { background: white; padding: 40px; border-radius: 15px; text-align: center; border: 3px solid var(--primary); }
-    #word-display { font-size: 3rem; color: var(--primary); letter-spacing: 8px; margin: 20px 0; font-weight: 900; }
-    input { padding: 12px; width: 250px; border-radius: 10px; border: 2px solid #ddd; font-size: 1.1rem; }
-    @media (max-width: 768px) { .card { flex-direction: column; } .card img { width: 100%; } }
     
-    header { display: flex; align-items: center; justify-content: center; gap: 20px; padding: 40px 0; border-bottom: 1px solid #ddd; margin-bottom: 40px; }
-    .logo { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; }
-    h1 { font-size: 2.2rem; margin: 0; color: var(--primary); }
-    .tagline { margin: 5px 0 0; font-size: 1rem; color: #666; }
-
-    .news-grid { display: grid; gap: 30px; }
-    .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: flex; transition: all 0.3s; }
-    .card:hover { box-shadow: 0 8px 20px rgba(0,0,0,0.12); transform: translateY(-2px); }
-    
-    .card img { width: 280px; height: auto; object-fit: cover; flex-shrink: 0; }
-    .card-content { padding: 20px; flex: 1; display: flex; flex-direction: column; }
-    .category { font-size: 0.75rem; font-weight: bold; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
-    .card h3 { margin: 0 0 10px; font-size: 1.2rem; line-height: 1.3; }
-    .card p { margin: 0 0 12px; color: #555; line-height: 1.5; flex-grow: 1; font-size: 0.95rem; }
-    .source { font-size: 0.8rem; color: #999; margin-bottom: 10px; }
-    .btn { display: inline-block; color: var(--primary); text-decoration: none; font-weight: 600; border: 2px solid var(--primary); padding: 6px 14px; border-radius: 20px; }
-    .btn:hover { background: var(--primary); color: white; }
-    
-    @media (max-width: 768px) { 
-        header { flex-direction: column; gap: 15px; }
-        .card { flex-direction: column; } 
-        .card img { width: 100%; height: 200px; } 
+    /* Logo and Title in one line */
+    header { 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        gap: 20px; 
+        padding: 40px 0; 
+        border-bottom: 1px solid #ddd; 
+        margin-bottom: 40px; 
     }
-    
-    footer { text-align: center; padding: 30px; font-size: 0.85rem; border-top: 1px solid #ddd; color: #999; }
-    .ad-space { text-align: center; padding: 20px; background: #f0f0f0; border-radius: 8px; margin: 20px 0; }
+    .logo { width: 80px; height: 80px; border-radius: 60%; object-fit: cover; }
+    .header-text { text-align: left; }
+    h1 { font-size: 2.2rem; margin: 0; color: var(--primary); line-height: 1; }
+    .tagline { margin: 5px 0 0 0; font-size: 1rem; color: #666; }
+
+    .news-grid { display: grid; grid-row-gap: 30px; }
+    .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; transition: 0.3s; }
+    @media (max-width: 768px) { 
+        header { flex-direction: column; text-align: center; } 
+        .header-text { text-align: center; }
+        .card { flex-direction: column; } 
+        .card img { width: 100% !important; height: 200px !important; } 
+    }
+    .card img { width: 300px; height: auto; object-fit: cover; }
+    .card-content { padding: 25px; flex: 1; }
+    .category { font-size: 0.7rem; font-weight: bold; color: var(--primary); text-transform: uppercase; }
+    .btn { display: inline-block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: bold; border: 2px solid var(--primary); padding: 6px 15px; border-radius: 20px; }
+    footer { text-align: center; padding: 40px; font-size: 0.8rem; border-top: 1px solid #ddd; }
 </style>
 
-    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "NewsArticle", "headline": "The Happy Tools", "description": "Positive news updates daily"}</script>
 </head>
 <body>
     <div class="ticker-wrap">
-        <div class="ticker">🌟 Apple launches iPhone 17e at $599,  • Big Google Home update lets Gemini  • Zendaya and Tom Holland are married • Target is set to report quarterly e • Trees cover rock, eventually: Study • Viagara May Be One of Our Best Exis • Older adults gain muscle power with • CDC director urges use of measles v • Lindsey Graham’s Attempt To Defend  • Being stronger means you’re likely  🌟</div>
+        <div class="ticker">BREAKING: [Hollywood] “Seven Together, We Can Do Anything”: Netflix Drops Trailer for BTS Comeback Concert Live Stream  •  [Hollywood] 15 Chanel Gifts You Can Get for Under $100  •  [Hollywood] ‘Matlock’ Actor David Del Rio’s Firing Sparks Legal Battle With CBS Studios  •  [Hollywood] Paramount’s Warner Bros. Megadeal Could Upend Canada’s Battle For TV Viewers  •  [Hollywood] ‘Disinherited’ Drama Starring Victoria Pedretti, Kiera Allen Snags FX and Hulu Series Order  •  [Hollywood] Ryan Gosling Mistakenly Gets Ready for His Fifth ‘Saturday Night Live’ Hosting Gig in New Promo  •  [Hollywood] ‘Traitors’ Winner Rob Rausch on If He’d Come Back and His Necessary Maura Betrayal: “I Was Dreading It”  •  [Hollywood] ‘Ocean’s Eleven’ Prequel Loses Director Lee Isaac Chung Amid Creative Differences  •  [Hollywood] ‘The Bear’ Set to End With Season 5 at FX and Hulu  •  [Hollywood] Will Liam Neeson’s ‘Naked Gun’ Get a Sequel? Producer Seth MacFarlane Gives Update</div>
     </div>
-    
-<nav>
-    <div class="nav-container">
-        <div style="display:flex; align-items:center; gap:10px;">
-            <img src="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png" style="width:30px; height:30px; border-radius:50%;">
-            <span style="color:white; font-weight:900;">HAPPY TOOLS</span>
-        </div>
-        <ul class="nav-links">
-            <li><a href="index.html">News</a></li>
-            <li><a href="games.html">Fun Games</a></li>
-            <li><a href="about.html">About</a></li>
-        </ul>
-    </div>
-</nav>
-
     <div class="container">
-        # <header>
-        #     <img src="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png" alt="Logo" class="logo">
-        #     <div>
-        #         <h1>The Happy Tools</h1>
-        #         <p class="tagline">Your daily dose of positive news</p>
-        #     </div>
-        # </header>
-        
+        <header>
+            <img src="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png" alt="Logo" class="logo">
+            <div class="header-text">
+                <h1>The Happy Tools</h1>
+                <p class="tagline">Your daily dose of breakthroughs and kindness.</p>
+            </div>
+        </header>
         <div class="ad-space">ADVERTISEMENT</div>
         
         <div class="news-grid">
             
-    <div class="card">
-        <img src="https://www.staradvertiser.com/wp-content/uploads/2026/03/web1_20260302_brk_apl01.jpg" alt="Apple launches iPhone 17e at $599, boosts base storage - Honolulu Star-Advertiser" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
-        <div class="card-content">
-            <span class="category">Technology</span>
-            <h3>Apple launches iPhone 17e at $599, boosts base storage - Honolulu Star-Advertiser</h3>
-            <p>Apple today launched iPhone 17e, its more affordable smartphone model that starts at a price of $599 with 256 gigabytes of storage, as it looks to defend its share in a fiercely competitive global han...</p>
-            <div class="source">📰 Honolulu Star-Advertiser</div>
-            <a href="https://www.staradvertiser.com/2026/03/02/breaking-news/apple-launches-iphone-17e-at-599-boosts-base-storage/" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800" alt="news">
+            <div class="card-content">
+                <span class="category">Good News</span>
+                <h3>Rare Fossils in Amber Raise Questions About Secret Lives of Cretaceous Insects</h3>
+                <p>These stunning amber fossils provide a rare and beautiful glimpse into the vibrant history of our planet, revealing the long-hidden stories of ancient life. This discovery sparks new excitement for the future of science, reminding us that there are still many wonderful mysteries waiting to be uncovered in the natural world.</p>
+                <a href="https://www.goodnewsnetwork.org/rare-fossils-in-amber-reveal-the-secret-lives-of-cretaceous-insects/" target="_blank" class="btn">Read More &rarr;</a>
+            </div>
         </div>
-    </div>
-    <div class="card">
-        <img src="https://platform.theverge.com/wp-content/uploads/sites/2/2026/03/Screenshot-2025-05-22-at-11.35.57%E2%80%AFAM.png.webp?quality=90&strip=all&crop=0%2C0.33877425315676%2C100%2C99.322451493686&w=1200" alt="Big Google Home update lets Gemini describe live camera feeds - The Verge" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
-        <div class="card-content">
-            <span class="category">Technology</span>
-            <h3>Big Google Home update lets Gemini describe live camera feeds - The Verge</h3>
-            <p>Google Home updates fix a long list of annoyances and introduces Live Search to give Gemini the power to describe what your cameras see.</p>
-            <div class="source">📰 The Verge</div>
-            <a href="https://www.theverge.com/tech/888008/big-google-home-update-lets-gemini-describe-live-camera-feeds" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800" alt="news">
+            <div class="card-content">
+                <span class="category">Good News</span>
+                <h3>Good News in History, February 23</h3>
+                <p>On this day in 1954, the first mass vaccinations against polio began, marking a monumental turning point in global health and the protection of children everywhere. This historic milestone serves as a powerful reminder that through innovation and unity, we have the strength to overcome our greatest challenges and build a safer future for all.</p>
+                <a href="https://www.goodnewsnetwork.org/events070223/" target="_blank" class="btn">Read More &rarr;</a>
+            </div>
         </div>
-    </div>
-    <div class="card">
-        <img src="https://s.yimg.com/ny/api/res/1.2/rJCRwr2qHCVxg2uS0BZECw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD02NzU7Y2Y9d2VicA--/https://d29szjachogqwa.cloudfront.net/images/user-uploaded/thumb-tom-and-zendaya.jpg" alt="Zendaya and Tom Holland are married, stylist says: Their relationship through the years - Yahoo" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
-        <div class="card-content">
-            <span class="category">General</span>
-            <h3>Zendaya and Tom Holland are married, stylist says: Their relationship through the years - Yahoo</h3>
-            <p>Yahoo is looking back at Tomdaya's relationship timeline — from their platonic beginnings to their Instagram hard launch that nearly broke the internet.</p>
-            <div class="source">📰 Yahoo Entertainment</div>
-            <a href="https://www.yahoo.com/entertainment/celebrity/article/zendaya-and-tom-holland-are-married-stylist-says-their-relationship-through-the-years-221139239.html" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800" alt="news">
+            <div class="card-content">
+                <span class="category">Good News</span>
+                <h3>Treacherous 43-Day Mountain Search Finally Reunites Dog With Owner After it Bolted During Road Trip: ‘It was amazing’</h3>
+                <p>Against all odds, a beloved dog has been safely reunited with its owner after surviving 43 treacherous days in the mountains. This miraculous rescue is a beautiful testament to the power of perseverance and the unbreakable bond we share with our pets.</p>
+                <a href="https://www.goodnewsnetwork.org/treacherous-43-day-mountain-search-finally-reunites-dog-with-owner-after-it-bolted-during-road-trip/" target="_blank" class="btn">Read More &rarr;</a>
+            </div>
         </div>
-    </div>
-    <div class="card">
-        <img src="https://image.cnbcfm.com/api/v1/image/108215229-1761133987103-gettyimages-2242151899-McGregor251021FloridaBusinesses02.jpeg?v=1772201732&w=1920&h=1080" alt="Target is set to report quarterly earnings, share turnaround plan. Here's what to expect - CNBC" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
-        <div class="card-content">
-            <span class="category">General</span>
-            <h3>Target is set to report quarterly earnings, share turnaround plan. Here's what to expect - CNBC</h3>
-            <p>The big-box retailer Target posted its fourth-quarter results as it hosted an investor meeting at its Minneapolis headquarters.</p>
-            <div class="source">📰 CNBC</div>
-            <a href="https://www.cnbc.com/2026/03/03/target-tgt-q4-2025-earnings.html" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800" alt="news">
+            <div class="card-content">
+                <span class="category">Good News</span>
+                <h3>Thailand’s Mythical ‘Fire Tiger’ Captured on Trail Cam, One of the Rarest Sightings in the Cat World</h3>
+                <p>The legendary "Fire Tiger" has been captured on camera in the forests of Thailand, providing a rare and beautiful glimpse of a creature once thought to be nearly impossible to find. This extraordinary sighting brings a renewed sense of hope for the survival of the species and highlights the inspiring success of ongoing conservation efforts.</p>
+                <a href="https://www.goodnewsnetwork.org/thailands-mythical-fire-tiger-captured-on-trail-cam-one-of-the-rarest-sightings-in-the-cat-world/" target="_blank" class="btn">Read More &rarr;</a>
+            </div>
         </div>
-    </div>
-    <div class="card">
-        <img src="https://scx2.b-cdn.net/gfx/news/2026/trees-cover-rock-event.jpg" alt="Trees cover rock, eventually: Study maps how bare Georgia bedrock turns into forest - Phys.org" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
-        <div class="card-content">
-            <span class="category">Science</span>
-            <h3>Trees cover rock, eventually: Study maps how bare Georgia bedrock turns into forest - Phys.org</h3>
-            <p>In the forests of the southeastern United States, dense tree cover dominates most landscapes. That's why the Appalachian Trail is sometimes nicknamed &quot;The Green Tunnel.&quot; But avid hikers know that ofte...</p>
-            <div class="source">📰 Phys.Org</div>
-            <a href="https://phys.org/news/2026-03-trees-eventually-georgia-bedrock-forest.html" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800" alt="news">
+            <div class="card-content">
+                <span class="category">Good News</span>
+                <h3>Philadelphia Schools Now Guarantee Water and Bathroom Breaks and Daily Recess–With a Ban on Silent Lunches</h3>
+                <p>Philadelphia schools are ushering in a more nurturing environment by guaranteeing every student the essential time they need for daily recess, hydration, and personal breaks. By also banning silent lunches, the district is ensuring that school remains a joyful place where children can flourish through social connection and active play.</p>
+                <a href="https://www.goodnewsnetwork.org/philadelphia-schools-now-guarantee-water-and-bathroom-breaks-with-daily-recess-and-ban-silent-lunches/" target="_blank" class="btn">Read More &rarr;</a>
+            </div>
         </div>
-    </div>
-    <div class="card">
-        <img src="https://www.sciencealert.com/images/2026/02/BrainScan.jpg" alt="Viagara May Be One of Our Best Existing Options For an Alzheimer's Treatment - ScienceAlert" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
-        <div class="card-content">
-            <span class="category">Health</span>
-            <h3>Viagara May Be One of Our Best Existing Options For an Alzheimer's Treatment - ScienceAlert</h3>
-            <p>Repurposing treatments to treat multiple conditions is quicker, safer, and less expensive than developing new ways to manage health.</p>
-            <div class="source">📰 ScienceAlert</div>
-            <a href="https://www.sciencealert.com/viagara-may-be-one-of-our-best-existing-options-for-an-alzheimers-treatment" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        
+        <div class="card">
+            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800" alt="news">
+            <div class="card-content">
+                <span class="category">Good News</span>
+                <h3>Good News in History, February 26</h3>
+                <p>Today we celebrate the remarkable milestones in history that highlight our capacity for innovation and the preservation of our world's natural beauty. These past triumphs serve as an inspiring reminder that our collective actions can build a brighter and more enduring future for everyone.</p>
+                <a href="https://www.goodnewsnetwork.org/events070226/" target="_blank" class="btn">Read More &rarr;</a>
+            </div>
         </div>
-    </div>
-    <div class="card">
-        <img src="https://s.yimg.com/ny/api/res/1.2/.I90_mgrhDodn4tUVe2DXg--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD02NzU-/https://media.zenfs.com/en/aol_fox_news_articles_947/d5656145dacbd27427e1d501b00181a8" alt="Older adults gain muscle power with daily servings of everyday snack, study finds - AOL.com" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
-        <div class="card-content">
-            <span class="category">Health</span>
-            <h3>Older adults gain muscle power with daily servings of everyday snack, study finds - AOL.com</h3>
-            <p>A new study finds daily peanut butter consumption may boost muscle power in adults 65 and older. The research found three tablespoons daily improved a chair-...</p>
-            <div class="source">📰 AOL</div>
-            <a href="https://www.aol.com/articles/older-adults-gain-muscle-power-130044189.html" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
-        </div>
-    </div>
-    <div class="card">
-        <img src="https://img.ksl.com/slc/3146/314658/31465898.JPG?filter=kslv2/responsive_story_lg" alt="CDC director urges use of measles vaccine - KSL.com" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
-        <div class="card-content">
-            <span class="category">Health</span>
-            <h3>CDC director urges use of measles vaccine - KSL.com</h3>
-            <p>The Centers for Disease Control and Prevention's new acting director, Jay Bhattacharya, on ​Monday urged Americans to get vaccinated against measles, saying it was the best protection against the dise...</p>
-            <div class="source">📰 KSL.com</div>
-            <a href="https://www.ksl.com/article/51456022/cdc-director-urges-use-of-measles-vaccine" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
-        </div>
-    </div>
-    <div class="card">
-        <img src="https://img.huffingtonpost.com/asset/69a68aa927000087bd47298d.jpeg?cache=mBZ2eIf2p5&ops=500_281%2Cscalefit_1200_630" alt="Lindsey Graham’s Attempt To Defend Trump Turns Into Social Media Punch Line - HuffPost" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
-        <div class="card-content">
-            <span class="category">General</span>
-            <h3>Lindsey Graham’s Attempt To Defend Trump Turns Into Social Media Punch Line - HuffPost</h3>
-            <p>&quot;Where is the lie?&quot; asked one critic.</p>
-            <div class="source">📰 HuffPost</div>
-            <a href="https://www.huffpost.com/entry/lindsey-graham-donald-trump-freudian-slip_n_69a6888de4b0c426d6a91f4f" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
-        </div>
-    </div>
-    <div class="card">
-        <img src="https://www.washingtonpost.com/wp-apps/imrs.php?src=https://cloudfront-us-east-1.images.arcpublishing.com/wapo/LYQQO5CN5XJTTH26VNRCDY6XAM.jpg&w=1440" alt="Being stronger means you’re likely to live longer, new study finds - The Washington Post" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
-        <div class="card-content">
-            <span class="category">Health</span>
-            <h3>Being stronger means you’re likely to live longer, new study finds - The Washington Post</h3>
-            <p>Even when controlling for aerobic fitness and daily physical activity, stronger muscles were associated with longevity.</p>
-            <div class="source">📰 The Washington Post</div>
-            <a href="https://www.washingtonpost.com/wellness/2026/03/03/muscle-strength-longevity-study/" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
-        </div>
-    </div>
-    <div class="card">
-        <img src="https://scx2.b-cdn.net/gfx/news/hires/2026/the-first-digital-reco.jpg" alt="First 3D reconstruction of the face of 'Little Foot' completed - Phys.org" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
-        <div class="card-content">
-            <span class="category">Science</span>
-            <h3>First 3D reconstruction of the face of 'Little Foot' completed - Phys.org</h3>
-            <p>Identified as the most complete Australopithecus fossil discovered to date, &quot;Little Foot&quot; was buried in sediments whose movement and weight caused fractures and deformations, making analysis of its sk...</p>
-            <div class="source">📰 Phys.Org</div>
-            <a href="https://phys.org/news/2026-03-3d-reconstruction-foot.html" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
-        </div>
-    </div>
-    <div class="card">
-        <img src="https://assets2.cbsnewsstatic.com/hub/i/r/2026/03/02/fffb9fbf-c462-48a1-b3a7-c2a35784d16c/thumbnail/1200x630/ab5c47b8ec8ebad1ce06b9dae094b158/gettyimages-2230669911.jpg" alt="Prediction markets draw scrutiny over Iran bets: "Insider trading in broad daylight," senator says - CBS News" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
-        <div class="card-content">
-            <span class="category">Business</span>
-            <h3>Prediction markets draw scrutiny over Iran bets: "Insider trading in broad daylight," senator says - CBS News</h3>
-            <p>Lawmakers are raising concerns that prediction market users are engaging in insider trading to wager on U.S. military actions.</p>
-            <div class="source">📰 CBS News</div>
-            <a href="https://www.cbsnews.com/news/iran-khamenei-prediction-markets-insider-trading/" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
-        </div>
-    </div>
+        
         </div>
 
         <footer>
             <p>&copy; 2026 The Happy Tools | <a href="about.html">About</a> | <a href="privacy.html">Privacy</a></p>
-            <p>Updated: March 04, 2026 at 02:12 PM</p>
         </footer>
     </div>
 </body>
