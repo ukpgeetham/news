@@ -289,13 +289,6 @@ def generate_index_html(cards_html: str, ticker_text: str) -> str:
     </div>
     {NAV_HTML}
     <div class="container">
-        # <header>
-        #     <img src="{LOGO_URL}" alt="Logo" class="logo">
-        #     <div>
-        #         <h1>The Happy Tools</h1>
-        #         <p class="tagline">Your daily dose of positive news</p>
-        #     </div>
-        # </header>
         
         <div class="ad-space">ADVERTISEMENT</div>
         
