@@ -18,6 +18,7 @@ jobs:
       - name: Run Script
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          NEWSAPI_KEY: ${{ secrets.NEWSAPI_KEY }}
         run: python app.py
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
