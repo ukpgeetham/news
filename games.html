@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head><meta charset="UTF-8"><title>About - The Happy Tools</title>
+
+<!DOCTYPE html><html><head>
 <style>
     :root { --primary: #2ecc71; --dark: #2c3e50; --bg: #f8f9fa; }
     * { box-sizing: border-box; }
@@ -52,8 +51,40 @@
     .ad-space { text-align: center; padding: 20px; background: #f0f0f0; border-radius: 8px; margin: 20px 0; }
 </style>
 </head>
-<body><div class="container">
-<h1>About The Happy Tools</h1>
-<p>In a world filled with heavy news, we celebrate progress and positive change. All stories curated from trusted news sources and presented to you daily.</p>
-<p><a href="index.html" class="btn">← Back to Home</a></p>
-</div></body></html>
+<body>
+    
+<nav>
+    <div class="nav-container">
+        <div style="display:flex; align-items:center; gap:10px;">
+            <img src="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png" style="width:30px; height:30px; border-radius:50%;">
+            <span style="color:white; font-weight:900;">HAPPY TOOLS</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">News</a></li>
+            <li><a href="games.html">Fun Games</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </div>
+</nav>
+
+    <div class="container">
+        <div class="game-box">
+            <h2>🧩 Positive Word Scramble</h2>
+            <p>Unscramble the uplifting word!</p>
+            <div id="word-display">-----</div>
+            <input type="text" id="user-input" placeholder="Type here...">
+            <button onclick="check()" class="btn" style="cursor:pointer; background:white;">Submit</button>
+        </div>
+    </div>
+    <script>
+        const words = ["HAPPY", "PEACE", "SMILE", "HOPE", "JOY"];
+        let secret = words[Math.floor(Math.random()*words.length)];
+        document.getElementById('word-display').innerText = secret.split('').sort(()=>0.5-Math.random()).join('');
+        function check() {
+            if(document.getElementById('user-input').value.toUpperCase() === secret) {
+                alert("You got it! 🌟");
+                location.reload();
+            } else { alert("Try again!"); }
+        }
+    </script>
+</body></html>

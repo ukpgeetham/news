@@ -1,23 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Get your daily dose of hope. AI-summarized positive news and global breakthroughs.">
-    <meta name="news_keywords" content="positive news, hope, breakthroughs, AI news summaries, uplifting stories">
-    <meta property="og:title" content="Happy Tools | AI News">
-    <meta property="og:description" content="Uplifting news summaries, delivered daily by AI.">
-    <meta property="og:image" content="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    
-    <script type="application/ld+json">
-    {"@context": "https://schema.org", "@type": "NewsArticle", "headline": "The Happy Tools: Uplifting AI Summaries", "description": "Daily positive news and breakthroughs summarized by Gemini AI.", "publisher": {"@type": "Organization", "name": "Happy Tools", "logo": {"@type": "ImageObject", "url": "https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png"}}}
-    </script>
-    
-    <title>Happy Tools</title>
+    <meta name="description" content="Daily positive news and breakthroughs.">
+    <title>The Happy Tools - Positive News</title>
     <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png">
     
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2241812164647663"
@@ -26,135 +13,207 @@
     
 <style>
     :root { --primary: #2ecc71; --dark: #2c3e50; --bg: #f8f9fa; }
-    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--dark); margin: 0; }
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--dark); margin: 0; }
     .container { max-width: 1000px; margin: auto; padding: 20px; }
     
-    /* Live Ticker Styling */
     .ticker-wrap { width: 100%; overflow: hidden; background: var(--dark); color: white; padding: 10px 0; position: sticky; top: 0; z-index: 1000; }
-    .ticker { white-space: nowrap; display: inline-block; animation: marquee 30s linear infinite; font-weight: bold; font-size: 0.9rem; }
+    .ticker { white-space: nowrap; display: inline-block; animation: marquee 50s linear infinite; font-weight: bold; font-size: 0.9rem; }
     @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-    
-    /* Logo and Title in one line */
-    header { 
-        display: flex; 
-        align-items: center; 
-        justify-content: center; 
-        gap: 20px; 
-        padding: 40px 0; 
-        border-bottom: 1px solid #ddd; 
-        margin-bottom: 40px; 
-    }
-    .logo { width: 80px; height: 80px; border-radius: 60%; object-fit: cover; }
-    .header-text { text-align: left; }
-    h1 { font-size: 2.2rem; margin: 0; color: var(--primary); line-height: 1; }
-    .tagline { margin: 5px 0 0 0; font-size: 1rem; color: #666; }
 
-    .news-grid { display: grid; grid-row-gap: 30px; }
-    .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; transition: 0.3s; }
+    /* NAV MENU */
+    nav { background: var(--dark); padding: 15px 0; position: fixed; top: 0; width: 100%; z-index: 1000; border-bottom: 3px solid var(--primary); }
+    .nav-container { max-width: 1000px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+    .nav-links { list-style: none; display: flex; gap: 25px; margin: 0; padding: 0; }
+    .nav-links a { color: white; text-decoration: none; font-weight: bold; font-size: 0.9rem; text-transform: uppercase; transition: 0.3s; }
+    .nav-links a:hover { color: var(--primary); }
+
+    /* GAME BOX */
+    .game-box { background: white; padding: 40px; border-radius: 15px; text-align: center; border: 3px solid var(--primary); }
+    #word-display { font-size: 3rem; color: var(--primary); letter-spacing: 8px; margin: 20px 0; font-weight: 900; }
+    input { padding: 12px; width: 250px; border-radius: 10px; border: 2px solid #ddd; font-size: 1.1rem; }
+    @media (max-width: 768px) { .card { flex-direction: column; } .card img { width: 100%; } }
+    
+    header { display: flex; align-items: center; justify-content: center; gap: 20px; padding: 40px 0; border-bottom: 1px solid #ddd; margin-bottom: 40px; }
+    .logo { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; }
+    h1 { font-size: 2.2rem; margin: 0; color: var(--primary); }
+    .tagline { margin: 5px 0 0; font-size: 1rem; color: #666; }
+
+    .news-grid { display: grid; gap: 30px; }
+    .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: flex; transition: all 0.3s; }
+    .card:hover { box-shadow: 0 8px 20px rgba(0,0,0,0.12); transform: translateY(-2px); }
+    
+    .card img { width: 280px; height: auto; object-fit: cover; flex-shrink: 0; }
+    .card-content { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .category { font-size: 0.75rem; font-weight: bold; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+    .card h3 { margin: 0 0 10px; font-size: 1.2rem; line-height: 1.3; }
+    .card p { margin: 0 0 12px; color: #555; line-height: 1.5; flex-grow: 1; font-size: 0.95rem; }
+    .source { font-size: 0.8rem; color: #999; margin-bottom: 10px; }
+    .btn { display: inline-block; color: var(--primary); text-decoration: none; font-weight: 600; border: 2px solid var(--primary); padding: 6px 14px; border-radius: 20px; }
+    .btn:hover { background: var(--primary); color: white; }
+    
     @media (max-width: 768px) { 
-        header { flex-direction: column; text-align: center; } 
-        .header-text { text-align: center; }
+        header { flex-direction: column; gap: 15px; }
         .card { flex-direction: column; } 
-        .card img { width: 100% !important; height: 200px !important; } 
+        .card img { width: 100%; height: 200px; } 
     }
-    .card img { width: 300px; height: auto; object-fit: cover; }
-    .card-content { padding: 25px; flex: 1; }
-    .category { font-size: 0.7rem; font-weight: bold; color: var(--primary); text-transform: uppercase; }
-    .btn { display: inline-block; margin-top: 15px; color: var(--primary); text-decoration: none; font-weight: bold; border: 2px solid var(--primary); padding: 6px 15px; border-radius: 20px; }
-    footer { text-align: center; padding: 40px; font-size: 0.8rem; border-top: 1px solid #ddd; }
+    
+    footer { text-align: center; padding: 30px; font-size: 0.85rem; border-top: 1px solid #ddd; color: #999; }
+    .ad-space { text-align: center; padding: 20px; background: #f0f0f0; border-radius: 8px; margin: 20px 0; }
 </style>
 
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "NewsArticle", "headline": "The Happy Tools", "description": "Positive news updates daily"}</script>
 </head>
 <body>
     <div class="ticker-wrap">
-        <div class="ticker">BREAKING: [Hollywood] ‘One Battle After Another’ Takes Camera Operators Prize  •  [Hollywood] Paramount Eyes Changes to Historic Studio Lot Following Warner Bros. Merger  •  [Hollywood] Corey Parker, ‘Will & Grace’ Actor, Dies at 60  •  [Hollywood] F1 Australian Grand Prix Livestream: How to Watch the First Race of the 2026 Season Online  •  [Hollywood] ‘It Ends With Us’ Author Colleen Hoover Says It’s Now “Easier to Separate” Blake Lively–Justin Baldoni Controversy From Film  •  [Hollywood] ‘Monsters, Inc. 3’ in the Works at Pixar; ‘Incredibles 3’ Set for 2028 Release  •  [Hollywood] Box Office: ‘Hoppers’ Eyes $40M-Plus Start in Key Win for Pixar as ‘The Bride!’ Enters Bomb Territory  •  [Hollywood] Mckenna Grace Breaks Down Her Big ‘Scream 7’ Scene  •  [Hollywood] Alan Ritchson Pushed Himself to the Limit on ‘War Machine’ (And Needed Oxygen on His Next Film)  •  [Hollywood] Bill Maher Gets “Honest” With Donald Trump About President’s Successes and Failures: “I Have Every Right to Say So in a Democracy”</div>
+        <div class="ticker">🌟 Xbox Drops 2 AAA Free Games, No Gam • Western Alliance Sues Jefferies Ove • Everything Kenny Brooks said after  • 'Enough is enough': PA lawmakers ca • Living at High Altitude May Have a  • Rosa’s Encouragement, Mega Zygarde  • Here’s Why BlackRock Shares Slid To • Donald Trump’s Greatest Promise Is  • Material previously thought to be q • Neiman Marcus store at Ala Moana Ce 🌟</div>
     </div>
+    
+<nav>
+    <div class="nav-container">
+        <div style="display:flex; align-items:center; gap:10px;">
+            <img src="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png" style="width:30px; height:30px; border-radius:50%;">
+            <span style="color:white; font-weight:900;">HAPPY TOOLS</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">News</a></li>
+            <li><a href="games.html">Fun Games</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </div>
+</nav>
+
     <div class="container">
-        <header>
-            <img src="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png" alt="Logo" class="logo">
-            <div class="header-text">
-                <h1>The Happy Tools</h1>
-                <p class="tagline">Your daily dose of breakthroughs and kindness.</p>
-            </div>
-        </header>
+        
         <div class="ad-space">ADVERTISEMENT</div>
         
         <div class="news-grid">
             
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800" alt="news">
-            <div class="card-content">
-                <span class="category">Good News</span>
-                <h3>He Earns More in an Hour as Spider-Man Than a Full Day at his Old Supermarket Job</h3>
-                <p>A former supermarket worker is now thriving in his dream role, proving that following your passion can lead to both financial freedom and personal joy. His uplifting journey inspires us all to believe that a brighter, more fulfilling career path is always within reach.</p>
-                <a href="https://www.goodnewsnetwork.org/he-earns-more-in-an-hour-as-spider-man-than-a-full-day-at-supermarket/" target="_blank" class="btn">Read More &rarr;</a>
-            </div>
+    <div class="card">
+        <img src="https://resizer.ladbiblegroup.com/ogimage/v3/assets/bltbc1876152fcd9f07/blt08688c64db00be11/69aae7a6b2d0790008d237b1/FBCFirebreakFReePlayDays.jpg" alt="Xbox Drops 2 AAA Free Games, No Game Pass Required To Play - GAMINGbible" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">Technology</span>
+            <h3>Xbox Drops 2 AAA Free Games, No Game Pass Required To Play - GAMINGbible</h3>
+            <p>Xbox users can enjoy 4 AAA games for free for a limited time, with 2 games not requiring a Game Pass subscription! Have a good weekend gamers.</p>
+            <div class="source">📰 Gamingbible.com</div>
+            <a href="https://www.gamingbible.com/news/platform/xbox/xbox-drops-2-aaa-free-games-528407-20260306" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
         </div>
-        
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800" alt="news">
-            <div class="card-content">
-                <span class="category">Good News</span>
-                <h3>Sub-Zero Temperatures Didn’t Affect Madison’s Electric Bus Fleet This Year–A Major EV Milestone</h3>
-                <p>Madison’s electric bus fleet successfully powered through sub-zero temperatures this year, proving that clean energy is reliable even in the harshest winter conditions. This major milestone offers an inspiring vision of a greener future where sustainable transit keeps our communities moving all year round.</p>
-                <a href="https://www.goodnewsnetwork.org/sub-zero-temperatures-didnt-affect-madisons-electric-bus-fleet-this-year-a-major-ev-milestone/" target="_blank" class="btn">Read More &rarr;</a>
-            </div>
+    </div>
+    <div class="card">
+        <img src="https://images.wsj.net/im-783457/social" alt="Western Alliance Sues Jefferies Over Soured Loan, Records Charge-Off - WSJ" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">Business</span>
+            <h3>Western Alliance Sues Jefferies Over Soured Loan, Records Charge-Off - WSJ</h3>
+            <p>Bank says it will write off the loan as fears mount in the private-credit industry</p>
+            <div class="source">📰 The Wall Street Journal</div>
+            <a href="https://www.wsj.com/finance/banking/western-alliance-sues-jefferies-7b0614f9" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
         </div>
-        
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800" alt="news">
-            <div class="card-content">
-                <span class="category">Hollywood</span>
-                <h3>Bill Maher Gets “Honest” With Donald Trump About President’s Successes and Failures: “I Have Every Right to Say So in a Democracy”</h3>
-                <p>Bill Maher’s candid reflections remind us of the enduring beauty of a society where open dialogue and free expression are always celebrated. This exchange highlights the strength of our democracy, proving that through honest conversation, we continue to uphold the vital right to share our voices.</p>
-                <a href="https://www.hollywoodreporter.com/news/politics-news/bill-maher-trump-dinner-criticism-successes-failures-1236524233/" target="_blank" class="btn">Read More &rarr;</a>
-            </div>
+    </div>
+    <div class="card">
+        <img src="https://on3static.com/uploads/dev/assets/cms/2026/03/06140817/Untitled-design-14.png" alt="Everything Kenny Brooks said after Kentucky's quarterfinal loss to South Carolina women's basketball - On3" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">General</span>
+            <h3>Everything Kenny Brooks said after Kentucky's quarterfinal loss to South Carolina women's basketball - On3</h3>
+            <p>Kentucky coach Kenny Brooks spoke with the media after the Wildcats loss to South Carolina women's basketball in the SEC Tournament.</p>
+            <div class="source">📰 On3.com</div>
+            <a href="https://www.on3.com/teams/south-carolina-gamecocks/news/everything-kenny-brooks-said-after-kentuckys-quarterfinal-loss-to-south-carolina-womens-basketball/" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
         </div>
-        
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800" alt="news">
-            <div class="card-content">
-                <span class="category">Good News</span>
-                <h3>Rare Fossils in Amber Raise Questions About Secret Lives of Cretaceous Insects</h3>
-                <p>The discovery of these rare fossils provides a beautiful window into the ancient world, revealing the vibrant and intricate lives of insects from the age of dinosaurs. This extraordinary find sparks new wonder and deepens our connection to the enduring and resilient history of life on our planet.</p>
-                <a href="https://www.goodnewsnetwork.org/rare-fossils-in-amber-reveal-the-secret-lives-of-cretaceous-insects/" target="_blank" class="btn">Read More &rarr;</a>
-            </div>
+    </div>
+    <div class="card">
+        <img src="https://bloximages.newyork1.vip.townnews.com/wfmz.com/content/tncms/assets/v3/editorial/f/dc/fdca9a59-30c5-50e0-bb7e-67032cfe30da/69ab5e8196580.image.jpg?crop=1280%2C672%2C0%2C23&resize=1200%2C630&order=crop%2Cresize" alt="'Enough is enough': PA lawmakers call for price gouging probe as gas prices jump overnight - WFMZ.com" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">Business</span>
+            <h3>'Enough is enough': PA lawmakers call for price gouging probe as gas prices jump overnight - WFMZ.com</h3>
+            <p>While filling up your tank this week, you may have felt the squeeze on your wallet.</p>
+            <div class="source">📰 WFMZ Allentown</div>
+            <a href="https://www.wfmz.com/news/area/lehighvalley/lehigh-county/allentown-area/enough-is-enough-pa-lawmakers-call-for-price-gouging-probe-as-gas-prices-jump-overnight/article_495ad116-260b-470d-8dd6-1b794ac2a22a.html" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
         </div>
-        
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800" alt="news">
-            <div class="card-content">
-                <span class="category">Good News</span>
-                <h3>Older Male Whales More Successful at Mating Because They’re Better Singers, Shows Study</h3>
-                <p>A heartwarming new study reveals that older male whales are more successful in finding love as their singing voices grow more refined and beautiful with age. This discovery celebrates the power of maturity, reminding us that experience and wisdom bring their own unique harmony to the world.</p>
-                <a href="https://www.goodnewsnetwork.org/older-male-whales-more-successful-at-mating-as-they-sing-better/" target="_blank" class="btn">Read More &rarr;</a>
-            </div>
+    </div>
+    <div class="card">
+        <img src="https://www.sciencealert.com/images/2026/02/MountainView.jpg" alt="Living at High Altitude May Have a Surprising Impact on Diabetes Risk - ScienceAlert" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">Health</span>
+            <h3>Living at High Altitude May Have a Surprising Impact on Diabetes Risk - ScienceAlert</h3>
+            <p>Research has shown that living at higher altitudes lowers your risk of developing diabetes, but scientists haven't been able to pin down why that is – until now.</p>
+            <div class="source">📰 ScienceAlert</div>
+            <a href="https://www.sciencealert.com/living-at-high-altitude-may-have-a-surprising-impact-on-diabetes-risk" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
         </div>
-        
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800" alt="news">
-            <div class="card-content">
-                <span class="category">Good News</span>
-                <h3>Schoolboy With ‘Can-Do’ Attitude Has Recycled a Million Cans and Donated the Proceeds to Charity</h3>
-                <p>An inspiring young student has turned one million recycled cans into a beacon of hope by donating all the proceeds to support those in need. His incredible "can-do" spirit serves as a powerful reminder that any individual, no matter their age, has the power to change the world for the better.</p>
-                <a href="https://www.goodnewsnetwork.org/schoolboy-with-can-do-attitude-has-recycled-a-million-cans-and-donated-the-proceeds-to-charity/" target="_blank" class="btn">Read More &rarr;</a>
-            </div>
+    </div>
+    <div class="card">
+        <img src="https://www.pokemon.com/static-assets/content-assets/cms2/img/trading-card-game/_tiles/me/me03/preview-cards/me03-preview-cards-2-169-en.png" alt="Rosa’s Encouragement, Mega Zygarde ex, and More from Mega Evolution—Perfect Order - Pokemon.com" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">Technology</span>
+            <h3>Rosa’s Encouragement, Mega Zygarde ex, and More from Mega Evolution—Perfect Order - Pokemon.com</h3>
+            <p>Get ready for the return of Rosa as a Supporter card, new Mega Evolution Pokémon ex, and more.</p>
+            <div class="source">📰 Pokemon.com</div>
+            <a href="https://www.pokemon.com/us/pokemon-news/rosas-encouragement-mega-zygarde-ex-and-more-from-mega-evolution-perfect-order" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
         </div>
-        
-        <div class="card">
-            <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800" alt="news">
-            <div class="card-content">
-                <span class="category">Good News</span>
-                <h3>‘Cards Against Humanity’ Offers to Refund ‘Obviously Illegal’ Tariffs to Customers After Supreme Court Decision</h3>
-                <p>Following a landmark Supreme Court decision, Cards Against Humanity is championing consumer rights by proactively refunding customers for unjust tariff charges. This commitment to fairness brings a wave of financial relief and serves as a promising reminder that justice can prevail for everyday people.</p>
-                <a href="https://www.goodnewsnetwork.org/cards-against-humanity-is-refunding-obviously-illegal-tariffs-to-customers/" target="_blank" class="btn">Read More &rarr;</a>
-            </div>
+    </div>
+    <div class="card">
+        <img src="https://imageio.forbes.com/specials-images/imageserve/69ab465aad8dbfec0f03bc15/0x0.jpg?format=jpg&crop=2396,1597,x0,y0,safe&height=900&width=1600&fit=bounds" alt="Here’s Why BlackRock Shares Slid To Their Lowest Point In Nearly 9 Months - Forbes" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">Business</span>
+            <h3>Here’s Why BlackRock Shares Slid To Their Lowest Point In Nearly 9 Months - Forbes</h3>
+            <p>Shares of the world’s largest asset manager are now down 10% on the year.</p>
+            <div class="source">📰 Forbes</div>
+            <a href="https://www.forbes.com/sites/antoniopequenoiv/2026/03/06/blackrock-shares-tumble-over-7-after-firm-limits-withdrawals-from-private-credit-fund/" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
         </div>
-        
+    </div>
+    <div class="card">
+        <img src="https://compote.slate.com/images/2fee775d-1cdc-414c-99e7-e1ffb156cf7e.jpeg?crop=1460%2C973%2Cx100%2Cy0&width=1560" alt="Donald Trump’s Greatest Promise Is Looking More Disastrous for Him by the Day - Slate" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">Business</span>
+            <h3>Donald Trump’s Greatest Promise Is Looking More Disastrous for Him by the Day - Slate</h3>
+            <p>Is it good politics to preside over job losses and rising gas prices? We’ll find out!.</p>
+            <div class="source">📰 Slate Magazine</div>
+            <a href="https://slate.com/news-and-politics/2026/03/february-jobs-report-trump-economy.html" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="https://scx2.b-cdn.net/gfx/news/hires/2026/material-previously-th.jpg" alt="Material previously thought to be quantum is actually a new, non-quantum state of matter - Phys.org" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">Science</span>
+            <h3>Material previously thought to be quantum is actually a new, non-quantum state of matter - Phys.org</h3>
+            <p>Magnetic materials in a quantum spin liquid phase are of great interest in the pursuit of exotic state of matter and quantum computation. But in the quantum realm, things are not always what they seem...</p>
+            <div class="source">📰 Phys.Org</div>
+            <a href="https://phys.org/news/2026-03-material-previously-thought-quantum-state.html" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="https://www.staradvertiser.com/wp-content/uploads/2026/03/web1_20260306_WEB_Neiman-Marcus.jpeg" alt="Neiman Marcus store at Ala Moana Center to close - Honolulu Star-Advertiser" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">Business</span>
+            <h3>Neiman Marcus store at Ala Moana Center to close - Honolulu Star-Advertiser</h3>
+            <p>Saks Global is closing the Neiman Marcus department store at Ala Moana Center as part of ongoing restructuring efforts, the luxury retailer said in a news release today.</p>
+            <div class="source">📰 Honolulu Star-Advertiser</div>
+            <a href="https://www.staradvertiser.com/2026/03/06/breaking-news/neiman-marcus-store-to-close-at-ala-moana-center/" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="https://www.eatingwell.com/thmb/DymBgWbFy8cQVf_KvdwvcNkYl9s=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/The-Best-Time-to-Eat-High-Fiber-Foods-to-Poop-the-Next-Morning.REV-49982bd00bdb4257824d22017dd21a94.jpg" alt="The Best Time to Eat High-Fiber Foods to Poop the Next Morning - EatingWell" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">Health</span>
+            <h3>The Best Time to Eat High-Fiber Foods to Poop the Next Morning - EatingWell</h3>
+            <p>Find out the best time to eat high-fiber foods to poop the next morning. Dietitians discuss timing and share other tips to help you poop.</p>
+            <div class="source">📰 Eatingwell.com</div>
+            <a href="https://www.eatingwell.com/the-best-time-to-eat-high-fiber-foods-to-poop-the-next-morning-11917411" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        </div>
+    </div>
+    <div class="card">
+        <img src="https://media.nature.com/lw1200/magazine-assets/d41586-026-00692-9/d41586-026-00692-9_52128846.jpg" alt="The missing pieces of menopause science - Nature" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'">
+        <div class="card-content">
+            <span class="category">Health</span>
+            <h3>The missing pieces of menopause science - Nature</h3>
+            <p>Hormone therapy is back after decades in the shadows. But evidence gaps remain for treating perimenopause — often the most disruptive part of the menopause transition.</p>
+            <div class="source">📰 Nature.com</div>
+            <a href="https://www.nature.com/articles/d41586-026-00692-9" target="_blank" rel="noopener noreferrer" class="btn">Read More →</a>
+        </div>
+    </div>
         </div>
 
         <footer>
             <p>&copy; 2026 The Happy Tools | <a href="about.html">About</a> | <a href="privacy.html">Privacy</a></p>
+            <p>Updated: March 08, 2026 at 12:35 PM</p>
         </footer>
     </div>
 </body>
