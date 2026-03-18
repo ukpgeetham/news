@@ -466,10 +466,71 @@ STYLE = """
   footer a { color: var(--primary); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
 
+  /* ---- HAMBURGER BUTTON ---- */
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: all .3s;
+  }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ---- RESPONSIVE ---- */
   @media (max-width: 768px) {
     header { flex-direction: column; gap: 14px; text-align: center; }
     .filters input[type=text] { width: 100%; }
     .tools-grid, .agents-grid { grid-template-columns: 1fr; }
+
+    .nav-toggle { display: flex; }
+
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--dark);
+      padding: 12px 16px 16px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      z-index: 999;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a {
+      font-size: 0.95rem;
+      padding: 10px 14px;
+      border-radius: 10px;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+    nav { position: sticky; top: 0; }
+    .nav-container { position: relative; }
+  }
+
+  @media (max-width: 480px) {
+    .container { padding: 16px 14px; }
+    header h1 { font-size: 1.6rem; }
+    .tagline { font-size: 0.85rem; }
+    .filter-btn { font-size: 0.72rem; padding: 5px 10px; }
+    .filters input[type=text] { font-size: 0.88rem; }
+    .tool-card h3 { font-size: 0.98rem; }
+    .tool-card-desc { font-size: 0.84rem; }
+    .modal-body { padding: 16px; }
+    .modal-title { font-size: 1.2rem; }
   }
 </style>
 """
@@ -480,10 +541,35 @@ ADSENSE_CODE = f"""<script async src="https://pagead2.googlesyndication.com/page
 def nav_html(active: str = "") -> str:
     pages = [("tools","index.html","AI Tools"), ("agents","agents.html","AI Agents"), ("courses","courses.html","AI Courses"), ("about","about.html","About")]
     items = "".join(f'<li><a href="{h}" class="{"active" if k==active else ""}">{l}</a></li>' for k,h,l in pages)
-    return f"""<nav><div class="nav-container">
-  <a class="nav-brand" href="index.html"><img src="{LOGO_URL}" style="width:30px;height:30px;border-radius:50%;" alt="logo"> HAPPY TOOLS</a>
-  <ul class="nav-links">{items}</ul>
-</div></nav>"""
+    return f"""<nav>
+  <div class="nav-container">
+    <a class="nav-brand" href="index.html">
+      <img src="{LOGO_URL}" style="width:28px;height:28px;border-radius:50%;flex-shrink:0;" alt="logo">
+      HAPPY TOOLS
+    </a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links">{items}</ul>
+  </div>
+</nav>
+<script>
+(function(){{
+  var btn   = document.getElementById('nav-toggle');
+  var links = document.getElementById('nav-links');
+  if (!btn) return;
+  btn.addEventListener('click', function(){{
+    btn.classList.toggle('open');
+    links.classList.toggle('open');
+  }});
+  links.querySelectorAll('a').forEach(function(a){{
+    a.addEventListener('click', function(){{
+      btn.classList.remove('open');
+      links.classList.remove('open');
+    }});
+  }});
+}})();
+</script>"""
 
 
 def footer_html() -> str:
@@ -1223,8 +1309,21 @@ def generate_about_html() -> str:
 {nav_html("about")}
 <div class="container" style="max-width:700px;padding-top:40px;">
   <h1 style="color:var(--primary);margin-bottom:16px;">About Happy Tools</h1>
-  <p style="line-height:1.7;color:#555;margin-bottom:12px;">Happy Tools is a live-updated directory of the best AI tools and agents. Data is pulled at build time from Hugging Face's public model API, community GitHub awesome lists.</p>
-  <p style="line-height:1.7;color:#555;margin-bottom:24px;">Use search and filters to find what you need, or browse the AI Agents section for autonomous systems.</p>
+  <p style="line-height:1.7;color:var(--mid);margin-bottom:12px;">
+    Happy Tools is a curated directory of the best AI tools, agents and courses available today.
+    Our goal is to help developers, creators and teams discover the right AI tool for the job — fast.
+  </p>
+  <p style="line-height:1.7;color:var(--mid);margin-bottom:12px;">
+    The directory is refreshed regularly from live sources including the Hugging Face model hub
+    and community-maintained lists, combined with our own hand-picked selections across
+    categories like coding, writing, image generation, audio, video and productivity.
+  </p>
+  <p style="line-height:1.7;color:var(--mid);margin-bottom:28px;">
+    Use the search and filters on each page to find what you need, or explore the
+    <a href="agents.html" style="color:var(--primary);">AI Agents</a> and
+    <a href="courses.html" style="color:var(--primary);">AI Courses</a> sections
+    to go deeper.
+  </p>
   <a href="index.html" class="btn">&#8592; Browse Tools</a>
 </div>
 {footer_html()}
@@ -1258,7 +1357,21 @@ def generate_sitemap() -> str:
 # 6. SAVE & MAIN
 # ============================================================================
 
+def generate_ads_txt() -> str:
+    """
+    ads.txt tells Google (and other ad networks) which sellers are authorised
+    to sell ad inventory for this domain. Required by AdSense to serve ads.
+    Format: <ad-system-domain>, <publisher-id>, <account-type>
+    """
+    return f"google.com, {ADSENSE_ID}, DIRECT, f08c47fec0942fa0\n"
+
+
 def save_files(files: Dict[str, str]) -> None:
+    os.makedirs("public", exist_ok=True)
+    for name, content in files.items():
+        with open(f"public/{name}", "w", encoding="utf-8") as f:
+            f.write(content)
+        print(f"  ✓ public/{name}")
     os.makedirs("public", exist_ok=True)
     for name, content in files.items():
         with open(f"public/{name}", "w", encoding="utf-8") as f:
@@ -1286,6 +1399,7 @@ def main():
         "about.html":   generate_about_html(),
         "privacy.html": generate_privacy_html(),
         "sitemap.xml":  generate_sitemap(),
+        "ads.txt":      generate_ads_txt(),
     })
 
     print("\n" + "=" * 60)
