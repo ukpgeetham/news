@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover the best AI agents — autonomous systems that plan, act and execute tasks.">
+  <title>AI Agents — Happy Tools</title>
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2241812164647663" crossorigin="anonymous"></script>
+  
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary:    #7c6af7;
+    --primary-lt: #ede9ff;
+    --primary-dk: #5b4de0;
+    --accent:     #34d399;
+    --accent-lt:  #d1fae5;
+    --dark:       #1e1b3a;
+    --mid:        #4b4869;
+    --muted:      #8b87a8;
+    --bg:         #f5f4fb;
+    --surface:    #ffffff;
+    --border:     #e5e2f5;
+    --radius-sm:  10px;
+    --radius-md:  16px;
+    --radius-lg:  22px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    line-height: 1.6;
+  }
+  h1, h2, h3, .nav-brand {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .container { max-width: 1120px; margin: auto; padding: 24px 20px; }
+
+  /* ---- NAV ---- */
+  nav {
+    background: var(--dark);
+    padding: 14px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 2px solid var(--primary);
+  }
+  .nav-container { max-width: 1120px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+  .nav-brand { display: flex; align-items: center; gap: 10px; color: white; font-weight: 700; font-size: 1.05rem; text-decoration: none; letter-spacing: .3px; }
+  .nav-links { list-style: none; display: flex; gap: 8px; }
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.83rem;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    transition: all .2s;
+  }
+  .nav-links a:hover { color: white; background: rgba(255,255,255,0.1); }
+  .nav-links a.active { color: white; background: var(--primary); }
+
+  /* ---- HEADER ---- */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    padding: 44px 0 28px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary-lt); }
+  header h1 {
+    font-size: 2.1rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .tagline { font-size: 0.95rem; color: var(--muted); margin-top: 5px; }
+
+  /* ---- FILTERS ---- */
+  .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; align-items: center; }
+  .filters input[type=text] {
+    padding: 10px 18px;
+    border-radius: 28px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    font-size: 0.92rem;
+    font-family: 'DM Sans', sans-serif;
+    width: 240px;
+    outline: none;
+    color: var(--dark);
+    transition: border .2s, box-shadow .2s;
+  }
+  .filters input[type=text]::placeholder { color: var(--muted); }
+  .filters input[type=text]:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-lt); }
+  .filter-group { display: flex; flex-wrap: wrap; gap: 6px; }
+  .filter-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.76rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+    color: var(--mid);
+  }
+  .filter-btn:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-lt); }
+  .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+  .stats-bar { font-size: 0.84rem; color: var(--muted); margin-bottom: 18px; }
+  .stats-bar b { color: var(--dark); }
+
+  /* ---- TOOL CARDS ---- */
+  .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(295px, 1fr)); gap: 24px; }
+  .tool-card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1.5px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    transition: transform .22s, box-shadow .22s, border-color .22s;
+    cursor: pointer;
+  }
+  .tool-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(124,106,247,0.13);
+    border-color: var(--primary);
+  }
+  .tool-card-img { width: 100%; height: 150px; object-fit: cover; display: block; }
+  .tool-card-body { padding: 16px 18px 18px; flex: 1; display: flex; flex-direction: column; gap: 9px; }
+  .tool-meta { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  .badge {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.67rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    white-space: nowrap;
+  }
+  .badge-category { background: var(--primary-lt); color: var(--primary-dk); }
+  .badge-free     { background: #d1fae5; color: #065f46; }
+  .badge-freemium { background: #fef3c7; color: #92400e; }
+  .badge-paid     { background: #fce7f3; color: #9d174d; }
+
+  .tool-card h3 { font-size: 1.05rem; font-weight: 600; line-height: 1.35; color: var(--dark); }
+  .tool-card-desc { color: var(--mid); line-height: 1.58; font-size: 0.88rem; flex-grow: 1; }
+  .tool-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag {
+    font-size: 0.67rem;
+    background: var(--bg);
+    color: var(--muted);
+    padding: 2px 9px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  .btn {
+    display: inline-block;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.84rem;
+    color: var(--primary);
+    text-decoration: none;
+    border: 2px solid var(--primary);
+    padding: 7px 16px;
+    border-radius: 22px;
+    transition: all .2s;
+    text-align: center;
+  }
+  .btn:hover { background: var(--primary); color: white; }
+
+  /* ---- AGENT CARDS ---- */
+  .agents-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 24px; }
+  .agent-card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 22px;
+    border: 1.5px solid var(--border);
+    border-left: 4px solid var(--primary);
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    transition: transform .22s, box-shadow .22s;
+  }
+  .agent-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(124,106,247,0.12); }
+  .agent-card h3 { font-size: 1.1rem; font-weight: 600; color: var(--dark); }
+  .agent-card-desc { color: var(--mid); font-size: 0.9rem; line-height: 1.58; flex-grow: 1; }
+  .agent-type   { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.68rem; font-weight: 700; color: var(--primary-dk); background: var(--primary-lt); padding: 3px 11px; border-radius: 12px; }
+  .agent-status { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.68rem; font-weight: 700; color: #065f46; background: #d1fae5; padding: 3px 11px; border-radius: 12px; }
+
+  /* ---- MODAL ---- */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(30,27,58,0.6); z-index: 2000; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(2px); }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--surface); border-radius: var(--radius-lg); max-width: 540px; width: 100%; overflow: hidden; border: 1.5px solid var(--border); }
+  .modal-img { width: 100%; height: 200px; object-fit: cover; display: block; }
+  .modal-body { padding: 24px; }
+  .modal-title { font-size: 1.45rem; font-weight: 700; margin: 10px 0 9px; color: var(--dark); }
+  .modal-desc { color: var(--mid); line-height: 1.65; margin-bottom: 18px; font-size: 0.95rem; }
+  .modal-actions { display: flex; gap: 10px; align-items: center; }
+  .modal-close { margin-left: auto; background: var(--bg); border: 1.5px solid var(--border); border-radius: 50%; width: 34px; height: 34px; font-size: 1rem; cursor: pointer; color: var(--muted); transition: .2s; display: flex; align-items: center; justify-content: center; }
+  .modal-close:hover { background: var(--primary-lt); color: var(--primary); border-color: var(--primary); }
+
+  /* ---- MISC ---- */
+  .no-results { text-align: center; padding: 64px 20px; color: var(--muted); grid-column: 1 / -1; }
+  .no-results h3 { font-size: 1.2rem; margin-bottom: 6px; color: var(--mid); }
+
+  .ad-space {
+    text-align: center;
+    padding: 16px;
+    background: var(--primary-lt);
+    border: 1px dashed var(--primary);
+    border-radius: var(--radius-sm);
+    margin: 20px 0;
+    font-size: 0.82rem;
+    color: var(--primary-dk);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 500;
+  }
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 0.82rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    margin-top: 48px;
+  }
+  footer a { color: var(--primary); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 768px) {
+    header { flex-direction: column; gap: 14px; text-align: center; }
+    .filters input[type=text] { width: 100%; }
+    .tools-grid, .agents-grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+</head>
+<body>
+<nav><div class="nav-container">
+  <a class="nav-brand" href="index.html"><img src="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png" style="width:30px;height:30px;border-radius:50%;" alt="logo"> HAPPY TOOLS</a>
+  <ul class="nav-links"><li><a href="index.html" class="">AI Tools</a></li><li><a href="agents.html" class="active">AI Agents</a></li><li><a href="courses.html" class="">AI Courses</a></li><li><a href="about.html" class="">About</a></li></ul>
+</div></nav>
+<div class="container">
+  <header>
+    <img src="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png" class="logo" alt="Happy Tools">
+    <div>
+      <h1>AI Agents</h1>
+      <p class="tagline">Autonomous AI systems that plan, act and get things done</p>
+    </div>
+  </header>
+
+  <div class="ad-space">ADVERTISEMENT</div>
+
+  <div class="filters">
+    <input type="text" id="q" placeholder="Search agents..." oninput="applyFilters()">
+    <div class="filter-group" id="type-btns"><button class="filter-btn active" onclick="setType(this,'all')">All</button><button class="filter-btn" onclick="setType(this,'AI Agent')">AI Agent</button><button class="filter-btn" onclick="setType(this,'Agent framework')">Agent framework</button><button class="filter-btn" onclick="setType(this,'Browser agent')">Browser agent</button><button class="filter-btn" onclick="setType(this,'Coding agent')">Coding agent</button><button class="filter-btn" onclick="setType(this,'Computer agent')">Computer agent</button><button class="filter-btn" onclick="setType(this,'Framework')">Framework</button><button class="filter-btn" onclick="setType(this,'General agent')">General agent</button><button class="filter-btn" onclick="setType(this,'Multi-agent')">Multi-agent</button><button class="filter-btn" onclick="setType(this,'Multi-agent framework')">Multi-agent framework</button><button class="filter-btn" onclick="setType(this,'No-code agent builder')">No-code agent builder</button><button class="filter-btn" onclick="setType(this,'Web agent')">Web agent</button><button class="filter-btn" onclick="setType(this,'Workflow agent')">Workflow agent</button></div>
+  </div>
+
+  <p class="stats-bar">Showing <b id="count">30</b> of 30 agents</p>
+  <div class="agents-grid" id="grid"></div>
+
+  <footer><p>&copy; 2026 Happy Tools &nbsp;|&nbsp; <a href="about.html">About</a> &nbsp;|&nbsp; <a href="privacy.html">Privacy</a></p><p>Updated: March 18, 2026 at 12:47 PM</p></footer>
+</div>
+
+<script id="agents-data" type="application/json">[{"name": "form", "type": "AI Agent", "status": "Available", "description": ". Please keep the alphabetical order and in the correct category.", "url": "https://forms.gle/UXQFCogLYrPFvfoUA", "tags": ["agent", "ai"]}, {"name": "Awesome SDKs for AI Agents", "type": "AI Agent", "status": "Available", "description": ". This list is only for AI assistants and agents.", "url": "https://github.com/e2b-dev/awesome-sdks-for-ai-agents", "tags": ["agent", "ai"]}, {"name": "e2b", "type": "AI Agent", "status": "Available", "description": ". E2b is building AWS for AI agents. We help developers to deploy, test, and monitor AI agents. E2b is agnostic to your tech stack and aims to work with any tooling for building AI agents.", "url": "https://github.com/e2b-dev/e2b", "tags": ["agent", "ai"]}, {"name": "on Discord", "type": "AI Agent", "status": "Available", "description": ". Follow us on", "url": "https://discord.gg/35NF4Y8WSE", "tags": ["agent", "ai"]}, {"name": "MovieLens-1M", "type": "AI Agent", "status": "Available", "description": "dataset, embodying varied social traits and preferences.", "url": "https://grouplens.org/datasets/movielens/1m/", "tags": ["agent", "ai"]}, {"name": "function-calling", "type": "AI Agent", "status": "Available", "description": "and developers can add customized tools/APIs  .", "url": "https://platform.openai.com/docs/guides/gpt/function-calling", "tags": ["agent", "ai"]}, {"name": "BabyAGI", "type": "AI Agent", "status": "Available", "description": "which executes shell commands", "url": "https://github.com/yoheinakajima/babyagi", "tags": ["agent", "ai"]}, {"name": "*data-to-paper*", "type": "AI Agent", "status": "Available", "description": "is a framework for systematically navigating the power of AI to perform complete end-to-end", "url": "https://arxiv.org/abs/2404.17605", "tags": ["agent", "ai"]}, {"name": "benchmarks", "type": "AI Agent", "status": "Available", "description": "for the agent", "url": "https://github.com/0xpayne/gpt-migrate#-benchmarks", "tags": ["agent", "ai"]}, {"name": "Superagent", "type": "AI Agent", "status": "Available", "description": "<\/details>", "url": "https://www.superagent.sh/", "tags": ["agent", "ai"]}, {"name": "varies", "type": "AI Agent", "status": "Available", "description": "based on the model used by the agent.", "url": "https://www.swebench.com/", "tags": ["agent", "ai"]}, {"name": "image", "type": "AI Agent", "status": "Available", "description": "p-500.png)", "url": "https://assets-global.website-files.com/644b0c1743a3f6abb4f7f149/659c69f2d6e5ba953d5aed58_t%20(1", "tags": ["agent", "ai"]}, {"name": "code execution tool", "type": "AI Agent", "status": "Available", "description": ". To try Superagent with E2B, create a Code interpreter API and then select it for your agent to use.", "url": "https://x.com/pelaseyed/status/1709592941226831916?s=20", "tags": ["agent", "ai"]}, {"name": "try the OpenAI Assistants with E2B", "type": "AI Agent", "status": "Available", "description": ", you can follow our guide in  or .", "url": "https://e2b.dev/docs/llm-platforms/openai", "tags": ["agent", "ai"]}, {"name": "integrated into Langchain", "type": "AI Agent", "status": "Available", "description": "allows you to", "url": "https://python.langchain.com/docs/integrations/tools/e2b_data_analysis", "tags": ["agent", "ai"]}, {"name": "AutoGPT", "type": "General agent", "status": "Open-source", "description": "One of the first autonomous AI agents. Chains GPT-4 calls to complete long-horizon tasks without human input.", "url": "https://github.com/Significant-Gravitas/AutoGPT", "tags": ["autonomous", "gpt-4", "open-source"]}, {"name": "Claude Computer Use", "type": "Computer agent", "status": "Beta", "description": "Anthropic's agent that controls a computer — clicks buttons, types text and navigates browsers to complete tasks.", "url": "https://docs.anthropic.com/computer-use", "tags": ["anthropic", "desktop", "browser"]}, {"name": "OpenAI Operator", "type": "Web agent", "status": "Available", "description": "OpenAI's agent that navigates websites and completes multi-step tasks like booking, shopping and form filling.", "url": "https://openai.com/operator", "tags": ["openai", "web", "automation"]}, {"name": "LangChain Agents", "type": "Framework", "status": "Open-source", "description": "The most popular framework for building LLM agents with tool use, memory and multi-step reasoning chains.", "url": "https://www.langchain.com", "tags": ["framework", "python", "tool-use"]}, {"name": "CrewAI", "type": "Multi-agent", "status": "Open-source", "description": "Orchestrate multiple AI agents with distinct roles to collaborate on complex tasks like a real crew.", "url": "https://crewai.com", "tags": ["multi-agent", "python", "collaboration"]}, {"name": "Microsoft Copilot Studio", "type": "No-code agent builder", "status": "Available", "description": "Build, configure and deploy AI agents without code inside Microsoft 365 and Power Platform ecosystems.", "url": "https://copilotstudio.microsoft.com", "tags": ["microsoft", "no-code", "enterprise"]}, {"name": "AgentGPT", "type": "Browser agent", "status": "Free", "description": "Run autonomous AI agents in your browser. Define a goal and watch the agent break it into tasks and execute them.", "url": "https://agentgpt.reworkd.ai", "tags": ["browser", "autonomous", "no-install"]}, {"name": "Devin", "type": "Coding agent", "status": "Available", "description": "The first AI software engineer. Devin plans, codes, debugs and deploys software autonomously end-to-end.", "url": "https://devin.ai", "tags": ["coding", "autonomous", "software-engineer"]}, {"name": "AutoGen", "type": "Multi-agent framework", "status": "Open-source", "description": "Microsoft Research framework where multiple agents converse to collaboratively solve tasks.", "url": "https://microsoft.github.io/autogen", "tags": ["microsoft", "multi-agent", "framework"]}, {"name": "Google Gemini Agents", "type": "General agent", "status": "Available", "description": "Google Gemini-powered agents with access to Search, Maps, Gmail and Workspace tools.", "url": "https://deepmind.google/technologies/gemini", "tags": ["google", "multimodal", "search"]}, {"name": "Phidata", "type": "Agent framework", "status": "Open-source", "description": "Build AI agents with memory, knowledge and tools using a clean Python API. Supports any LLM provider.", "url": "https://phidata.com", "tags": ["python", "framework", "memory"]}, {"name": "Claude Code", "type": "Coding agent", "status": "Available", "description": "Anthropic agentic coding tool in your terminal. Understands entire codebases and executes multi-step engineering tasks.", "url": "https://claude.ai/code", "tags": ["anthropic", "coding", "terminal"]}, {"name": "Cursor Agent", "type": "Coding agent", "status": "Available", "description": "Cursor built-in agent mode that autonomously writes, runs and debugs code across your entire project.", "url": "https://cursor.sh", "tags": ["coding", "vscode", "autonomous"]}, {"name": "n8n AI Agents", "type": "Workflow agent", "status": "Open-source", "description": "Build visual AI agent workflows with open-source automation. Connect any tool, API or model with no code.", "url": "https://n8n.io", "tags": ["workflow", "automation", "no-code"]}, {"name": "Zapier AI Agents", "type": "Workflow agent", "status": "Available", "description": "Zapier AI agents connect your apps and automate complex multi-step workflows using natural language instructions.", "url": "https://zapier.com/ai", "tags": ["workflow", "automation", "no-code"]}]</script>
+<script>
+(function () {
+  var AGENTS    = JSON.parse(document.getElementById('agents-data').textContent);
+  var activeType = 'all';
+
+  function renderAgents(list) {
+    document.getElementById('count').textContent = list.length;
+    var grid = document.getElementById('grid');
+    if (!list.length) {
+      grid.innerHTML = '<div class="no-results"><h3>No agents found</h3><p>Try a different search.</p></div>';
+      return;
+    }
+    var html = '';
+    for (var i = 0; i < list.length; i++) {
+      var a    = list[i];
+      var tags = (a.tags || []).map(function(x) { return '<span class="tag">' + x + '</span>'; }).join('');
+      html +=
+        '<div class="agent-card">' +
+          '<div style="display:flex;gap:8px;flex-wrap:wrap;">' +
+            '<span class="agent-type">'   + (a.type   || 'AI Agent')  + '</span>' +
+            '<span class="agent-status">' + (a.status || 'Available') + '</span>' +
+          '</div>' +
+          '<h3>' + a.name + '</h3>' +
+          '<p class="agent-card-desc">' + a.description + '</p>' +
+          '<div class="tool-tags">' + tags + '</div>' +
+          '<a href="' + a.url + '" target="_blank" rel="noopener" class="btn" style="align-self:flex-start;">Learn More &#8594;</a>' +
+        '</div>';
+    }
+    grid.innerHTML = html;
+  }
+
+  function applyFilters() {
+    var q = document.getElementById('q').value.toLowerCase();
+    var filtered = AGENTS.filter(function(a) {
+      var matchQ = !q
+        || a.name.toLowerCase().indexOf(q) !== -1
+        || a.description.toLowerCase().indexOf(q) !== -1;
+      return matchQ && (activeType === 'all' || a.type === activeType);
+    });
+    renderAgents(filtered);
+  }
+
+  window.setType = function(btn, v) {
+    activeType = v;
+    document.querySelectorAll('#type-btns .filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    applyFilters();
+  };
+
+  window.applyFilters = applyFilters;
+  renderAgents(AGENTS);
+})();
+</script>
+</body>
+</html>
