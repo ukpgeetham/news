@@ -63,7 +63,7 @@ def fetch_huggingface_models() -> List[Dict]:
         print(f"  ✓ Hugging Face     → {len(tools)} models")
         return tools
     except Exception as e:
-        print(f"  ⚠ Hugging Face failed : {e}")
+        print(f"  ⚠ Hugging Face failed: {e}")
         return []
 
 
@@ -105,7 +105,7 @@ def fetch_github_awesome_list() -> List[Dict]:
 
 
 def get_all_tools() -> List[Dict]:
-    """Merge all sources and deduplicate by name."""
+    """Merge all sources and deduplicate by name. Falls back to built-in list if all fetches fail."""
     print("\n🔄 Fetching tools from all sources...")
     all_tools: List[Dict] = []
     seen: set = set()
@@ -121,8 +121,50 @@ def get_all_tools() -> List[Dict]:
     add(fetch_huggingface_models())
     add(fetch_github_awesome_list())
 
+    # If all live sources failed and no local tools.json exists, use built-in fallback
+    if not all_tools:
+        print("  ⚠ No live data — using built-in fallback tools")
+        add(TOOLS_FALLBACK)
+
     print(f"\n  ✓ Total unique tools: {len(all_tools)}")
     return all_tools
+
+
+# Built-in fallback — always shown when live sources are unavailable
+TOOLS_FALLBACK: List[Dict] = [
+    {"name": "ChatGPT",            "category": "Chatbot",           "pricing": "freemium", "description": "OpenAI's conversational AI for writing, coding, Q&A and brainstorming. The most widely used AI assistant in the world.",                              "url": "https://chat.openai.com",                     "tags": ["text", "coding", "writing"],           "image": FALLBACK_IMAGE},
+    {"name": "Claude",             "category": "Chatbot",           "pricing": "freemium", "description": "Anthropic's AI assistant known for thoughtful, nuanced responses. Excellent for long documents, analysis and coding tasks.",                          "url": "https://claude.ai",                           "tags": ["text", "analysis", "coding"],          "image": FALLBACK_IMAGE},
+    {"name": "Gemini",             "category": "Chatbot",           "pricing": "freemium", "description": "Google's multimodal AI that integrates with Google Workspace. Understands text, images, audio and video natively.",                                   "url": "https://gemini.google.com",                   "tags": ["text", "multimodal", "google"],         "image": FALLBACK_IMAGE},
+    {"name": "Perplexity AI",      "category": "Search",            "pricing": "freemium", "description": "AI-powered search engine that answers questions with cited sources in real time. A smarter alternative to traditional search.",                        "url": "https://perplexity.ai",                       "tags": ["search", "research", "citations"],      "image": FALLBACK_IMAGE},
+    {"name": "Midjourney",         "category": "Image Generation",  "pricing": "paid",     "description": "Generate stunning photorealistic and artistic images from text prompts. The gold standard for AI art and design work.",                               "url": "https://midjourney.com",                      "tags": ["image", "design", "art"],              "image": FALLBACK_IMAGE},
+    {"name": "DALL·E 3",           "category": "Image Generation",  "pricing": "freemium", "description": "OpenAI's image generator built into ChatGPT. Creates accurate, detailed images from natural language descriptions.",                                  "url": "https://openai.com/dall-e-3",                 "tags": ["image", "openai", "art"],              "image": FALLBACK_IMAGE},
+    {"name": "Stable Diffusion",   "category": "Image Generation",  "pricing": "free",     "description": "Open-source image generation model you can run locally or via web UIs. Highly customisable with thousands of community models.",                     "url": "https://stability.ai",                        "tags": ["image", "open-source", "local"],       "image": FALLBACK_IMAGE},
+    {"name": "GitHub Copilot",     "category": "Coding",            "pricing": "paid",     "description": "AI pair programmer that autocompletes code, explains functions and generates entire files directly inside your code editor.",                          "url": "https://github.com/features/copilot",         "tags": ["coding", "github", "autocomplete"],    "image": FALLBACK_IMAGE},
+    {"name": "Cursor",             "category": "Coding",            "pricing": "freemium", "description": "AI-first code editor built on VS Code. Chat with your codebase, generate features and fix bugs with natural language.",                               "url": "https://cursor.sh",                           "tags": ["coding", "editor", "vscode"],          "image": FALLBACK_IMAGE},
+    {"name": "Claude Code",        "category": "Coding",            "pricing": "freemium", "description": "Anthropic's agentic coding tool that runs in your terminal. Understands entire codebases and executes multi-step engineering tasks.",                 "url": "https://claude.ai/code",                      "tags": ["coding", "terminal", "agentic"],       "image": FALLBACK_IMAGE},
+    {"name": "Replit AI",          "category": "Coding",            "pricing": "freemium", "description": "AI coding assistant inside Replit's browser IDE. Write, run and deploy code entirely in the cloud with AI assistance.",                              "url": "https://replit.com/ai",                       "tags": ["coding", "browser", "deployment"],     "image": FALLBACK_IMAGE},
+    {"name": "v0 by Vercel",       "category": "Coding",            "pricing": "freemium", "description": "Generate React UI components from a text prompt. Paste the code directly into your project — zero setup required.",                                  "url": "https://v0.dev",                              "tags": ["coding", "ui", "react"],               "image": FALLBACK_IMAGE},
+    {"name": "Jasper",             "category": "Writing",           "pricing": "paid",     "description": "AI writing platform for marketing teams. Creates blog posts, ad copy, emails and social content at scale with brand voice controls.",                 "url": "https://jasper.ai",                           "tags": ["writing", "marketing", "copywriting"], "image": FALLBACK_IMAGE},
+    {"name": "Grammarly",          "category": "Writing",           "pricing": "freemium", "description": "AI writing assistant that checks grammar, tone, clarity and style. Works across browsers, Google Docs and email clients.",                            "url": "https://grammarly.com",                       "tags": ["writing", "grammar", "editing"],       "image": FALLBACK_IMAGE},
+    {"name": "Copy.ai",            "category": "Writing",           "pricing": "freemium", "description": "Generate marketing copy, product descriptions, email sequences and blog content in seconds with AI-powered templates.",                               "url": "https://copy.ai",                             "tags": ["writing", "marketing", "copywriting"], "image": FALLBACK_IMAGE},
+    {"name": "Runway",             "category": "Video",             "pricing": "freemium", "description": "AI video generation and editing suite. Generate videos from text, remove backgrounds and apply cinematic effects with ease.",                          "url": "https://runwayml.com",                        "tags": ["video", "editing", "generation"],      "image": FALLBACK_IMAGE},
+    {"name": "Sora",               "category": "Video",             "pricing": "freemium", "description": "OpenAI's text-to-video model that generates realistic scenes from prompts up to a minute long. Cinematic quality output.",                           "url": "https://sora.com",                            "tags": ["video", "openai", "generation"],       "image": FALLBACK_IMAGE},
+    {"name": "Pika",               "category": "Video",             "pricing": "freemium", "description": "Generate and edit videos with AI. Animate images, modify existing clips and create cinematic scenes from a text description.",                        "url": "https://pika.art",                            "tags": ["video", "animation", "generation"],    "image": FALLBACK_IMAGE},
+    {"name": "ElevenLabs",         "category": "Audio",             "pricing": "freemium", "description": "AI voice synthesis and cloning. Generate natural-sounding speech in any voice or language for podcasts, videos and apps.",                            "url": "https://elevenlabs.io",                       "tags": ["audio", "voice", "tts"],               "image": FALLBACK_IMAGE},
+    {"name": "Suno",               "category": "Audio",             "pricing": "freemium", "description": "Generate full songs with vocals and instruments from a text prompt. Create original music in any genre in seconds.",                                  "url": "https://suno.ai",                             "tags": ["audio", "music", "generation"],        "image": FALLBACK_IMAGE},
+    {"name": "Notion AI",          "category": "Productivity",      "pricing": "paid",     "description": "AI built into Notion that summarises pages, drafts content, translates text and answers questions about your workspace.",                             "url": "https://notion.so/product/ai",                "tags": ["productivity", "notes", "workspace"],  "image": FALLBACK_IMAGE},
+    {"name": "Otter.ai",           "category": "Productivity",      "pricing": "freemium", "description": "AI meeting assistant that transcribes, summarises and captures action items from meetings in real time across Zoom, Meet and Teams.",                 "url": "https://otter.ai",                            "tags": ["productivity", "transcription", "meetings"], "image": FALLBACK_IMAGE},
+    {"name": "Gamma",              "category": "Productivity",      "pricing": "freemium", "description": "Create beautiful presentations, documents and websites with AI. Just describe what you want and Gamma generates a polished deck instantly.",           "url": "https://gamma.app",                           "tags": ["productivity", "presentations", "design"], "image": FALLBACK_IMAGE},
+    {"name": "Whisper",            "category": "Audio",             "pricing": "free",     "description": "OpenAI's open-source speech recognition model. Transcribes audio in 99 languages with impressive accuracy. Free to run locally.",                    "url": "https://openai.com/research/whisper",          "tags": ["audio", "transcription", "open-source"], "image": FALLBACK_IMAGE},
+    {"name": "Hugging Face",       "category": "Open-Source LLM",  "pricing": "free",     "description": "The hub for open-source AI models, datasets and demos. Home to thousands of community models for every AI task imaginable.",                         "url": "https://huggingface.co",                      "tags": ["open-source", "models", "hub"],        "image": FALLBACK_IMAGE},
+    {"name": "Ollama",             "category": "Open-Source LLM",  "pricing": "free",     "description": "Run large language models locally on your own machine with one command. Supports Llama, Mistral, Gemma, Phi and dozens more.",                      "url": "https://ollama.ai",                           "tags": ["open-source", "local", "llm"],         "image": FALLBACK_IMAGE},
+    {"name": "LM Studio",          "category": "Open-Source LLM",  "pricing": "free",     "description": "Desktop app for discovering, downloading and running local LLMs. Clean UI, no command line needed, runs fully offline.",                             "url": "https://lmstudio.ai",                         "tags": ["open-source", "local", "desktop"],     "image": FALLBACK_IMAGE},
+    {"name": "Mistral AI",         "category": "Open-Source LLM",  "pricing": "freemium", "description": "French AI lab behind the Mistral and Mixtral open-weight models. Offers both open-source models and a fast API.",                                    "url": "https://mistral.ai",                          "tags": ["open-source", "llm", "api"],           "image": FALLBACK_IMAGE},
+    {"name": "Meta Llama",         "category": "Open-Source LLM",  "pricing": "free",     "description": "Meta's family of open-weight large language models. Llama 3 rivals closed models on many benchmarks and is free to download and run.",               "url": "https://llama.meta.com",                      "tags": ["open-source", "meta", "llm"],          "image": FALLBACK_IMAGE},
+    {"name": "Canva AI",           "category": "Design",            "pricing": "freemium", "description": "AI-powered design tools inside Canva — generate images, remove backgrounds, write copy and auto-resize designs for any format.",                     "url": "https://canva.com/ai-image-generator",        "tags": ["design", "image", "canva"],            "image": FALLBACK_IMAGE},
+    {"name": "Adobe Firefly",      "category": "Design",            "pricing": "freemium", "description": "Adobe's family of creative AI tools for generating images, vectors and text effects. Trained on licensed content for commercial safety.",             "url": "https://firefly.adobe.com",                   "tags": ["design", "image", "adobe"],            "image": FALLBACK_IMAGE},
+    {"name": "Ideogram",           "category": "Image Generation",  "pricing": "freemium", "description": "AI image generator that excels at generating text inside images accurately — great for logos, posters and social media graphics.",                   "url": "https://ideogram.ai",                         "tags": ["image", "text", "design"],             "image": FALLBACK_IMAGE},
+]
 
 
 # ============================================================================
@@ -533,6 +575,7 @@ def generate_index_html(tools: List[Dict]) -> str:
 (function () {{
   var TOOLS = JSON.parse(document.getElementById('tools-data').textContent);
   var FB    = '{FALLBACK_IMAGE}';
+  window._FB = FB;
   var activeCat   = 'all';
   var activePrice = 'all';
 
@@ -559,7 +602,7 @@ def generate_index_html(tools: List[Dict]) -> str:
       var tags = (t.tags || []).map(function(x) {{ return '<span class="tag">' + x + '</span>'; }}).join('');
       html +=
         '<div class="tool-card" onclick="openModal(' + idx + ')">' +
-          '<img class="tool-card-img" src="' + img + '" alt="' + escAttr(t.name) + '" loading="lazy" onerror="this.src=\'' + FB + '\'">' +
+          '<img class="tool-card-img" src="' + img + '" alt="' + escAttr(t.name) + '" loading="lazy" onerror="this.src=window._FB">' +
           '<div class="tool-card-body">' +
             '<div class="tool-meta"><span class="badge badge-category">' + t.category + '</span>' + badge(t.pricing) + '</div>' +
             '<h3>' + t.name + '</h3>' +
@@ -1180,7 +1223,7 @@ def generate_about_html() -> str:
 {nav_html("about")}
 <div class="container" style="max-width:700px;padding-top:40px;">
   <h1 style="color:var(--primary);margin-bottom:16px;">About Happy Tools</h1>
-  <p style="line-height:1.7;color:#555;margin-bottom:12px;">Happy Tools is a live-updated directory of the best AI tools and agents. Data is pulled at build time from Hugging Face's public model API, community GitHub awesome lists, and a hand-curated <code>tools.json</code> in the repo.</p>
+  <p style="line-height:1.7;color:#555;margin-bottom:12px;">Happy Tools is a live-updated directory of the best AI tools and agents. Data is pulled at build time from Hugging Face's public model API, community GitHub awesome lists.</p>
   <p style="line-height:1.7;color:#555;margin-bottom:24px;">Use search and filters to find what you need, or browse the AI Agents section for autonomous systems.</p>
   <a href="index.html" class="btn">&#8592; Browse Tools</a>
 </div>
