@@ -63,7 +63,7 @@ def fetch_huggingface_models() -> List[Dict]:
         print(f"  ✓ Hugging Face     → {len(tools)} models")
         return tools
     except Exception as e:
-        print(f"  ⚠ Hugging Face failed: {e}")
+        print(f"  ⚠ Hugging Face failed : {e}")
         return []
 
 
