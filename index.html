@@ -297,7 +297,7 @@
     </div>
   </div>
 
-  <footer><p>&copy; 2026 Happy Tools &nbsp;|&nbsp; <a href="about.html">About</a> &nbsp;|&nbsp; <a href="privacy.html">Privacy</a></p><p>Updated: March 18, 2026 at 12:47 PM</p></footer>
+  <footer><p>&copy; 2026 Happy Tools &nbsp;|&nbsp; <a href="about.html">About</a> &nbsp;|&nbsp; <a href="privacy.html">Privacy</a></p><p>Updated: March 18, 2026 at 12:57 PM</p></footer>
 </div>
 
 <!-- Data embedded safely — no inline string concatenation issues -->
@@ -306,6 +306,7 @@
 (function () {
   var TOOLS = JSON.parse(document.getElementById('tools-data').textContent);
   var FB    = 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800';
+  window._FB = FB;
   var activeCat   = 'all';
   var activePrice = 'all';
 
@@ -332,7 +333,7 @@
       var tags = (t.tags || []).map(function(x) { return '<span class="tag">' + x + '</span>'; }).join('');
       html +=
         '<div class="tool-card" onclick="openModal(' + idx + ')">' +
-          '<img class="tool-card-img" src="' + img + '" alt="' + escAttr(t.name) + '" loading="lazy" onerror="this.src='' + FB + ''">' +
+          '<img class="tool-card-img" src="' + img + '" alt="' + escAttr(t.name) + '" loading="lazy" onerror="this.src=window._FB">' +
           '<div class="tool-card-body">' +
             '<div class="tool-meta"><span class="badge badge-category">' + t.category + '</span>' + badge(t.pricing) + '</div>' +
             '<h3>' + t.name + '</h3>' +
