@@ -244,10 +244,71 @@
   footer a { color: var(--primary); text-decoration: none; }
   footer a:hover { text-decoration: underline; }
 
+  /* ---- HAMBURGER BUTTON ---- */
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: all .3s;
+  }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ---- RESPONSIVE ---- */
   @media (max-width: 768px) {
     header { flex-direction: column; gap: 14px; text-align: center; }
     .filters input[type=text] { width: 100%; }
     .tools-grid, .agents-grid { grid-template-columns: 1fr; }
+
+    .nav-toggle { display: flex; }
+
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--dark);
+      padding: 12px 16px 16px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      z-index: 999;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a {
+      font-size: 0.95rem;
+      padding: 10px 14px;
+      border-radius: 10px;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+    nav { position: sticky; top: 0; }
+    .nav-container { position: relative; }
+  }
+
+  @media (max-width: 480px) {
+    .container { padding: 16px 14px; }
+    header h1 { font-size: 1.6rem; }
+    .tagline { font-size: 0.85rem; }
+    .filter-btn { font-size: 0.72rem; padding: 5px 10px; }
+    .filters input[type=text] { font-size: 0.88rem; }
+    .tool-card h3 { font-size: 0.98rem; }
+    .tool-card-desc { font-size: 0.84rem; }
+    .modal-body { padding: 16px; }
+    .modal-title { font-size: 1.2rem; }
   }
 </style>
 
@@ -320,10 +381,35 @@
   </style>
 </head>
 <body>
-<nav><div class="nav-container">
-  <a class="nav-brand" href="index.html"><img src="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png" style="width:30px;height:30px;border-radius:50%;" alt="logo"> HAPPY TOOLS</a>
-  <ul class="nav-links"><li><a href="index.html" class="">AI Tools</a></li><li><a href="agents.html" class="">AI Agents</a></li><li><a href="courses.html" class="active">AI Courses</a></li><li><a href="about.html" class="">About</a></li></ul>
-</div></nav>
+<nav>
+  <div class="nav-container">
+    <a class="nav-brand" href="index.html">
+      <img src="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png" style="width:28px;height:28px;border-radius:50%;flex-shrink:0;" alt="logo">
+      HAPPY TOOLS
+    </a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links"><li><a href="index.html" class="">AI Tools</a></li><li><a href="agents.html" class="">AI Agents</a></li><li><a href="courses.html" class="active">AI Courses</a></li><li><a href="about.html" class="">About</a></li></ul>
+  </div>
+</nav>
+<script>
+(function(){
+  var btn   = document.getElementById('nav-toggle');
+  var links = document.getElementById('nav-links');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    btn.classList.toggle('open');
+    links.classList.toggle('open');
+  });
+  links.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      btn.classList.remove('open');
+      links.classList.remove('open');
+    });
+  });
+})();
+</script>
 <div class="container">
   <header>
     <img src="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png" class="logo" alt="Happy Tools">
@@ -352,7 +438,7 @@
   <p class="stats-bar">Showing <b id="count">18</b> of 18 courses</p>
   <div class="courses-grid" id="grid"></div>
 
-  <footer><p>&copy; 2026 Happy Tools &nbsp;|&nbsp; <a href="about.html">About</a> &nbsp;|&nbsp; <a href="privacy.html">Privacy</a></p><p>Updated: March 18, 2026 at 01:14 PM</p></footer>
+  <footer><p>&copy; 2026 Happy Tools &nbsp;|&nbsp; <a href="about.html">About</a> &nbsp;|&nbsp; <a href="privacy.html">Privacy</a></p><p>Updated: March 19, 2026 at 02:22 AM</p></footer>
 </div>
 
 <script id="courses-data" type="application/json">[{"title": "Generative AI for Everyone", "provider": "DeepLearning.AI", "platform": "Coursera", "level": "Beginner", "pricing": "free", "duration": "6 hrs", "tags": ["genai", "beginner", "no-code"], "description": "Andrew Ng's non-technical intro to generative AI — how it works, where it can be applied, and how to use it in your own projects.", "url": "https://www.coursera.org/learn/generative-ai-for-everyone", "cert": true}, {"title": "Introduction to Large Language Models", "provider": "Google Cloud", "platform": "Google Cloud Skills Boost", "level": "Beginner", "pricing": "free", "duration": "1 hr", "tags": ["llm", "google", "beginner"], "description": "Quick but solid overview of LLMs — what they are, use cases, and how prompt tuning works. Part of Google's Generative AI learning path.", "url": "https://cloudskillsboost.google/course_templates/539", "cert": true}, {"title": "ChatGPT Prompt Engineering for Developers", "provider": "DeepLearning.AI + OpenAI", "platform": "DeepLearning.AI", "level": "Beginner", "pricing": "free", "duration": "1 hr", "tags": ["prompt-engineering", "openai", "python"], "description": "Hands-on short course by Isa Fulford and Andrew Ng. Learn prompt engineering best practices for building LLM-powered applications.", "url": "https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/", "cert": false}, {"title": "LangChain for LLM Application Development", "provider": "DeepLearning.AI", "platform": "DeepLearning.AI", "level": "Intermediate", "pricing": "free", "duration": "1 hr", "tags": ["langchain", "python", "llm"], "description": "Build LLM-powered apps using LangChain — covers chains, agents, memory and tools with Python code walkthroughs.", "url": "https://www.deeplearning.ai/short-courses/langchain-for-llm-application-development/", "cert": false}, {"title": "Hugging Face NLP Course", "provider": "Hugging Face", "platform": "Hugging Face", "level": "Intermediate", "pricing": "free", "duration": "Self-paced", "tags": ["nlp", "transformers", "python", "huggingface"], "description": "The definitive free course on Transformers and the Hugging Face ecosystem — fine-tuning, tokenizers, datasets and deployment.", "url": "https://huggingface.co/learn/nlp-course", "cert": false}, {"title": "Elements of AI", "provider": "University of Helsinki", "platform": "elementsofai.com", "level": "Beginner", "pricing": "free", "duration": "30 hrs", "tags": ["ai-fundamentals", "beginner", "no-code"], "description": "Finland's famous open online course covering AI fundamentals, machine learning basics and societal implications. No coding needed.", "url": "https://www.elementsofai.com", "cert": true}, {"title": "Fast.ai — Practical Deep Learning for Coders", "provider": "fast.ai", "platform": "fast.ai", "level": "Intermediate", "pricing": "free", "duration": "Self-paced", "tags": ["deep-learning", "python", "pytorch"], "description": "Top-down, code-first approach to deep learning. Covers vision, NLP and tabular models using PyTorch and the fastai library.", "url": "https://course.fast.ai", "cert": false}, {"title": "CS50's Introduction to AI with Python", "provider": "Harvard University", "platform": "edX", "level": "Intermediate", "pricing": "free", "duration": "7 weeks", "tags": ["python", "algorithms", "harvard"], "description": "Harvard's intro to AI concepts — search, knowledge, uncertainty, optimisation, machine learning, neural networks and NLP with Python.", "url": "https://cs50.harvard.edu/ai/", "cert": true}, {"title": "AWS Certified AI Practitioner", "provider": "Amazon Web Services", "platform": "AWS Training", "level": "Beginner", "pricing": "paid", "duration": "Self-paced", "tags": ["aws", "cloud", "certification"], "description": "AWS's foundational AI/ML certification. Covers AI/ML concepts, AWS AI services (Bedrock, SageMaker, Rekognition) and responsible AI.", "url": "https://aws.amazon.com/certification/certified-ai-practitioner/", "cert": true}, {"title": "Google Professional Machine Learning Engineer", "provider": "Google Cloud", "platform": "Google Cloud", "level": "Advanced", "pricing": "paid", "duration": "Self-paced", "tags": ["google-cloud", "mlops", "certification"], "description": "Professional-level cert for designing, building and productionising ML models on Google Cloud. Highly respected in the industry.", "url": "https://cloud.google.com/learn/certification/machine-learning-engineer", "cert": true}, {"title": "Microsoft Azure AI Engineer Associate", "provider": "Microsoft", "platform": "Microsoft Learn", "level": "Intermediate", "pricing": "paid", "duration": "Self-paced", "tags": ["azure", "microsoft", "certification"], "description": "Build and deploy AI solutions using Azure Cognitive Services, Azure OpenAI, and Azure ML. Leads to the AI-102 certification.", "url": "https://learn.microsoft.com/en-us/credentials/certifications/azure-ai-engineer/", "cert": true}, {"title": "Deep Learning Specialization", "provider": "DeepLearning.AI", "platform": "Coursera", "level": "Intermediate", "pricing": "paid", "duration": "5 months", "tags": ["deep-learning", "python", "tensorflow"], "description": "Andrew Ng's landmark 5-course series. Covers neural networks, CNNs, RNNs, LSTMs, transformers and practical ML projects.", "url": "https://www.coursera.org/specializations/deep-learning", "cert": true}, {"title": "Machine Learning Specialization", "provider": "Stanford + DeepLearning.AI", "platform": "Coursera", "level": "Beginner", "pricing": "paid", "duration": "3 months", "tags": ["ml", "python", "stanford"], "description": "Updated Andrew Ng ML course — supervised learning, unsupervised learning and best practices for building real ML systems.", "url": "https://www.coursera.org/specializations/machine-learning-introduction", "cert": true}, {"title": "LLMOps: Building Real-World Applications", "provider": "DeepLearning.AI", "platform": "DeepLearning.AI", "level": "Advanced", "pricing": "free", "duration": "1 hr", "tags": ["llmops", "mlops", "production"], "description": "Short course on deploying LLMs to production — data pipelines, model evaluation, monitoring and CI/CD for LLM-based applications.", "url": "https://www.deeplearning.ai/short-courses/llmops/", "cert": false}, {"title": "AI Agents in LangGraph", "provider": "DeepLearning.AI", "platform": "DeepLearning.AI", "level": "Intermediate", "pricing": "free", "duration": "1 hr", "tags": ["agents", "langgraph", "python"], "description": "Build agentic AI applications using LangGraph — covers state machines, tool use, human-in-the-loop and multi-agent systems.", "url": "https://www.deeplearning.ai/short-courses/ai-agents-in-langgraph/", "cert": false}, {"title": "Prompt Engineering for Generative AI", "provider": "Vanderbilt University", "platform": "Coursera", "level": "Beginner", "pricing": "paid", "duration": "3 weeks", "tags": ["prompt-engineering", "genai", "beginner"], "description": "Comprehensive prompt engineering course covering zero-shot, few-shot, chain-of-thought, ReAct and multimodal prompting techniques.", "url": "https://www.coursera.org/learn/prompt-engineering", "cert": true}, {"title": "Databricks Generative AI Fundamentals", "provider": "Databricks", "platform": "Databricks Academy", "level": "Beginner", "pricing": "free", "duration": "2 hrs", "tags": ["genai", "databricks", "certification"], "description": "Free accreditation from Databricks covering generative AI fundamentals, LLMs, RAG and responsible AI practices.", "url": "https://www.databricks.com/learn/training/generative-ai-fundamentals-accreditation", "cert": true}, {"title": "Building RAG Agents with LLMs", "provider": "NVIDIA", "platform": "NVIDIA Deep Learning Institute", "level": "Advanced", "pricing": "paid", "duration": "1 day", "tags": ["rag", "nvidia", "agents"], "description": "Hands-on workshop from NVIDIA on building retrieval-augmented generation systems and LLM-powered agents at scale.", "url": "https://learn.nvidia.com/courses/course-detail?course_id=course-v1:DLI+S-FX-15+V1", "cert": true}]</script>
