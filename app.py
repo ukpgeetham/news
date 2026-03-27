@@ -1348,7 +1348,7 @@ def generate_privacy_html() -> str:
 
 
 def generate_sitemap() -> str:
-    pages = ["", "agents.html", "courses.html", "about.html", "privacy.html"]
+    pages = ["", "agents.html", "courses.html", "about.html", "privacy.html", "scaniq-privacy.html"]
     urls  = "\n".join(f"  <url><loc>{SITE_URL}/{p}</loc><changefreq>weekly</changefreq></url>" for p in pages)
     return f"""<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}\n</urlset>"""
 
@@ -1366,12 +1366,233 @@ def generate_ads_txt() -> str:
     return f"google.com, {ADSENSE_ID}, DIRECT, f08c47fec0942fa0\n"
 
 
+def generate_scaniq_privacy_html() -> str:
+    updated = datetime.now().strftime('%B %d, %Y')
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ScanIQ Privacy Policy — how we collect, use and protect your data.">
+  <title>ScanIQ — Privacy Policy</title>
+  <link rel="icon" type="image/png" href="{LOGO_URL}">
+  {STYLE}
+  <style>
+    .policy-wrap {{
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+    }}
+    .policy-wrap h1 {{
+      font-size: 2rem;
+      margin-bottom: 6px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }}
+    .policy-meta {{
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 36px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }}
+    .policy-wrap h2 {{
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin: 32px 0 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }}
+    .policy-wrap p, .policy-wrap li {{
+      font-size: 0.95rem;
+      color: var(--mid);
+      line-height: 1.75;
+      margin-bottom: 10px;
+    }}
+    .policy-wrap ul {{
+      padding-left: 20px;
+      margin-bottom: 10px;
+    }}
+    .policy-wrap ul li {{ margin-bottom: 6px; }}
+    .highlight-box {{
+      background: var(--primary-lt);
+      border-left: 4px solid var(--primary);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 14px 18px;
+      margin: 20px 0;
+      font-size: 0.92rem;
+      color: var(--primary-dk);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+    }}
+    .contact-card {{
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      margin-top: 32px;
+    }}
+    .contact-card h3 {{
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }}
+    .contact-card a {{ color: var(--primary); text-decoration: none; }}
+    .contact-card a:hover {{ text-decoration: underline; }}
+  </style>
+</head>
+<body>
+{nav_html()}
+<div class="policy-wrap">
+
+  <h1>Privacy Policy</h1>
+  <p class="policy-meta">
+    Applies to: <strong>ScanIQ</strong> Android App &nbsp;·&nbsp;
+    Last updated: <strong>{updated}</strong>
+  </p>
+
+  <div class="highlight-box">
+    ScanIQ is committed to protecting your privacy. This policy explains exactly
+    what data we collect, why we collect it, and how you can control it.
+  </div>
+
+  <h2>1. Who we are</h2>
+  <p>
+    ScanIQ is an AI-powered product analyser app for Android, published under the
+    Happy Tools umbrella. When you use ScanIQ, you are agreeing to the terms
+    described in this Privacy Policy. If you do not agree, please uninstall the app.
+  </p>
+
+  <h2>2. Information we collect</h2>
+
+  <p><strong>a) Account information</strong></p>
+  <p>
+    When you sign in with Google, we receive your <strong>name</strong> and
+    <strong>email address</strong> from Google. We use this solely to identify
+    your account and personalise your experience. We do not share this with
+    any third parties.
+  </p>
+
+  <p><strong>b) Camera access</strong></p>
+  <p>
+    ScanIQ requests access to your device camera so you can scan and photograph
+    products for AI analysis. <strong>Images are processed to generate product
+    insights and are not stored on our servers beyond the duration of your
+    analysis session</strong> unless you explicitly save a result.
+    We never use your camera without your active initiation.
+  </p>
+
+  <p><strong>c) Product scan data</strong></p>
+  <p>
+    When you scan a product, the image or barcode is sent to our AI analysis
+    service to generate a result. This data may be temporarily cached to
+    improve response speed but is not linked to your identity.
+  </p>
+
+  <p><strong>d) Data we do NOT collect</strong></p>
+  <ul>
+    <li>Precise or approximate location</li>
+    <li>Contacts or call logs</li>
+    <li>Financial or payment information</li>
+    <li>Any data while the app is in the background</li>
+  </ul>
+
+  <h2>3. How we use your information</h2>
+  <ul>
+    <li>To authenticate you securely via Google Sign-In</li>
+    <li>To process product images and return AI-generated analysis</li>
+    <li>To improve the accuracy of our AI model over time (anonymised only)</li>
+    <li>To send important app updates or security notices (via your email)</li>
+  </ul>
+  <p>We will never sell, rent or trade your personal information to third parties.</p>
+
+  <h2>4. Google Sign-In</h2>
+  <p>
+    ScanIQ uses <strong>Google Sign-In</strong> for authentication. By signing in
+    with Google you are also subject to
+    <a href="https://policies.google.com/privacy" target="_blank" rel="noopener"
+       style="color:var(--primary);">Google's Privacy Policy</a>.
+    You can revoke ScanIQ's access to your Google account at any time by visiting
+    <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener"
+       style="color:var(--primary);">myaccount.google.com/permissions</a>.
+  </p>
+
+  <h2>5. Camera permission</h2>
+  <p>
+    ScanIQ requests <code>android.permission.CAMERA</code> at runtime.
+    You can revoke this permission at any time through your device's
+    <strong>Settings → Apps → ScanIQ → Permissions</strong>.
+    Revoking camera access will disable the scanning feature but will not
+    affect your account or saved results.
+  </p>
+
+  <h2>6. Data storage and security</h2>
+  <p>
+    Your account information is stored securely using industry-standard encryption.
+    Product scan images are transmitted over HTTPS and are not permanently stored
+    on our servers. We apply appropriate technical and organisational measures to
+    protect your data against unauthorised access, loss or misuse.
+  </p>
+
+  <h2>7. Data retention</h2>
+  <p>
+    We retain your account information for as long as your account is active.
+    If you delete your account, all associated personal data is permanently
+    removed within 30 days. Anonymised, aggregated scan data (with no link
+    to your identity) may be retained for model improvement purposes.
+  </p>
+
+  <h2>8. Children's privacy</h2>
+  <p>
+    ScanIQ is not directed at children under the age of 13. We do not knowingly
+    collect personal information from children. If you believe a child has
+    provided us with personal data, please contact us and we will delete it promptly.
+  </p>
+
+  <h2>9. Your rights</h2>
+  <p>Depending on your location, you may have the right to:</p>
+  <ul>
+    <li>Access the personal data we hold about you</li>
+    <li>Request correction of inaccurate data</li>
+    <li>Request deletion of your account and associated data</li>
+    <li>Withdraw consent for data processing at any time</li>
+  </ul>
+  <p>To exercise any of these rights, please contact us using the details below.</p>
+
+  <h2>10. Changes to this policy</h2>
+  <p>
+    We may update this Privacy Policy from time to time. When we do, we will
+    update the "Last updated" date at the top of this page and notify you via
+    the app if the changes are material. Continued use of ScanIQ after any
+    changes constitutes acceptance of the updated policy.
+  </p>
+
+  <div class="contact-card">
+    <h3>Contact us</h3>
+    <p style="margin-bottom:6px;">
+      If you have any questions, requests or concerns about this Privacy Policy
+      or how ScanIQ handles your data, please reach out:
+    </p>
+    <p style="margin:0;">
+      Website: <a href="{SITE_URL}">{SITE_URL}</a>
+    </p>
+  </div>
+
+  <p style="margin-top:28px;">
+    <a href="index.html" class="btn">&#8592; Back to Happy Tools</a>
+  </p>
+
+</div>
+{footer_html()}
+</body>
+</html>"""
+
+
 def save_files(files: Dict[str, str]) -> None:
-    os.makedirs("public", exist_ok=True)
-    for name, content in files.items():
-        with open(f"public/{name}", "w", encoding="utf-8") as f:
-            f.write(content)
-        print(f"  ✓ public/{name}")
     os.makedirs("public", exist_ok=True)
     for name, content in files.items():
         with open(f"public/{name}", "w", encoding="utf-8") as f:
@@ -1393,13 +1614,14 @@ def main():
 
     print("\n  Generating pages...")
     save_files({
-        "index.html":   generate_index_html(tools),
-        "agents.html":  generate_agents_html(agents),
-        "courses.html": generate_courses_html(),
-        "about.html":   generate_about_html(),
-        "privacy.html": generate_privacy_html(),
-        "sitemap.xml":  generate_sitemap(),
-        "ads.txt":      generate_ads_txt(),
+        "index.html":          generate_index_html(tools),
+        "agents.html":         generate_agents_html(agents),
+        "courses.html":        generate_courses_html(),
+        "about.html":          generate_about_html(),
+        "privacy.html":        generate_privacy_html(),
+        "scaniq-privacy.html": generate_scaniq_privacy_html(),
+        "sitemap.xml":         generate_sitemap(),
+        "ads.txt":             generate_ads_txt(),
     })
 
     print("\n" + "=" * 60)
