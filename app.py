@@ -1590,7 +1590,135 @@ def generate_scaniq_privacy_html() -> str:
 {footer_html()}
 </body>
 </html>"""
+#====================================================
 
+def generate_scaniq_delete_html() -> str:
+    updated = datetime.now().strftime('%B %d, %Y')
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ScanIQ Data Delete Request">
+  <title>ScanIQ — Privacy Policy</title>
+  <link rel="icon" type="image/png" href="{LOGO_URL}">
+  {STYLE}
+  <style>
+    .policy-wrap {{
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+    }}
+    .policy-wrap h1 {{
+      font-size: 2rem;
+      margin-bottom: 6px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }}
+    .policy-meta {{
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 36px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }}
+    .policy-wrap h2 {{
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin: 32px 0 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }}
+    .policy-wrap p, .policy-wrap li {{
+      font-size: 0.95rem;
+      color: var(--mid);
+      line-height: 1.75;
+      margin-bottom: 10px;
+    }}
+    .policy-wrap ul {{
+      padding-left: 20px;
+      margin-bottom: 10px;
+    }}
+    .policy-wrap ul li {{ margin-bottom: 6px; }}
+    .highlight-box {{
+      background: var(--primary-lt);
+      border-left: 4px solid var(--primary);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 14px 18px;
+      margin: 20px 0;
+      font-size: 0.92rem;
+      color: var(--primary-dk);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+    }}
+    .contact-card {{
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      margin-top: 32px;
+    }}
+    .contact-card h3 {{
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }}
+    .contact-card a {{ color: var(--primary); text-decoration: none; }}
+    .contact-card a:hover {{ text-decoration: underline; }}
+  </style>
+</head>
+<body>
+{nav_html()}
+<div class="policy-wrap">
+
+  <h1>Data Delete Policy</h1>
+  <p class="policy-meta">
+    Applies to: <strong>ScanIQ</strong> Android App &nbsp;·&nbsp;
+    Last updated: <strong>{updated}</strong>
+  </p>
+
+  <div class="highlight-box">
+    ScanIQ is committed to protecting your privacy. This policy explains exactly
+    what data we collect, why we collect it, and how you can control it.
+  </div>
+
+  <h2>1. How to delete</h2>
+  <p>
+    If you want to delete the data associated with your account permenantly from our database please send an email from your registered email.
+    The topic should be "Delete ScanIQ Account" to happytools@happytools.site
+  </p>
+
+  
+  <p>
+    We may update this Privacy Policy from time to time. When we do, we will
+    update the "Last updated" date at the top of this page and notify you via
+    the app if the changes are material. Continued use of ScanIQ after any
+    changes constitutes acceptance of the updated policy.
+  </p>
+
+  <div class="contact-card">
+    <h3>Contact us</h3>
+    <p style="margin-bottom:6px;">
+      If you have any questions, requests or concerns about this Privacy Policy
+      or how ScanIQ handles your data, please reach out:
+    </p>
+    <p style="margin:0;">
+      Website: <a href="{SITE_URL}">{SITE_URL}</a>
+    </p>
+  </div>
+
+  <p style="margin-top:28px;">
+    <a href="index.html" class="btn">&#8592; Back to Happy Tools</a>
+  </p>
+
+</div>
+{footer_html()}
+</body>
+</html>"""
 
 def save_files(files: Dict[str, str]) -> None:
     os.makedirs("public", exist_ok=True)
@@ -1620,6 +1748,7 @@ def main():
         "about.html":          generate_about_html(),
         "privacy.html":        generate_privacy_html(),
         "scaniq-privacy.html": generate_scaniq_privacy_html(),
+        "scaniq-delete.html": generate_scaniq_delete_html(),
         "sitemap.xml":         generate_sitemap(),
         "ads.txt":             generate_ads_txt(),
     })
