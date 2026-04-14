@@ -1,0 +1,9 @@
+# Happy Tools - Robots.txt
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://happytools.site/sitemap.xml
+
+# Crawl-delay (optional, helps prevent overload)
+Crawl-delay: 1
