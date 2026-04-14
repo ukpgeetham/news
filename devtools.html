@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Free Developer Tools Online — Text Compare, JSON Formatter, XML Validator | Happy Tools">
+  <meta name="description" content="Free online developer tools: Text Compare & Diff Checker, JSON Formatter & Validator, JSON Compare, XML Formatter, Base64 Encoder/Decoder, URL Encoder, Hash Generator (SHA256, SHA1), UUID Generator. No signup required.">
+  <meta name="keywords" content="text compare, text comparison tool, diff checker, compare text online, JSON formatter, JSON validator, JSON beautifier, format JSON online, JSON compare, compare JSON, JSON diff, XML formatter, XML validator, format XML online, base64 encoder, base64 decoder, base64 encode online, URL encoder, URL decoder, encode URL online, hash generator, SHA256 generator, SHA1 generator, UUID generator, GUID generator, generate UUID online, developer tools, dev tools online, free developer tools, online text tools, web developer utilities">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  <meta name="author" content="Happy Tools">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://happytools.site/devtools.html">
+  <meta property="og:title" content="Free Developer Tools Online — Text Compare, JSON Formatter, XML Validator | Happy Tools">
+  <meta property="og:description" content="Free online developer tools: Text Compare & Diff Checker, JSON Formatter & Validator, JSON Compare, XML Formatter, Base64 Encoder/Decoder, URL Encoder, Hash Generator (SHA256, SHA1), UUID Generator. No signup required.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png">
+  <meta property="og:site_name" content="Happy Tools">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://happytools.site/devtools.html">
+  <meta property="twitter:title" content="Free Developer Tools Online — Text Compare, JSON Formatter, XML Validator | Happy Tools">
+  <meta property="twitter:description" content="Free online developer tools: Text Compare & Diff Checker, JSON Formatter & Validator, JSON Compare, XML Formatter, Base64 Encoder/Decoder, URL Encoder, Hash Generator (SHA256, SHA1), UUID Generator. No signup required.">
+  <meta property="twitter:image" content="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://happytools.site/devtools.html">
+
+  <title>Free Developer Tools Online — Text Compare, JSON Formatter, XML Validator</title>
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2241812164647663" crossorigin="anonymous"></script>
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Happy Tools - Developer Utilities",
+    "description": "Free online developer tools including text compare, JSON formatter, XML validator, and more",
+    "url": "https://happytools.site/devtools.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "1250"
+    }
+  }
+  </script>
+
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://happytools.site"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Dev Tools",
+      "item": "https://happytools.site/devtools.html"
+    }
+    ]
+  }
+  </script>
+
+  
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary:    #7c6af7;
+    --primary-lt: #ede9ff;
+    --primary-dk: #5b4de0;
+    --accent:     #34d399;
+    --accent-lt:  #d1fae5;
+    --dark:       #1e1b3a;
+    --mid:        #4b4869;
+    --muted:      #8b87a8;
+    --bg:         #f5f4fb;
+    --surface:    #ffffff;
+    --border:     #e5e2f5;
+    --radius-sm:  10px;
+    --radius-md:  16px;
+    --radius-lg:  22px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    line-height: 1.6;
+  }
+  h1, h2, h3, .nav-brand {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .container { max-width: 1120px; margin: auto; padding: 24px 20px; }
+
+  /* ---- NAV ---- */
+  nav {
+    background: var(--dark);
+    padding: 14px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 2px solid var(--primary);
+  }
+  .nav-container { max-width: 1120px; margin: auto; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; }
+  .nav-brand { display: flex; align-items: center; gap: 10px; color: white; font-weight: 700; font-size: 1.05rem; text-decoration: none; letter-spacing: .3px; }
+  .nav-links { list-style: none; display: flex; gap: 8px; }
+  .nav-links a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.83rem;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    transition: all .2s;
+  }
+  .nav-links a:hover { color: white; background: rgba(255,255,255,0.1); }
+  .nav-links a.active { color: white; background: var(--primary); }
+
+  /* ---- HEADER ---- */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    padding: 44px 0 28px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary-lt); }
+  header h1 {
+    font-size: 2.1rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .tagline { font-size: 0.95rem; color: var(--muted); margin-top: 5px; }
+
+  /* ---- FILTERS ---- */
+  .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; align-items: center; }
+  .filters input[type=text] {
+    padding: 10px 18px;
+    border-radius: 28px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    font-size: 0.92rem;
+    font-family: 'DM Sans', sans-serif;
+    width: 240px;
+    outline: none;
+    color: var(--dark);
+    transition: border .2s, box-shadow .2s;
+  }
+  .filters input[type=text]::placeholder { color: var(--muted); }
+  .filters input[type=text]:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-lt); }
+  .filter-group { display: flex; flex-wrap: wrap; gap: 6px; }
+  .filter-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1.5px solid var(--border);
+    background: var(--surface);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.76rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+    color: var(--mid);
+  }
+  .filter-btn:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-lt); }
+  .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+  .stats-bar { font-size: 0.84rem; color: var(--muted); margin-bottom: 18px; }
+  .stats-bar b { color: var(--dark); }
+
+  /* ---- TOOL CARDS ---- */
+  .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(295px, 1fr)); gap: 24px; }
+  .tool-card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 1.5px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    transition: transform .22s, box-shadow .22s, border-color .22s;
+    cursor: pointer;
+  }
+  .tool-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(124,106,247,0.13);
+    border-color: var(--primary);
+  }
+  .tool-card-img { width: 100%; height: 150px; object-fit: cover; display: block; }
+  .tool-card-body { padding: 16px 18px 18px; flex: 1; display: flex; flex-direction: column; gap: 9px; }
+  .tool-meta { display: flex; gap: 6px; flex-wrap: wrap; }
+
+  .badge {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.67rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    white-space: nowrap;
+  }
+  .badge-category { background: var(--primary-lt); color: var(--primary-dk); }
+  .badge-free     { background: #d1fae5; color: #065f46; }
+  .badge-freemium { background: #fef3c7; color: #92400e; }
+  .badge-paid     { background: #fce7f3; color: #9d174d; }
+
+  .tool-card h3 { font-size: 1.05rem; font-weight: 600; line-height: 1.35; color: var(--dark); }
+  .tool-card-desc { color: var(--mid); line-height: 1.58; font-size: 0.88rem; flex-grow: 1; }
+  .tool-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag {
+    font-size: 0.67rem;
+    background: var(--bg);
+    color: var(--muted);
+    padding: 2px 9px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  .btn {
+    display: inline-block;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.84rem;
+    color: var(--primary);
+    text-decoration: none;
+    border: 2px solid var(--primary);
+    padding: 7px 16px;
+    border-radius: 22px;
+    transition: all .2s;
+    text-align: center;
+  }
+  .btn:hover { background: var(--primary); color: white; }
+
+  /* ---- AGENT CARDS ---- */
+  .agents-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 24px; }
+  .agent-card {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: 22px;
+    border: 1.5px solid var(--border);
+    border-left: 4px solid var(--primary);
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    transition: transform .22s, box-shadow .22s;
+  }
+  .agent-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(124,106,247,0.12); }
+  .agent-card h3 { font-size: 1.1rem; font-weight: 600; color: var(--dark); }
+  .agent-card-desc { color: var(--mid); font-size: 0.9rem; line-height: 1.58; flex-grow: 1; }
+  .agent-type   { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.68rem; font-weight: 700; color: var(--primary-dk); background: var(--primary-lt); padding: 3px 11px; border-radius: 12px; }
+  .agent-status { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.68rem; font-weight: 700; color: #065f46; background: #d1fae5; padding: 3px 11px; border-radius: 12px; }
+
+  /* ---- MODAL ---- */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(30,27,58,0.6); z-index: 2000; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(2px); }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--surface); border-radius: var(--radius-lg); max-width: 540px; width: 100%; overflow: hidden; border: 1.5px solid var(--border); }
+  .modal-img { width: 100%; height: 200px; object-fit: cover; display: block; }
+  .modal-body { padding: 24px; }
+  .modal-title { font-size: 1.45rem; font-weight: 700; margin: 10px 0 9px; color: var(--dark); }
+  .modal-desc { color: var(--mid); line-height: 1.65; margin-bottom: 18px; font-size: 0.95rem; }
+  .modal-actions { display: flex; gap: 10px; align-items: center; }
+  .modal-close { margin-left: auto; background: var(--bg); border: 1.5px solid var(--border); border-radius: 50%; width: 34px; height: 34px; font-size: 1rem; cursor: pointer; color: var(--muted); transition: .2s; display: flex; align-items: center; justify-content: center; }
+  .modal-close:hover { background: var(--primary-lt); color: var(--primary); border-color: var(--primary); }
+
+  /* ---- MISC ---- */
+  .no-results { text-align: center; padding: 64px 20px; color: var(--muted); grid-column: 1 / -1; }
+  .no-results h3 { font-size: 1.2rem; margin-bottom: 6px; color: var(--mid); }
+
+  .ad-space {
+    text-align: center;
+    padding: 16px;
+    background: var(--primary-lt);
+    border: 1px dashed var(--primary);
+    border-radius: var(--radius-sm);
+    margin: 20px 0;
+    font-size: 0.82rem;
+    color: var(--primary-dk);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 500;
+  }
+  footer {
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 0.82rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    margin-top: 48px;
+  }
+  footer a { color: var(--primary); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  /* ---- HAMBURGER BUTTON ---- */
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    transition: all .3s;
+  }
+  .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle.open span:nth-child(2) { opacity: 0; }
+  .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 768px) {
+    header { flex-direction: column; gap: 14px; text-align: center; }
+    .filters input[type=text] { width: 100%; }
+    .tools-grid, .agents-grid { grid-template-columns: 1fr; }
+
+    .nav-toggle { display: flex; }
+
+    .nav-links {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--dark);
+      padding: 12px 16px 16px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      z-index: 999;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a {
+      font-size: 0.95rem;
+      padding: 10px 14px;
+      border-radius: 10px;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+    nav { position: sticky; top: 0; }
+    .nav-container { position: relative; }
+  }
+
+  @media (max-width: 480px) {
+    .container { padding: 16px 14px; }
+    header h1 { font-size: 1.6rem; }
+    .tagline { font-size: 0.85rem; }
+    .filter-btn { font-size: 0.72rem; padding: 5px 10px; }
+    .filters input[type=text] { font-size: 0.88rem; }
+    .tool-card h3 { font-size: 0.98rem; }
+    .tool-card-desc { font-size: 0.84rem; }
+    .modal-body { padding: 16px; }
+    .modal-title { font-size: 1.2rem; }
+  }
+</style>
+
+  <style>
+    /* Dev Tools specific styles */
+    .tools-nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      padding: 16px;
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--border);
+    }
+    .tool-nav-btn {
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      color: var(--mid);
+    }
+    .tool-nav-btn:hover { border-color: var(--primary); color: var(--primary); background: var(--primary-lt); }
+    .tool-nav-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+    
+    .tool-section {
+      display: none;
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      border: 1.5px solid var(--border);
+    }
+    .tool-section.active { display: block; }
+    .tool-section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: var(--dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .tool-section p { color: var(--muted); margin-bottom: 20px; font-size: 0.9rem; }
+    
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .input-group label {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--dark);
+    }
+    .code-editor {
+      width: 100%;
+      min-height: 200px;
+      padding: 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: 'Courier New', monospace;
+      font-size: 0.88rem;
+      background: var(--bg);
+      color: var(--dark);
+      resize: vertical;
+      outline: none;
+      transition: border .2s;
+    }
+    .code-editor:focus { border-color: var(--primary); }
+    
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
+    
+    .action-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 16px 0;
+    }
+    .action-btn {
+      padding: 10px 20px;
+      border-radius: 22px;
+      border: 2px solid var(--primary);
+      background: var(--primary);
+      color: white;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .action-btn:hover { background: var(--primary-dk); border-color: var(--primary-dk); }
+    .action-btn.secondary {
+      background: var(--surface);
+      color: var(--primary);
+    }
+    .action-btn.secondary:hover { background: var(--primary-lt); }
+    
+    .result-box {
+      padding: 14px;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: 'Courier New', monospace;
+      font-size: 0.88rem;
+      color: var(--dark);
+      white-space: pre-wrap;
+      word-break: break-all;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .diff-line { padding: 2px 4px; }
+    .diff-add { background: #d1fae5; color: #065f46; }
+    .diff-remove { background: #fee2e2; color: #991b1b; }
+    .diff-same { color: var(--muted); }
+    
+    .error-msg { color: #dc2626; background: #fee2e2; padding: 10px 14px; border-radius: var(--radius-sm); margin-top: 12px; }
+    .success-msg { color: #065f46; background: #d1fae5; padding: 10px 14px; border-radius: var(--radius-sm); margin-top: 12px; }
+  </style>
+</head>
+<body>
+<nav>
+  <div class="nav-container">
+    <a class="nav-brand" href="index.html">
+      <img src="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png" style="width:28px;height:28px;border-radius:50%;flex-shrink:0;" alt="logo">
+      HAPPY TOOLS
+    </a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="nav-links"><li><a href="index.html" class="">AI Tools</a></li><li><a href="agents.html" class="">AI Agents</a></li><li><a href="courses.html" class="">AI Courses</a></li><li><a href="devtools.html" class="active">Dev Tools</a></li><li><a href="about.html" class="">About</a></li></ul>
+  </div>
+</nav>
+<script>
+(function(){
+  var btn   = document.getElementById('nav-toggle');
+  var links = document.getElementById('nav-links');
+  if (!btn) return;
+  btn.addEventListener('click', function(){
+    btn.classList.toggle('open');
+    links.classList.toggle('open');
+  });
+  links.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(){
+      btn.classList.remove('open');
+      links.classList.remove('open');
+    });
+  });
+})();
+</script>
+<div class="container">
+  <header>
+    <img src="https://raw.githubusercontent.com/ukpgeetham/news/main/logo.png" class="logo" alt="Happy Tools">
+    <div>
+      <h1>Developer Tools</h1>
+      <p class="tagline">Free online utilities — compare, format, encode &amp; validate</p>
+    </div>
+  </header>
+
+  <div class="tools-nav">
+    <button class="tool-nav-btn active" onclick="showTool('text-compare')">Text Compare</button>
+    <button class="tool-nav-btn" onclick="showTool('json-formatter')">JSON Formatter</button>
+    <button class="tool-nav-btn" onclick="showTool('json-compare')">JSON Compare</button>
+    <button class="tool-nav-btn" onclick="showTool('xml-formatter')">XML Formatter</button>
+    <button class="tool-nav-btn" onclick="showTool('base64')">Base64 Encode/Decode</button>
+    <button class="tool-nav-btn" onclick="showTool('url-encoder')">URL Encoder</button>
+    <button class="tool-nav-btn" onclick="showTool('hash')">Hash Generator</button>
+    <button class="tool-nav-btn" onclick="showTool('uuid')">UUID Generator</button>
+  </div>
+
+  <!-- TEXT COMPARE -->
+  <div class="tool-section active" id="text-compare">
+    <h2>Text Compare & Diff Checker</h2>
+    <p>Compare two text blocks line by line. Perfect for code review, document comparison, and finding differences.</p>
+    <div class="two-col">
+      <div class="input-group">
+        <label>Text 1</label>
+        <textarea class="code-editor" id="text1" placeholder="Paste first text here..." aria-label="First text input"></textarea>
+      </div>
+      <div class="input-group">
+        <label>Text 2</label>
+        <textarea class="code-editor" id="text2" placeholder="Paste second text here..." aria-label="Second text input"></textarea>
+      </div>
+    </div>
+    <div class="action-bar">
+      <button class="action-btn" onclick="compareText()">Compare</button>
+      <button class="action-btn secondary" onclick="clearFields('text1','text2','text-result')">Clear</button>
+    </div>
+    <div id="text-result"></div>
+  </div>
+
+  <!-- JSON FORMATTER -->
+  <div class="tool-section" id="json-formatter">
+    <h2>JSON Formatter & Validator</h2>
+    <p>Format, validate, and beautify JSON with proper indentation. Minify JSON to single line.</p>
+    <div class="input-group">
+      <label>Input JSON</label>
+      <textarea class="code-editor" id="json-input" placeholder='{"key":"value"}' aria-label="JSON input"></textarea>
+    </div>
+    <div class="action-bar">
+      <button class="action-btn" onclick="formatJSON()">Format & Validate</button>
+      <button class="action-btn secondary" onclick="minifyJSON()">Minify</button>
+      <button class="action-btn secondary" onclick="copyResult('json-output')">Copy</button>
+      <button class="action-btn secondary" onclick="clearFields('json-input','json-output')">Clear</button>
+    </div>
+    <div class="input-group">
+      <label>Formatted JSON</label>
+      <div class="result-box" id="json-output"></div>
+    </div>
+  </div>
+
+  <!-- JSON COMPARE -->
+  <div class="tool-section" id="json-compare">
+    <h2>JSON Compare & Diff</h2>
+    <p>Compare two JSON objects and highlight differences at the key level.</p>
+    <div class="two-col">
+      <div class="input-group">
+        <label>JSON 1</label>
+        <textarea class="code-editor" id="json1" placeholder='{"key":"value"}' aria-label="First JSON input"></textarea>
+      </div>
+      <div class="input-group">
+        <label>JSON 2</label>
+        <textarea class="code-editor" id="json2" placeholder='{"key":"value"}' aria-label="Second JSON input"></textarea>
+      </div>
+    </div>
+    <div class="action-bar">
+      <button class="action-btn" onclick="compareJSON()">Compare JSON</button>
+      <button class="action-btn secondary" onclick="clearFields('json1','json2','json-compare-result')">Clear</button>
+    </div>
+    <div id="json-compare-result"></div>
+  </div>
+
+  <!-- XML FORMATTER -->
+  <div class="tool-section" id="xml-formatter">
+    <h2>XML Formatter & Validator</h2>
+    <p>Format and validate XML with proper indentation and structure.</p>
+    <div class="input-group">
+      <label>Input XML</label>
+      <textarea class="code-editor" id="xml-input" placeholder='<root><item>value</item></root>' aria-label="XML input"></textarea>
+    </div>
+    <div class="action-bar">
+      <button class="action-btn" onclick="formatXML()">Format & Validate</button>
+      <button class="action-btn secondary" onclick="copyResult('xml-output')">Copy</button>
+      <button class="action-btn secondary" onclick="clearFields('xml-input','xml-output')">Clear</button>
+    </div>
+    <div class="input-group">
+      <label>Formatted XML</label>
+      <div class="result-box" id="xml-output"></div>
+    </div>
+  </div>
+
+  <!-- BASE64 -->
+  <div class="tool-section" id="base64">
+    <h2>Base64 Encoder & Decoder</h2>
+    <p>Encode text to Base64 or decode Base64 strings. Supports UTF-8 encoding.</p>
+    <div class="input-group">
+      <label>Input</label>
+      <textarea class="code-editor" id="base64-input" placeholder="Enter text or Base64 string..." aria-label="Base64 input"></textarea>
+    </div>
+    <div class="action-bar">
+      <button class="action-btn" onclick="encodeBase64()">Encode to Base64</button>
+      <button class="action-btn" onclick="decodeBase64()">Decode from Base64</button>
+      <button class="action-btn secondary" onclick="copyResult('base64-output')">Copy</button>
+      <button class="action-btn secondary" onclick="clearFields('base64-input','base64-output')">Clear</button>
+    </div>
+    <div class="input-group">
+      <label>Output</label>
+      <div class="result-box" id="base64-output"></div>
+    </div>
+  </div>
+
+  <!-- URL ENCODER -->
+  <div class="tool-section" id="url-encoder">
+    <h2>URL Encoder & Decoder</h2>
+    <p>Encode or decode URL strings for safe transmission in web applications.</p>
+    <div class="input-group">
+      <label>Input</label>
+      <textarea class="code-editor" id="url-input" placeholder="Enter URL or encoded string..." aria-label="URL input"></textarea>
+    </div>
+    <div class="action-bar">
+      <button class="action-btn" onclick="encodeURL()">Encode URL</button>
+      <button class="action-btn" onclick="decodeURL()">Decode URL</button>
+      <button class="action-btn secondary" onclick="copyResult('url-output')">Copy</button>
+      <button class="action-btn secondary" onclick="clearFields('url-input','url-output')">Clear</button>
+    </div>
+    <div class="input-group">
+      <label>Output</label>
+      <div class="result-box" id="url-output"></div>
+    </div>
+  </div>
+
+  <!-- HASH GENERATOR -->
+  <div class="tool-section" id="hash">
+    <h2>Hash Generator (SHA-256, SHA-1)</h2>
+    <p>Generate cryptographic hashes from text. Client-side processing for security.</p>
+    <div class="input-group">
+      <label>Input Text</label>
+      <textarea class="code-editor" id="hash-input" placeholder="Enter text to hash..." aria-label="Hash input"></textarea>
+    </div>
+    <div class="action-bar">
+      <button class="action-btn" onclick="generateHashes()">Generate Hashes</button>
+      <button class="action-btn secondary" onclick="clearFields('hash-input','hash-output')">Clear</button>
+    </div>
+    <div class="input-group">
+      <label>Generated Hashes</label>
+      <div class="result-box" id="hash-output"></div>
+    </div>
+  </div>
+
+  <!-- UUID GENERATOR -->
+  <div class="tool-section" id="uuid">
+    <h2>UUID Generator (v4)</h2>
+    <p>Generate random UUIDs (Universally Unique Identifiers) for your projects.</p>
+    <div class="action-bar">
+      <button class="action-btn" onclick="generateUUID()">Generate 1 UUID</button>
+      <button class="action-btn" onclick="generateMultipleUUIDs()">Generate 10 UUIDs</button>
+      <button class="action-btn secondary" onclick="copyResult('uuid-output')">Copy</button>
+      <button class="action-btn secondary" onclick="clearFields('uuid-output')">Clear</button>
+    </div>
+    <div class="input-group">
+      <label>Generated UUIDs</label>
+      <div class="result-box" id="uuid-output"></div>
+    </div>
+  </div>
+
+  <footer><p>&copy; 2026 Happy Tools &nbsp;|&nbsp; <a href="about.html">About</a> &nbsp;|&nbsp; <a href="privacy.html">Privacy</a></p><p>Updated: April 14, 2026 at 11:56 AM</p></footer>
+</div>
+
+<script>
+// Navigation
+function showTool(toolId) {
+  document.querySelectorAll('.tool-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tool-nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(toolId).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// Utilities
+function clearFields(...ids) {
+  ids.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '' || (el.innerHTML = '');
+  });
+}
+
+function copyResult(id) {
+  const el = document.getElementById(id);
+  const text = el.textContent || el.value;
+  navigator.clipboard.writeText(text).then(() => {
+    showMessage(id, 'Copied to clipboard!', 'success');
+  });
+}
+
+function showMessage(afterId, msg, type) {
+  const existing = document.querySelector('.error-msg, .success-msg');
+  if (existing) existing.remove();
+  const div = document.createElement('div');
+  div.className = type === 'error' ? 'error-msg' : 'success-msg';
+  div.textContent = msg;
+  document.getElementById(afterId).parentNode.appendChild(div);
+  setTimeout(() => div.remove(), 3000);
+}
+
+// TEXT COMPARE
+function compareText() {
+  const t1 = document.getElementById('text1').value.split('\n');
+  const t2 = document.getElementById('text2').value.split('\n');
+  const maxLen = Math.max(t1.length, t2.length);
+  let html = '<div class="result-box">';
+  for (let i = 0; i < maxLen; i++) {
+    const line1 = t1[i] || '';
+    const line2 = t2[i] || '';
+    if (line1 === line2) {
+      html += `<div class="diff-line diff-same">${escapeHtml(line1) || '(empty)'}</div>`;
+    } else {
+      if (line1) html += `<div class="diff-line diff-remove">- ${escapeHtml(line1)}</div>`;
+      if (line2) html += `<div class="diff-line diff-add">+ ${escapeHtml(line2)}</div>`;
+    }
+  }
+  html += '</div>';
+  document.getElementById('text-result').innerHTML = html;
+}
+
+// JSON FORMATTER
+function formatJSON() {
+  try {
+    const input = document.getElementById('json-input').value;
+    const parsed = JSON.parse(input);
+    document.getElementById('json-output').textContent = JSON.stringify(parsed, null, 2);
+  } catch (e) {
+    showMessage('json-output', 'Invalid JSON: ' + e.message, 'error');
+  }
+}
+
+function minifyJSON() {
+  try {
+    const input = document.getElementById('json-input').value;
+    const parsed = JSON.parse(input);
+    document.getElementById('json-output').textContent = JSON.stringify(parsed);
+  } catch (e) {
+    showMessage('json-output', 'Invalid JSON: ' + e.message, 'error');
+  }
+}
+
+// JSON COMPARE
+function compareJSON() {
+  try {
+    const j1 = JSON.parse(document.getElementById('json1').value);
+    const j2 = JSON.parse(document.getElementById('json2').value);
+    const diff = jsonDiff(j1, j2);
+    document.getElementById('json-compare-result').innerHTML = 
+      '<div class="result-box">' + diff + '</div>';
+  } catch (e) {
+    showMessage('json-compare-result', 'Invalid JSON: ' + e.message, 'error');
+  }
+}
+
+function jsonDiff(obj1, obj2, path = '') {
+  let result = '';
+  const keys = new Set([...Object.keys(obj1 || {}), ...Object.keys(obj2 || {})]);
+  keys.forEach(key => {
+    const p = path ? `${path}.${key}` : key;
+    const v1 = obj1?.[key];
+    const v2 = obj2?.[key];
+    if (JSON.stringify(v1) !== JSON.stringify(v2)) {
+      result += `<div class="diff-line diff-remove">- ${p}: ${JSON.stringify(v1)}</div>`;
+      result += `<div class="diff-line diff-add">+ ${p}: ${JSON.stringify(v2)}</div>`;
+    }
+  });
+  return result || '<div class="success-msg">JSON objects are identical!</div>';
+}
+
+// XML FORMATTER
+function formatXML() {
+  try {
+    const input = document.getElementById('xml-input').value;
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(input, 'text/xml');
+    const error = xml.querySelector('parsererror');
+    if (error) throw new Error('Invalid XML');
+    const formatted = new XMLSerializer().serializeToString(xml);
+    document.getElementById('xml-output').textContent = formatXMLString(formatted);
+  } catch (e) {
+    showMessage('xml-output', 'Invalid XML: ' + e.message, 'error');
+  }
+}
+
+function formatXMLString(xml) {
+  let formatted = '';
+  let indent = 0;
+  xml.split(/>\s*</).forEach(node => {
+    if (node.match(/^\/\w/)) indent--;
+    formatted += '  '.repeat(indent) + '<' + node + '>\n';
+    if (node.match(/^<?\w[^>]*[^\/]$/)) indent++;
+  });
+  return formatted.substring(1, formatted.length - 2);
+}
+
+// BASE64
+function encodeBase64() {
+  const input = document.getElementById('base64-input').value;
+  document.getElementById('base64-output').textContent = btoa(unescape(encodeURIComponent(input)));
+}
+
+function decodeBase64() {
+  try {
+    const input = document.getElementById('base64-input').value;
+    document.getElementById('base64-output').textContent = decodeURIComponent(escape(atob(input)));
+  } catch (e) {
+    showMessage('base64-output', 'Invalid Base64 string', 'error');
+  }
+}
+
+// URL ENCODER
+function encodeURL() {
+  const input = document.getElementById('url-input').value;
+  document.getElementById('url-output').textContent = encodeURIComponent(input);
+}
+
+function decodeURL() {
+  try {
+    const input = document.getElementById('url-input').value;
+    document.getElementById('url-output').textContent = decodeURIComponent(input);
+  } catch (e) {
+    showMessage('url-output', 'Invalid URL encoding', 'error');
+  }
+}
+
+// HASH GENERATOR
+async function generateHashes() {
+  const input = document.getElementById('hash-input').value;
+  if (!input) return;
+  const encoder = new TextEncoder();
+  const data = encoder.encode(input);
+  
+  try {
+    const sha256 = await crypto.subtle.digest('SHA-256', data);
+    const sha1 = await crypto.subtle.digest('SHA-1', data);
+    
+    const output = `SHA-256: ${arrayToHex(sha256)}\n\nSHA-1: ${arrayToHex(sha1)}\n\nMD5: (not available in browser - use server-side)`;
+    document.getElementById('hash-output').textContent = output;
+  } catch (e) {
+    showMessage('hash-output', 'Error generating hashes', 'error');
+  }
+}
+
+function arrayToHex(buffer) {
+  return Array.from(new Uint8Array(buffer))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+// UUID GENERATOR
+function generateUUID() {
+  const uuid = crypto.randomUUID();
+  document.getElementById('uuid-output').textContent = uuid;
+}
+
+function generateMultipleUUIDs() {
+  const uuids = Array.from({length: 10}, () => crypto.randomUUID()).join('\n');
+  document.getElementById('uuid-output').textContent = uuids;
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+</script>
+</body>
+</html>
