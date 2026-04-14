@@ -539,7 +539,7 @@ ADSENSE_CODE = f"""<script async src="https://pagead2.googlesyndication.com/page
 
 
 def nav_html(active: str = "") -> str:
-    pages = [("tools","index.html","AI Tools"), ("agents","agents.html","AI Agents"), ("courses","courses.html","AI Courses"), ("about","about.html","About")]
+    pages = [("tools","index.html","AI Tools"), ("agents","agents.html","AI Agents"), ("courses","courses.html","AI Courses"), ("devtools","devtools.html","Dev Tools"), ("about","about.html","About")]
     items = "".join(f'<li><a href="{h}" class="{"active" if k==active else ""}">{l}</a></li>' for k,h,l in pages)
     return f"""<nav>
   <div class="nav-container">
@@ -590,6 +590,8 @@ def _safe_json(data) -> str:
 
 
 def generate_index_html(tools: List[Dict]) -> str:
+    from seo import get_seo_meta, get_structured_data_website, AI_TOOLS_KEYWORDS
+    
     categories  = sorted(set(t.get("category", "Other") for t in tools))
     tools_json  = _safe_json(tools)
     total       = len(tools)
@@ -599,15 +601,24 @@ def generate_index_html(tools: List[Dict]) -> str:
         safe = c.replace("'", "\\'")
         cat_btns += f'<button class="filter-btn" onclick="setCategory(this,\'{safe}\')">{c}</button>'
 
+    seo_meta = get_seo_meta(
+        page_type="website",
+        title="Happy Tools — Best AI Tools Directory 2026 | ChatGPT, Claude, Midjourney & More",
+        description="Discover 50+ best AI tools for 2026. Curated directory of ChatGPT, Claude, Midjourney, DALL-E, GitHub Copilot, and more. Live-updated daily with free and paid AI software.",
+        keywords=AI_TOOLS_KEYWORDS,
+        canonical=SITE_URL
+    )
+
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Discover the best AI tools — curated and live-updated daily.">
-  <title>Happy Tools — AI Tools Directory</title>
+  {seo_meta}
+  <title>Happy Tools — Best AI Tools Directory 2026</title>
   <link rel="icon" type="image/png" href="{LOGO_URL}">
   {ADSENSE_CODE}
+  {get_structured_data_website()}
   {STYLE}
 </head>
 <body>
@@ -1300,6 +1311,549 @@ def generate_courses_html() -> str:
 </html>"""
 
 
+def generate_devtools_html() -> str:
+    """Generate Dev Tools page with comprehensive SEO"""
+    from seo import get_seo_meta, get_structured_data_software, get_structured_data_breadcrumb, DEVTOOLS_KEYWORDS
+    
+    seo_meta = get_seo_meta(
+        page_type="website",
+        title="Free Developer Tools Online — Text Compare, JSON Formatter, XML Validator | Happy Tools",
+        description="Free online developer tools: Text Compare & Diff Checker, JSON Formatter & Validator, JSON Compare, XML Formatter, Base64 Encoder/Decoder, URL Encoder, Hash Generator (SHA256, SHA1), UUID Generator. No signup required.",
+        keywords=DEVTOOLS_KEYWORDS,
+        canonical=f"{SITE_URL}/devtools.html"
+    )
+    
+    breadcrumb = get_structured_data_breadcrumb([
+        ("Home", SITE_URL),
+        ("Dev Tools", f"{SITE_URL}/devtools.html")
+    ])
+    
+    structured_data = get_structured_data_software(
+        name="Happy Tools - Developer Utilities",
+        description="Free online developer tools including text compare, JSON formatter, XML validator, and more",
+        url=f"{SITE_URL}/devtools.html"
+    )
+    
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {seo_meta}
+  <title>Free Developer Tools Online — Text Compare, JSON Formatter, XML Validator</title>
+  <link rel="icon" type="image/png" href="{LOGO_URL}">
+  {ADSENSE_CODE}
+  {structured_data}
+  {breadcrumb}
+  {STYLE}
+  <style>
+    /* Dev Tools specific styles */
+    .tools-nav {{
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+      padding: 16px;
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--border);
+    }}
+    .tool-nav-btn {{
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      color: var(--mid);
+    }}
+    .tool-nav-btn:hover {{ border-color: var(--primary); color: var(--primary); background: var(--primary-lt); }}
+    .tool-nav-btn.active {{ background: var(--primary); color: white; border-color: var(--primary); }}
+    
+    .tool-section {{
+      display: none;
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      border: 1.5px solid var(--border);
+    }}
+    .tool-section.active {{ display: block; }}
+    .tool-section h2 {{
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+      color: var(--dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }}
+    .tool-section p {{ color: var(--muted); margin-bottom: 20px; font-size: 0.9rem; }}
+    
+    .input-group {{
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 16px;
+    }}
+    .input-group label {{
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: var(--dark);
+    }}
+    .code-editor {{
+      width: 100%;
+      min-height: 200px;
+      padding: 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: 'Courier New', monospace;
+      font-size: 0.88rem;
+      background: var(--bg);
+      color: var(--dark);
+      resize: vertical;
+      outline: none;
+      transition: border .2s;
+    }}
+    .code-editor:focus {{ border-color: var(--primary); }}
+    
+    .two-col {{ display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }}
+    @media (max-width: 768px) {{ .two-col {{ grid-template-columns: 1fr; }} }}
+    
+    .action-bar {{
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 16px 0;
+    }}
+    .action-btn {{
+      padding: 10px 20px;
+      border-radius: 22px;
+      border: 2px solid var(--primary);
+      background: var(--primary);
+      color: white;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all .2s;
+    }}
+    .action-btn:hover {{ background: var(--primary-dk); border-color: var(--primary-dk); }}
+    .action-btn.secondary {{
+      background: var(--surface);
+      color: var(--primary);
+    }}
+    .action-btn.secondary:hover {{ background: var(--primary-lt); }}
+    
+    .result-box {{
+      padding: 14px;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: 'Courier New', monospace;
+      font-size: 0.88rem;
+      color: var(--dark);
+      white-space: pre-wrap;
+      word-break: break-all;
+      max-height: 400px;
+      overflow-y: auto;
+    }}
+    .diff-line {{ padding: 2px 4px; }}
+    .diff-add {{ background: #d1fae5; color: #065f46; }}
+    .diff-remove {{ background: #fee2e2; color: #991b1b; }}
+    .diff-same {{ color: var(--muted); }}
+    
+    .error-msg {{ color: #dc2626; background: #fee2e2; padding: 10px 14px; border-radius: var(--radius-sm); margin-top: 12px; }}
+    .success-msg {{ color: #065f46; background: #d1fae5; padding: 10px 14px; border-radius: var(--radius-sm); margin-top: 12px; }}
+  </style>
+</head>
+<body>
+{nav_html("devtools")}
+<div class="container">
+  <header>
+    <img src="{LOGO_URL}" class="logo" alt="Happy Tools">
+    <div>
+      <h1>Developer Tools</h1>
+      <p class="tagline">Free online utilities — compare, format, encode &amp; validate</p>
+    </div>
+  </header>
+
+  <div class="ad-space">ADVERTISEMENT</div>
+
+  <div class="tools-nav">
+    <button class="tool-nav-btn active" onclick="showTool('text-compare')">Text Compare</button>
+    <button class="tool-nav-btn" onclick="showTool('json-formatter')">JSON Formatter</button>
+    <button class="tool-nav-btn" onclick="showTool('json-compare')">JSON Compare</button>
+    <button class="tool-nav-btn" onclick="showTool('xml-formatter')">XML Formatter</button>
+    <button class="tool-nav-btn" onclick="showTool('base64')">Base64 Encode/Decode</button>
+    <button class="tool-nav-btn" onclick="showTool('url-encoder')">URL Encoder</button>
+    <button class="tool-nav-btn" onclick="showTool('hash')">Hash Generator</button>
+    <button class="tool-nav-btn" onclick="showTool('uuid')">UUID Generator</button>
+  </div>
+
+  <!-- TEXT COMPARE -->
+  <div class="tool-section active" id="text-compare">
+    <h2>Text Compare & Diff Checker</h2>
+    <p>Compare two text blocks line by line. Perfect for code review, document comparison, and finding differences.</p>
+    <div class="two-col">
+      <div class="input-group">
+        <label>Text 1</label>
+        <textarea class="code-editor" id="text1" placeholder="Paste first text here..." aria-label="First text input"></textarea>
+      </div>
+      <div class="input-group">
+        <label>Text 2</label>
+        <textarea class="code-editor" id="text2" placeholder="Paste second text here..." aria-label="Second text input"></textarea>
+      </div>
+    </div>
+    <div class="action-bar">
+      <button class="action-btn" onclick="compareText()">Compare</button>
+      <button class="action-btn secondary" onclick="clearFields('text1','text2','text-result')">Clear</button>
+    </div>
+    <div id="text-result"></div>
+  </div>
+
+  <!-- JSON FORMATTER -->
+  <div class="tool-section" id="json-formatter">
+    <h2>JSON Formatter & Validator</h2>
+    <p>Format, validate, and beautify JSON with proper indentation. Minify JSON to single line.</p>
+    <div class="input-group">
+      <label>Input JSON</label>
+      <textarea class="code-editor" id="json-input" placeholder='{{"key":"value"}}' aria-label="JSON input"></textarea>
+    </div>
+    <div class="action-bar">
+      <button class="action-btn" onclick="formatJSON()">Format & Validate</button>
+      <button class="action-btn secondary" onclick="minifyJSON()">Minify</button>
+      <button class="action-btn secondary" onclick="copyResult('json-output')">Copy</button>
+      <button class="action-btn secondary" onclick="clearFields('json-input','json-output')">Clear</button>
+    </div>
+    <div class="input-group">
+      <label>Formatted JSON</label>
+      <div class="result-box" id="json-output"></div>
+    </div>
+  </div>
+
+  <!-- JSON COMPARE -->
+  <div class="tool-section" id="json-compare">
+    <h2>JSON Compare & Diff</h2>
+    <p>Compare two JSON objects and highlight differences at the key level.</p>
+    <div class="two-col">
+      <div class="input-group">
+        <label>JSON 1</label>
+        <textarea class="code-editor" id="json1" placeholder='{{"key":"value"}}' aria-label="First JSON input"></textarea>
+      </div>
+      <div class="input-group">
+        <label>JSON 2</label>
+        <textarea class="code-editor" id="json2" placeholder='{{"key":"value"}}' aria-label="Second JSON input"></textarea>
+      </div>
+    </div>
+    <div class="action-bar">
+      <button class="action-btn" onclick="compareJSON()">Compare JSON</button>
+      <button class="action-btn secondary" onclick="clearFields('json1','json2','json-compare-result')">Clear</button>
+    </div>
+    <div id="json-compare-result"></div>
+  </div>
+
+  <!-- XML FORMATTER -->
+  <div class="tool-section" id="xml-formatter">
+    <h2>XML Formatter & Validator</h2>
+    <p>Format and validate XML with proper indentation and structure.</p>
+    <div class="input-group">
+      <label>Input XML</label>
+      <textarea class="code-editor" id="xml-input" placeholder='<root><item>value</item></root>' aria-label="XML input"></textarea>
+    </div>
+    <div class="action-bar">
+      <button class="action-btn" onclick="formatXML()">Format & Validate</button>
+      <button class="action-btn secondary" onclick="copyResult('xml-output')">Copy</button>
+      <button class="action-btn secondary" onclick="clearFields('xml-input','xml-output')">Clear</button>
+    </div>
+    <div class="input-group">
+      <label>Formatted XML</label>
+      <div class="result-box" id="xml-output"></div>
+    </div>
+  </div>
+
+  <!-- BASE64 -->
+  <div class="tool-section" id="base64">
+    <h2>Base64 Encoder & Decoder</h2>
+    <p>Encode text to Base64 or decode Base64 strings. Supports UTF-8 encoding.</p>
+    <div class="input-group">
+      <label>Input</label>
+      <textarea class="code-editor" id="base64-input" placeholder="Enter text or Base64 string..." aria-label="Base64 input"></textarea>
+    </div>
+    <div class="action-bar">
+      <button class="action-btn" onclick="encodeBase64()">Encode to Base64</button>
+      <button class="action-btn" onclick="decodeBase64()">Decode from Base64</button>
+      <button class="action-btn secondary" onclick="copyResult('base64-output')">Copy</button>
+      <button class="action-btn secondary" onclick="clearFields('base64-input','base64-output')">Clear</button>
+    </div>
+    <div class="input-group">
+      <label>Output</label>
+      <div class="result-box" id="base64-output"></div>
+    </div>
+  </div>
+
+  <!-- URL ENCODER -->
+  <div class="tool-section" id="url-encoder">
+    <h2>URL Encoder & Decoder</h2>
+    <p>Encode or decode URL strings for safe transmission in web applications.</p>
+    <div class="input-group">
+      <label>Input</label>
+      <textarea class="code-editor" id="url-input" placeholder="Enter URL or encoded string..." aria-label="URL input"></textarea>
+    </div>
+    <div class="action-bar">
+      <button class="action-btn" onclick="encodeURL()">Encode URL</button>
+      <button class="action-btn" onclick="decodeURL()">Decode URL</button>
+      <button class="action-btn secondary" onclick="copyResult('url-output')">Copy</button>
+      <button class="action-btn secondary" onclick="clearFields('url-input','url-output')">Clear</button>
+    </div>
+    <div class="input-group">
+      <label>Output</label>
+      <div class="result-box" id="url-output"></div>
+    </div>
+  </div>
+
+  <!-- HASH GENERATOR -->
+  <div class="tool-section" id="hash">
+    <h2>Hash Generator (SHA-256, SHA-1)</h2>
+    <p>Generate cryptographic hashes from text. Client-side processing for security.</p>
+    <div class="input-group">
+      <label>Input Text</label>
+      <textarea class="code-editor" id="hash-input" placeholder="Enter text to hash..." aria-label="Hash input"></textarea>
+    </div>
+    <div class="action-bar">
+      <button class="action-btn" onclick="generateHashes()">Generate Hashes</button>
+      <button class="action-btn secondary" onclick="clearFields('hash-input','hash-output')">Clear</button>
+    </div>
+    <div class="input-group">
+      <label>Generated Hashes</label>
+      <div class="result-box" id="hash-output"></div>
+    </div>
+  </div>
+
+  <!-- UUID GENERATOR -->
+  <div class="tool-section" id="uuid">
+    <h2>UUID Generator (v4)</h2>
+    <p>Generate random UUIDs (Universally Unique Identifiers) for your projects.</p>
+    <div class="action-bar">
+      <button class="action-btn" onclick="generateUUID()">Generate 1 UUID</button>
+      <button class="action-btn" onclick="generateMultipleUUIDs()">Generate 10 UUIDs</button>
+      <button class="action-btn secondary" onclick="copyResult('uuid-output')">Copy</button>
+      <button class="action-btn secondary" onclick="clearFields('uuid-output')">Clear</button>
+    </div>
+    <div class="input-group">
+      <label>Generated UUIDs</label>
+      <div class="result-box" id="uuid-output"></div>
+    </div>
+  </div>
+
+  {footer_html()}
+</div>
+
+<script>
+// Navigation
+function showTool(toolId) {{
+  document.querySelectorAll('.tool-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tool-nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(toolId).classList.add('active');
+  event.target.classList.add('active');
+}}
+
+// Utilities
+function clearFields(...ids) {{
+  ids.forEach(id => {{
+    const el = document.getElementById(id);
+    if (el) el.value = '' || (el.innerHTML = '');
+  }});
+}}
+
+function copyResult(id) {{
+  const el = document.getElementById(id);
+  const text = el.textContent || el.value;
+  navigator.clipboard.writeText(text).then(() => {{
+    showMessage(id, 'Copied to clipboard!', 'success');
+  }});
+}}
+
+function showMessage(afterId, msg, type) {{
+  const existing = document.querySelector('.error-msg, .success-msg');
+  if (existing) existing.remove();
+  const div = document.createElement('div');
+  div.className = type === 'error' ? 'error-msg' : 'success-msg';
+  div.textContent = msg;
+  document.getElementById(afterId).parentNode.appendChild(div);
+  setTimeout(() => div.remove(), 3000);
+}}
+
+// TEXT COMPARE
+function compareText() {{
+  const t1 = document.getElementById('text1').value.split('\\n');
+  const t2 = document.getElementById('text2').value.split('\\n');
+  const maxLen = Math.max(t1.length, t2.length);
+  let html = '<div class="result-box">';
+  for (let i = 0; i < maxLen; i++) {{
+    const line1 = t1[i] || '';
+    const line2 = t2[i] || '';
+    if (line1 === line2) {{
+      html += `<div class="diff-line diff-same">${{escapeHtml(line1) || '(empty)'}}</div>`;
+    }} else {{
+      if (line1) html += `<div class="diff-line diff-remove">- ${{escapeHtml(line1)}}</div>`;
+      if (line2) html += `<div class="diff-line diff-add">+ ${{escapeHtml(line2)}}</div>`;
+    }}
+  }}
+  html += '</div>';
+  document.getElementById('text-result').innerHTML = html;
+}}
+
+// JSON FORMATTER
+function formatJSON() {{
+  try {{
+    const input = document.getElementById('json-input').value;
+    const parsed = JSON.parse(input);
+    document.getElementById('json-output').textContent = JSON.stringify(parsed, null, 2);
+  }} catch (e) {{
+    showMessage('json-output', 'Invalid JSON: ' + e.message, 'error');
+  }}
+}}
+
+function minifyJSON() {{
+  try {{
+    const input = document.getElementById('json-input').value;
+    const parsed = JSON.parse(input);
+    document.getElementById('json-output').textContent = JSON.stringify(parsed);
+  }} catch (e) {{
+    showMessage('json-output', 'Invalid JSON: ' + e.message, 'error');
+  }}
+}}
+
+// JSON COMPARE
+function compareJSON() {{
+  try {{
+    const j1 = JSON.parse(document.getElementById('json1').value);
+    const j2 = JSON.parse(document.getElementById('json2').value);
+    const diff = jsonDiff(j1, j2);
+    document.getElementById('json-compare-result').innerHTML = 
+      '<div class="result-box">' + diff + '</div>';
+  }} catch (e) {{
+    showMessage('json-compare-result', 'Invalid JSON: ' + e.message, 'error');
+  }}
+}}
+
+function jsonDiff(obj1, obj2, path = '') {{
+  let result = '';
+  const keys = new Set([...Object.keys(obj1 || {{}}), ...Object.keys(obj2 || {{}})]);
+  keys.forEach(key => {{
+    const p = path ? `${{path}}.${{key}}` : key;
+    const v1 = obj1?.[key];
+    const v2 = obj2?.[key];
+    if (JSON.stringify(v1) !== JSON.stringify(v2)) {{
+      result += `<div class="diff-line diff-remove">- ${{p}}: ${{JSON.stringify(v1)}}</div>`;
+      result += `<div class="diff-line diff-add">+ ${{p}}: ${{JSON.stringify(v2)}}</div>`;
+    }}
+  }});
+  return result || '<div class="success-msg">JSON objects are identical!</div>';
+}}
+
+// XML FORMATTER
+function formatXML() {{
+  try {{
+    const input = document.getElementById('xml-input').value;
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(input, 'text/xml');
+    const error = xml.querySelector('parsererror');
+    if (error) throw new Error('Invalid XML');
+    const formatted = new XMLSerializer().serializeToString(xml);
+    document.getElementById('xml-output').textContent = formatXMLString(formatted);
+  }} catch (e) {{
+    showMessage('xml-output', 'Invalid XML: ' + e.message, 'error');
+  }}
+}}
+
+function formatXMLString(xml) {{
+  let formatted = '';
+  let indent = 0;
+  xml.split(/>\s*</).forEach(node => {{
+    if (node.match(/^\\/\\w/)) indent--;
+    formatted += '  '.repeat(indent) + '<' + node + '>\\n';
+    if (node.match(/^<?\w[^>]*[^\\/]$/)) indent++;
+  }});
+  return formatted.substring(1, formatted.length - 2);
+}}
+
+// BASE64
+function encodeBase64() {{
+  const input = document.getElementById('base64-input').value;
+  document.getElementById('base64-output').textContent = btoa(unescape(encodeURIComponent(input)));
+}}
+
+function decodeBase64() {{
+  try {{
+    const input = document.getElementById('base64-input').value;
+    document.getElementById('base64-output').textContent = decodeURIComponent(escape(atob(input)));
+  }} catch (e) {{
+    showMessage('base64-output', 'Invalid Base64 string', 'error');
+  }}
+}}
+
+// URL ENCODER
+function encodeURL() {{
+  const input = document.getElementById('url-input').value;
+  document.getElementById('url-output').textContent = encodeURIComponent(input);
+}}
+
+function decodeURL() {{
+  try {{
+    const input = document.getElementById('url-input').value;
+    document.getElementById('url-output').textContent = decodeURIComponent(input);
+  }} catch (e) {{
+    showMessage('url-output', 'Invalid URL encoding', 'error');
+  }}
+}}
+
+// HASH GENERATOR
+async function generateHashes() {{
+  const input = document.getElementById('hash-input').value;
+  if (!input) return;
+  const encoder = new TextEncoder();
+  const data = encoder.encode(input);
+  
+  try {{
+    const sha256 = await crypto.subtle.digest('SHA-256', data);
+    const sha1 = await crypto.subtle.digest('SHA-1', data);
+    
+    const output = `SHA-256: ${{arrayToHex(sha256)}}\\n\\nSHA-1: ${{arrayToHex(sha1)}}\\n\\nMD5: (not available in browser - use server-side)`;
+    document.getElementById('hash-output').textContent = output;
+  }} catch (e) {{
+    showMessage('hash-output', 'Error generating hashes', 'error');
+  }}
+}}
+
+function arrayToHex(buffer) {{
+  return Array.from(new Uint8Array(buffer))
+    .map(b => b.toString(16).padStart(2, '0'))
+    .join('');
+}}
+
+// UUID GENERATOR
+function generateUUID() {{
+  const uuid = crypto.randomUUID();
+  document.getElementById('uuid-output').textContent = uuid;
+}}
+
+function generateMultipleUUIDs() {{
+  const uuids = Array.from({{length: 10}}, () => crypto.randomUUID()).join('\\n');
+  document.getElementById('uuid-output').textContent = uuids;
+}}
+
+function escapeHtml(text) {{
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}}
+</script>
+</body>
+</html>"""
+
+
 def generate_about_html() -> str:
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -1348,7 +1902,7 @@ def generate_privacy_html() -> str:
 
 
 def generate_sitemap() -> str:
-    pages = ["", "agents.html", "courses.html", "about.html", "privacy.html", "scaniq-privacy.html"]
+    pages = ["", "agents.html", "courses.html", "devtools.html", "about.html", "privacy.html", "scaniq-privacy.html"]
     urls  = "\n".join(f"  <url><loc>{SITE_URL}/{p}</loc><changefreq>weekly</changefreq></url>" for p in pages)
     return f"""<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}\n</urlset>"""
 
