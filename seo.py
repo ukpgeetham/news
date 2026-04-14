@@ -134,6 +134,11 @@ DEVTOOLS_KEYWORDS = [
     "URL encoder", "URL decoder", "encode URL online",
     "hash generator", "SHA256 generator", "SHA1 generator",
     "UUID generator", "GUID generator", "generate UUID online",
+    "JWT decoder", "JWT token decoder", "decode JWT online", "JWT validator",
+    "regex tester", "regular expression tester", "regex matcher", "test regex online",
+    "markdown preview", "markdown to HTML", "markdown editor", "markdown renderer",
+    "color converter", "HEX to RGB", "RGB to HSL", "color picker", "color code converter",
+    "timestamp converter", "unix timestamp", "epoch converter", "timestamp to date",
     "developer tools", "dev tools online", "free developer tools",
     "online text tools", "web developer utilities"
 ]

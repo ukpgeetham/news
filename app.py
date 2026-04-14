@@ -295,21 +295,21 @@ STYLE = """
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 22px;
-    padding: 44px 0 28px;
-    margin-bottom: 32px;
+    gap: 16px;
+    padding: 24px 0 18px;
+    margin-bottom: 24px;
     border-bottom: 1px solid var(--border);
   }
-  .logo { width: 76px; height: 76px; border-radius: 50%; object-fit: cover; border: 3px solid var(--primary-lt); }
+  .logo { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid var(--primary-lt); }
   header h1 {
-    font-size: 2.1rem;
+    font-size: 1.6rem;
     font-weight: 700;
     background: linear-gradient(135deg, var(--primary), var(--accent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  .tagline { font-size: 0.95rem; color: var(--muted); margin-top: 5px; }
+  .tagline { font-size: 0.88rem; color: var(--muted); margin-top: 3px; }
 
   /* ---- FILTERS ---- */
   .filters { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; align-items: center; }
@@ -490,7 +490,7 @@ STYLE = """
 
   /* ---- RESPONSIVE ---- */
   @media (max-width: 768px) {
-    header { flex-direction: column; gap: 14px; text-align: center; }
+    header { flex-direction: column; gap: 10px; text-align: center; padding: 18px 0 14px; }
     .filters input[type=text] { width: 100%; }
     .tools-grid, .agents-grid { grid-template-columns: 1fr; }
 
@@ -1317,8 +1317,8 @@ def generate_devtools_html() -> str:
     
     seo_meta = get_seo_meta(
         page_type="website",
-        title="Free Developer Tools Online — Text Compare, JSON Formatter, XML Validator | Happy Tools",
-        description="Free online developer tools: Text Compare & Diff Checker, JSON Formatter & Validator, JSON Compare, XML Formatter, Base64 Encoder/Decoder, URL Encoder, Hash Generator (SHA256, SHA1), UUID Generator. No signup required.",
+        title="Free Developer Tools Online — Text Compare, JSON Formatter, JWT Decoder & More | Happy Tools",
+        description="Free online developer tools: Text Compare, JSON Formatter & Validator, XML Formatter, Base64 Encoder, URL Encoder, Hash Generator, UUID Generator, JWT Decoder, Regex Tester, Markdown Preview, Color Converter, Timestamp Converter. No signup required.",
         keywords=DEVTOOLS_KEYWORDS,
         canonical=f"{SITE_URL}/devtools.html"
     )
@@ -1485,10 +1485,15 @@ def generate_devtools_html() -> str:
     <button class="tool-nav-btn" onclick="showTool('json-formatter')">JSON Formatter</button>
     <button class="tool-nav-btn" onclick="showTool('json-compare')">JSON Compare</button>
     <button class="tool-nav-btn" onclick="showTool('xml-formatter')">XML Formatter</button>
-    <button class="tool-nav-btn" onclick="showTool('base64')">Base64 Encode/Decode</button>
+    <button class="tool-nav-btn" onclick="showTool('base64')">Base64</button>
     <button class="tool-nav-btn" onclick="showTool('url-encoder')">URL Encoder</button>
     <button class="tool-nav-btn" onclick="showTool('hash')">Hash Generator</button>
     <button class="tool-nav-btn" onclick="showTool('uuid')">UUID Generator</button>
+    <button class="tool-nav-btn" onclick="showTool('jwt-decoder')">JWT Decoder</button>
+    <button class="tool-nav-btn" onclick="showTool('regex-tester')">Regex Tester</button>
+    <button class="tool-nav-btn" onclick="showTool('markdown-preview')">Markdown Preview</button>
+    <button class="tool-nav-btn" onclick="showTool('color-converter')">Color Converter</button>
+    <button class="tool-nav-btn" onclick="showTool('timestamp-converter')">Timestamp</button>
   </div>
 
   <!-- TEXT COMPARE -->
@@ -1518,7 +1523,7 @@ def generate_devtools_html() -> str:
     <p>Format, validate, and beautify JSON with proper indentation. Minify JSON to single line.</p>
     <div class="input-group">
       <label>Input JSON</label>
-      <textarea class="code-editor" id="json-input" placeholder='{{"key":"value"}}' aria-label="JSON input"></textarea>
+      <textarea class="code-editor" id="json-input" placeholder='{{"key":"value"}}' aria-label="JSON input" oninput="clearError('json-output')"></textarea>
     </div>
     <div class="action-bar">
       <button class="action-btn" onclick="formatJSON()">Format & Validate</button>
@@ -1539,11 +1544,11 @@ def generate_devtools_html() -> str:
     <div class="two-col">
       <div class="input-group">
         <label>JSON 1</label>
-        <textarea class="code-editor" id="json1" placeholder='{{"key":"value"}}' aria-label="First JSON input"></textarea>
+        <textarea class="code-editor" id="json1" placeholder='{{"key":"value"}}' aria-label="First JSON input" oninput="clearError('json-compare-result')"></textarea>
       </div>
       <div class="input-group">
         <label>JSON 2</label>
-        <textarea class="code-editor" id="json2" placeholder='{{"key":"value"}}' aria-label="Second JSON input"></textarea>
+        <textarea class="code-editor" id="json2" placeholder='{{"key":"value"}}' aria-label="Second JSON input" oninput="clearError('json-compare-result')"></textarea>
       </div>
     </div>
     <div class="action-bar">
@@ -1646,6 +1651,128 @@ def generate_devtools_html() -> str:
     </div>
   </div>
 
+  <!-- JWT DECODER -->
+  <div class="tool-section" id="jwt-decoder">
+    <h2>JWT Decoder & Validator</h2>
+    <p>Decode and inspect JWT tokens. View header, payload, and signature. Client-side only - your tokens never leave your browser.</p>
+    <div class="input-group">
+      <label>JWT Token</label>
+      <textarea class="code-editor" id="jwt-input" placeholder="Paste JWT token here (eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...)" aria-label="JWT token input"></textarea>
+    </div>
+    <div class="action-bar">
+      <button class="action-btn" onclick="decodeJWT()">Decode JWT</button>
+      <button class="action-btn secondary" onclick="clearFields('jwt-input','jwt-output')">Clear</button>
+    </div>
+    <div class="input-group">
+      <label>Decoded JWT</label>
+      <div class="result-box" id="jwt-output"></div>
+    </div>
+  </div>
+
+  <!-- REGEX TESTER -->
+  <div class="tool-section" id="regex-tester">
+    <h2>Regex Tester & Matcher</h2>
+    <p>Test regular expressions with live matching and highlighting. See all matches in real-time.</p>
+    <div class="input-group">
+      <label>Regular Expression</label>
+      <input type="text" class="code-editor" id="regex-pattern" placeholder="Enter regex pattern (e.g., \\d{{3}}-\\d{{4}})" style="min-height: auto; height: 42px;" aria-label="Regex pattern">
+    </div>
+    <div class="input-group">
+      <label>Test String</label>
+      <textarea class="code-editor" id="regex-test" placeholder="Enter text to test against the regex..." aria-label="Test string"></textarea>
+    </div>
+    <div class="action-bar">
+      <button class="action-btn" onclick="testRegex()">Test Regex</button>
+      <button class="action-btn secondary" onclick="clearFields('regex-pattern','regex-test','regex-output')">Clear</button>
+    </div>
+    <div class="input-group">
+      <label>Matches</label>
+      <div class="result-box" id="regex-output"></div>
+    </div>
+  </div>
+
+  <!-- MARKDOWN PREVIEW -->
+  <div class="tool-section" id="markdown-preview">
+    <h2>Markdown Preview</h2>
+    <p>Live markdown to HTML preview. Write markdown on the left, see rendered HTML on the right.</p>
+    <div class="two-col">
+      <div class="input-group">
+        <label>Markdown Input</label>
+        <textarea class="code-editor" id="markdown-input" placeholder="# Heading\\n\\nWrite **markdown** here..." oninput="renderMarkdown()" aria-label="Markdown input"></textarea>
+      </div>
+      <div class="input-group">
+        <label>HTML Preview</label>
+        <div class="result-box" id="markdown-output" style="white-space: normal; line-height: 1.6;"></div>
+      </div>
+    </div>
+    <div class="action-bar">
+      <button class="action-btn secondary" onclick="clearFields('markdown-input','markdown-output')">Clear</button>
+    </div>
+  </div>
+
+  <!-- COLOR CONVERTER -->
+  <div class="tool-section" id="color-converter">
+    <h2>Color Converter</h2>
+    <p>Convert between HEX, RGB, HSL color formats. Pick colors visually or enter values manually.</p>
+    <div class="input-group">
+      <label>Color Picker</label>
+      <input type="color" id="color-picker" value="#3b82f6" onchange="updateColorFromPicker()" style="width: 100px; height: 50px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); cursor: pointer;" aria-label="Color picker">
+    </div>
+    <div class="two-col">
+      <div class="input-group">
+        <label>HEX</label>
+        <input type="text" class="code-editor" id="color-hex" placeholder="#3b82f6" style="min-height: auto; height: 42px;" aria-label="HEX color">
+      </div>
+      <div class="input-group">
+        <label>RGB</label>
+        <input type="text" class="code-editor" id="color-rgb" placeholder="rgb(59, 130, 246)" style="min-height: auto; height: 42px;" aria-label="RGB color">
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="input-group">
+        <label>HSL</label>
+        <input type="text" class="code-editor" id="color-hsl" placeholder="hsl(217, 91%, 60%)" style="min-height: auto; height: 42px;" aria-label="HSL color">
+      </div>
+      <div class="input-group">
+        <label>CMYK (approximate)</label>
+        <input type="text" class="code-editor" id="color-cmyk" placeholder="cmyk(76%, 47%, 0%, 4%)" style="min-height: auto; height: 42px;" readonly aria-label="CMYK color">
+      </div>
+    </div>
+    <div class="action-bar">
+      <button class="action-btn" onclick="convertColor()">Convert</button>
+      <button class="action-btn secondary" onclick="clearFields('color-hex','color-rgb','color-hsl','color-cmyk')">Clear</button>
+    </div>
+  </div>
+
+  <!-- TIMESTAMP CONVERTER -->
+  <div class="tool-section" id="timestamp-converter">
+    <h2>Timestamp Converter</h2>
+    <p>Convert between Unix timestamp and human-readable date/time. Supports milliseconds and timezones.</p>
+    <div class="input-group">
+      <label>Unix Timestamp (seconds or milliseconds)</label>
+      <input type="text" class="code-editor" id="timestamp-input" placeholder="1713139200 or 1713139200000" style="min-height: auto; height: 42px;" aria-label="Unix timestamp">
+    </div>
+    <div class="action-bar">
+      <button class="action-btn" onclick="timestampToDate()">Convert to Date</button>
+      <button class="action-btn" onclick="currentTimestamp()">Current Timestamp</button>
+    </div>
+    <div class="input-group">
+      <label>Human Readable Date</label>
+      <div class="result-box" id="timestamp-output"></div>
+    </div>
+    <div class="input-group" style="margin-top: 20px;">
+      <label>Date/Time Input</label>
+      <input type="datetime-local" class="code-editor" id="date-input" style="min-height: auto; height: 42px;" aria-label="Date time input">
+    </div>
+    <div class="action-bar">
+      <button class="action-btn" onclick="dateToTimestamp()">Convert to Timestamp</button>
+    </div>
+    <div class="input-group">
+      <label>Unix Timestamp</label>
+      <div class="result-box" id="date-output"></div>
+    </div>
+  </div>
+
   {footer_html()}
 </div>
 
@@ -1662,7 +1789,11 @@ function showTool(toolId) {{
 function clearFields(...ids) {{
   ids.forEach(id => {{
     const el = document.getElementById(id);
-    if (el) el.value = '' || (el.innerHTML = '');
+    if (el) {{
+      el.value = '' || (el.innerHTML = '');
+      // Clear any associated error messages
+      clearError(id);
+    }}
   }});
 }}
 
@@ -1706,35 +1837,144 @@ function compareText() {{
 
 // JSON FORMATTER
 function formatJSON() {{
+  // Clear previous error
+  clearError('json-output');
+  
   try {{
-    const input = document.getElementById('json-input').value;
+    const input = document.getElementById('json-input').value.trim();
+    
+    if (!input) {{
+      showPersistentError('json-output', '❌ Error: Please enter some JSON to format');
+      return;
+    }}
+    
     const parsed = JSON.parse(input);
     document.getElementById('json-output').textContent = JSON.stringify(parsed, null, 2);
+    showSuccess('json-output', '✓ Valid JSON - Formatted successfully!');
   }} catch (e) {{
-    showMessage('json-output', 'Invalid JSON: ' + e.message, 'error');
+    const friendlyError = getJSONErrorMessage(e, document.getElementById('json-input').value);
+    showPersistentError('json-output', friendlyError);
   }}
 }}
 
 function minifyJSON() {{
+  // Clear previous error
+  clearError('json-output');
+  
   try {{
-    const input = document.getElementById('json-input').value;
+    const input = document.getElementById('json-input').value.trim();
+    
+    if (!input) {{
+      showPersistentError('json-output', '❌ Error: Please enter some JSON to minify');
+      return;
+    }}
+    
     const parsed = JSON.parse(input);
     document.getElementById('json-output').textContent = JSON.stringify(parsed);
+    showSuccess('json-output', '✓ Valid JSON - Minified successfully!');
   }} catch (e) {{
-    showMessage('json-output', 'Invalid JSON: ' + e.message, 'error');
+    const friendlyError = getJSONErrorMessage(e, document.getElementById('json-input').value);
+    showPersistentError('json-output', friendlyError);
   }}
+}}
+
+function getJSONErrorMessage(error, input) {{
+  const msg = error.message;
+  let friendlyMsg = '❌ Invalid JSON:\\n\\n';
+  
+  // Extract position if available
+  const posMatch = msg.match(/position (\\d+)/);
+  if (posMatch) {{
+    const pos = parseInt(posMatch[1]);
+    const lines = input.substring(0, pos).split('\\n');
+    const line = lines.length;
+    const col = lines[lines.length - 1].length + 1;
+    friendlyMsg += `📍 Error at line ${{line}}, column ${{col}}\\n\\n`;
+  }}
+  
+  // Common error patterns with friendly explanations
+  if (msg.includes('Unexpected token')) {{
+    if (msg.includes("'")) {{
+      friendlyMsg += '💡 Problem: Single quotes are not allowed in JSON\\n';
+      friendlyMsg += '   Solution: Use double quotes (") instead of single quotes (\\')'
+    }} else if (msg.includes('Unexpected end')) {{
+      friendlyMsg += '💡 Problem: JSON is incomplete\\n';
+      friendlyMsg += '   Solution: Check for missing closing brackets }} or ]';
+    }} else {{
+      friendlyMsg += '💡 Problem: Unexpected character found\\n';
+      friendlyMsg += '   Solution: Check for extra commas, missing quotes, or invalid characters';
+    }}
+  }} else if (msg.includes('Unexpected end of JSON')) {{
+    friendlyMsg += '💡 Problem: JSON is incomplete or cut off\\n';
+    friendlyMsg += '   Solution: Make sure all brackets and braces are closed';
+  }} else if (msg.includes('Expected')) {{
+    friendlyMsg += '💡 Problem: Missing or incorrect syntax\\n';
+    friendlyMsg += '   Solution: Check for missing commas, colons, or quotes';
+  }} else {{
+    friendlyMsg += `💡 Error: ${{msg}}`;
+  }}
+  
+  return friendlyMsg;
+}}
+
+function showPersistentError(afterId, msg) {{
+  clearError(afterId);
+  const div = document.createElement('div');
+  div.className = 'error-msg persistent-error';
+  div.style.whiteSpace = 'pre-wrap';
+  div.textContent = msg;
+  div.setAttribute('data-error-for', afterId);
+  document.getElementById(afterId).parentNode.appendChild(div);
+}}
+
+function showSuccess(afterId, msg) {{
+  clearError(afterId);
+  const div = document.createElement('div');
+  div.className = 'success-msg';
+  div.textContent = msg;
+  div.setAttribute('data-error-for', afterId);
+  document.getElementById(afterId).parentNode.appendChild(div);
+  setTimeout(() => div.remove(), 3000);
+}}
+
+function clearError(forId) {{
+  const existing = document.querySelector(`[data-error-for="${{forId}}"]`);
+  if (existing) existing.remove();
 }}
 
 // JSON COMPARE
 function compareJSON() {{
+  clearError('json-compare-result');
+  
   try {{
-    const j1 = JSON.parse(document.getElementById('json1').value);
-    const j2 = JSON.parse(document.getElementById('json2').value);
+    const input1 = document.getElementById('json1').value.trim();
+    const input2 = document.getElementById('json2').value.trim();
+    
+    if (!input1 || !input2) {{
+      showPersistentError('json-compare-result', '❌ Error: Please enter JSON in both fields to compare');
+      return;
+    }}
+    
+    let j1, j2;
+    try {{
+      j1 = JSON.parse(input1);
+    }} catch (e) {{
+      showPersistentError('json-compare-result', '❌ JSON 1 is invalid:\\n\\n' + getJSONErrorMessage(e, input1));
+      return;
+    }}
+    
+    try {{
+      j2 = JSON.parse(input2);
+    }} catch (e) {{
+      showPersistentError('json-compare-result', '❌ JSON 2 is invalid:\\n\\n' + getJSONErrorMessage(e, input2));
+      return;
+    }}
+    
     const diff = jsonDiff(j1, j2);
     document.getElementById('json-compare-result').innerHTML = 
       '<div class="result-box">' + diff + '</div>';
   }} catch (e) {{
-    showMessage('json-compare-result', 'Invalid JSON: ' + e.message, 'error');
+    showPersistentError('json-compare-result', '❌ Error comparing JSON: ' + e.message);
   }}
 }}
 
@@ -1848,6 +2088,230 @@ function escapeHtml(text) {{
   const div = document.createElement('div');
   div.textContent = text;
   return div.innerHTML;
+}}
+
+// JWT DECODER
+function decodeJWT() {{
+  try {{
+    const token = document.getElementById('jwt-input').value.trim();
+    if (!token) {{
+      showMessage('jwt-output', 'Please enter a JWT token', 'error');
+      return;
+    }}
+    
+    const parts = token.split('.');
+    if (parts.length !== 3) {{
+      showMessage('jwt-output', 'Invalid JWT format. Expected 3 parts separated by dots.', 'error');
+      return;
+    }}
+    
+    const header = JSON.parse(atob(parts[0]));
+    const payload = JSON.parse(atob(parts[1]));
+    const signature = parts[2];
+    
+    const output = `HEADER:\\n${{JSON.stringify(header, null, 2)}}\\n\\nPAYLOAD:\\n${{JSON.stringify(payload, null, 2)}}\\n\\nSIGNATURE:\\n${{signature}}\\n\\n⚠️ Note: Signature verification requires the secret key and should be done server-side.`;
+    document.getElementById('jwt-output').textContent = output;
+  }} catch (e) {{
+    showMessage('jwt-output', 'Invalid JWT token: ' + e.message, 'error');
+  }}
+}}
+
+// REGEX TESTER
+function testRegex() {{
+  try {{
+    const pattern = document.getElementById('regex-pattern').value;
+    const testStr = document.getElementById('regex-test').value;
+    
+    if (!pattern) {{
+      showMessage('regex-output', 'Please enter a regex pattern', 'error');
+      return;
+    }}
+    
+    const regex = new RegExp(pattern, 'g');
+    const matches = [...testStr.matchAll(regex)];
+    
+    if (matches.length === 0) {{
+      document.getElementById('regex-output').innerHTML = '<div class="error-msg">No matches found</div>';
+      return;
+    }}
+    
+    let output = `Found ${{matches.length}} match(es):\\n\\n`;
+    matches.forEach((match, i) => {{
+      output += `Match ${{i + 1}}: "${{match[0]}}" at position ${{match.index}}\\n`;
+      if (match.length > 1) {{
+        output += `  Capture groups: ${{match.slice(1).join(', ')}}\\n`;
+      }}
+    }});
+    
+    document.getElementById('regex-output').textContent = output;
+  }} catch (e) {{
+    showMessage('regex-output', 'Invalid regex: ' + e.message, 'error');
+  }}
+}}
+
+// MARKDOWN PREVIEW
+function renderMarkdown() {{
+  const input = document.getElementById('markdown-input').value;
+  let html = input
+    // Headers
+    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+    // Bold
+    .replace(/\\*\\*(.+?)\\*\\*/g, '<strong>$1</strong>')
+    // Italic
+    .replace(/\\*(.+?)\\*/g, '<em>$1</em>')
+    // Links
+    .replace(/\\[([^\\]]+)\\]\\(([^\\)]+)\\)/g, '<a href="$2" target="_blank">$1</a>')
+    // Code blocks
+    .replace(/```([\\s\\S]*?)```/g, '<pre><code>$1</code></pre>')
+    // Inline code
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    // Line breaks
+    .replace(/\\n\\n/g, '</p><p>')
+    .replace(/\\n/g, '<br>');
+  
+  // Wrap in paragraph if not already wrapped
+  if (!html.startsWith('<')) {{
+    html = '<p>' + html + '</p>';
+  }}
+  
+  document.getElementById('markdown-output').innerHTML = html;
+}}
+
+// COLOR CONVERTER
+function updateColorFromPicker() {{
+  const hex = document.getElementById('color-picker').value;
+  document.getElementById('color-hex').value = hex;
+  convertColor();
+}}
+
+function convertColor() {{
+  try {{
+    let hex = document.getElementById('color-hex').value.trim();
+    
+    // Handle different input formats
+    if (!hex.startsWith('#')) hex = '#' + hex;
+    if (!/^#[0-9A-F]{{6}}$/i.test(hex)) {{
+      showMessage('color-cmyk', 'Invalid HEX color. Use format: #RRGGBB', 'error');
+      return;
+    }}
+    
+    // Update color picker
+    document.getElementById('color-picker').value = hex;
+    
+    // Convert to RGB
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    document.getElementById('color-rgb').value = `rgb(${{r}}, ${{g}}, ${{b}})`;
+    
+    // Convert to HSL
+    const hsl = rgbToHsl(r, g, b);
+    document.getElementById('color-hsl').value = `hsl(${{hsl.h}}, ${{hsl.s}}%, ${{hsl.l}}%)`;
+    
+    // Convert to CMYK (approximate)
+    const cmyk = rgbToCmyk(r, g, b);
+    document.getElementById('color-cmyk').value = `cmyk(${{cmyk.c}}%, ${{cmyk.m}}%, ${{cmyk.y}}%, ${{cmyk.k}}%)`;
+  }} catch (e) {{
+    showMessage('color-cmyk', 'Error converting color: ' + e.message, 'error');
+  }}
+}}
+
+function rgbToHsl(r, g, b) {{
+  r /= 255; g /= 255; b /= 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b);
+  let h, s, l = (max + min) / 2;
+  
+  if (max === min) {{
+    h = s = 0;
+  }} else {{
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {{
+      case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+      case g: h = ((b - r) / d + 2) / 6; break;
+      case b: h = ((r - g) / d + 4) / 6; break;
+    }}
+  }}
+  
+  return {{
+    h: Math.round(h * 360),
+    s: Math.round(s * 100),
+    l: Math.round(l * 100)
+  }};
+}}
+
+function rgbToCmyk(r, g, b) {{
+  let c = 1 - (r / 255);
+  let m = 1 - (g / 255);
+  let y = 1 - (b / 255);
+  let k = Math.min(c, m, y);
+  
+  if (k === 1) {{
+    c = m = y = 0;
+  }} else {{
+    c = Math.round(((c - k) / (1 - k)) * 100);
+    m = Math.round(((m - k) / (1 - k)) * 100);
+    y = Math.round(((y - k) / (1 - k)) * 100);
+    k = Math.round(k * 100);
+  }}
+  
+  return {{ c, m, y, k }};
+}}
+
+// TIMESTAMP CONVERTER
+function timestampToDate() {{
+  try {{
+    let timestamp = document.getElementById('timestamp-input').value.trim();
+    if (!timestamp) {{
+      showMessage('timestamp-output', 'Please enter a timestamp', 'error');
+      return;
+    }}
+    
+    timestamp = parseInt(timestamp);
+    // Handle both seconds and milliseconds
+    if (timestamp < 10000000000) {{
+      timestamp *= 1000; // Convert seconds to milliseconds
+    }}
+    
+    const date = new Date(timestamp);
+    if (isNaN(date.getTime())) {{
+      showMessage('timestamp-output', 'Invalid timestamp', 'error');
+      return;
+    }}
+    
+    const output = `UTC: ${{date.toUTCString()}}\\n\\nLocal: ${{date.toString()}}\\n\\nISO 8601: ${{date.toISOString()}}\\n\\nDate: ${{date.toLocaleDateString()}}\\nTime: ${{date.toLocaleTimeString()}}`;
+    document.getElementById('timestamp-output').textContent = output;
+  }} catch (e) {{
+    showMessage('timestamp-output', 'Error converting timestamp: ' + e.message, 'error');
+  }}
+}}
+
+function dateToTimestamp() {{
+  try {{
+    const dateInput = document.getElementById('date-input').value;
+    if (!dateInput) {{
+      showMessage('date-output', 'Please select a date and time', 'error');
+      return;
+    }}
+    
+    const date = new Date(dateInput);
+    const timestampSeconds = Math.floor(date.getTime() / 1000);
+    const timestampMillis = date.getTime();
+    
+    const output = `Seconds: ${{timestampSeconds}}\\n\\nMilliseconds: ${{timestampMillis}}`;
+    document.getElementById('date-output').textContent = output;
+  }} catch (e) {{
+    showMessage('date-output', 'Error converting date: ' + e.message, 'error');
+  }}
+}}
+
+function currentTimestamp() {{
+  const now = Date.now();
+  const seconds = Math.floor(now / 1000);
+  document.getElementById('timestamp-input').value = seconds;
+  timestampToDate();
 }}
 </script>
 </body>
